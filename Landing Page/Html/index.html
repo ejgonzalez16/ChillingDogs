@@ -4,12 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chilling Dogs</title>
-    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="../Css/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <!--Lo hace responsive al navbar-->
+            <button class="navbar-toggler black" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="#">
+                <img src="../sources/logo.png" alt="logo" width="80px">
+                <h1>Chilling Dogs</h1>
+            </a>
+            <div class="collapse navbar-collapse centrar" id="navbar"> <!--Contiene el responsive de los elementos-->
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="#sobreNosotros" class="nav-link">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a href="#servicios" class="nav-link">Nuestros Servicios</a></li>
+                    <li class="nav-item"><a href="#casosDeExito" class="nav-link">Casos de éxito</a></li>
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse derecha" id="navbar">
+                <ul class="navbar-nav">
+                    <li class="nav-item" ><button class="iniciarSesion">Iniciar Sesión</button></li>
+                    <li class="nav-item"><button class="registrarse">Registrarse</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
     <main>
         <section id="presentacion" class="seccionDorada">
             <span>
@@ -51,5 +81,73 @@
             <div id="btnServicios"><button>Ver más servicios</button></div>
         </section>
     </main>
+
+    <footer>
+        <div class="logoIdioma">
+            <img src="../sources/logo.png" alt="logo" width="160px">
+            <select name="idioma" id="SeleccionaIdioma">
+                <option value="esp">Español</option>
+                <option value="eng">Inglés</option>
+            </select>
+        </div>
+
+        <div class="copyContactos">
+            <section class="contactos">
+                <article>
+                    <h5>Portal</h5>
+                    <div class="tarjeta">
+                        <img src="../sources/administrador.svg" alt="">
+                        <p>Administrador</p>
+                    </div>
+        
+                    <div class="tarjeta">
+                        <img src="../sources/veterinarios.svg" alt="">
+                        <p>Veterinarios</p>
+                    </div>
+                </article>
+        
+                <article>
+                    <h5>Compañia</h5>
+                    <div class="tarjeta">
+                        <img src="../sources/sobre-nosotros.svg" alt="">
+                        <p>Sobre Nosotros</p>
+                    </div>
+        
+                    <div class="tarjeta">
+                        <img src="../sources/nuestros-servicios.svg" alt="">
+                        <p>Nuestros Servicios</p>
+                    </div>
+                </article>
+        
+                <article">
+                    <h5>Contáctanos</h5>
+                    <div class="tarjeta">
+                        <img src="../sources/telefono.svg" alt="">
+                        <p>+57 300 331 4403</p>
+                    </div>
+        
+                    <div class="tarjeta">
+                        <img src="../sources/mail.svg" alt="">
+                        <p>contacto@chilling_dogs.com</p>
+                    </div>
+                </article>
+            </section>
+            
+           
+            
+            <div class="down-footer">
+                <ul class="copyright">
+                    &copy; 2024 Chilling Dogs
+                    <li>Privacidad</li>
+                    <li>Términos y condiciones</li>
+                </ul>
+                <article class="redesSociales">
+                    <img src="../sources/instagram.svg" alt="" width="20px">
+                    <img src="../sources/facebook.svg" alt="" width="20px">
+                    <img src="../sources/linkedin.svg" alt="" width="15px">
+                    <img src="../sources/youtube.svg" alt="" width="20px">
+                </article>
+            </div>
+    </footer>
 </body>
 </html>
