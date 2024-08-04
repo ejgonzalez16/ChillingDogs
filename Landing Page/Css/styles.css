@@ -1,0 +1,163 @@
+#presentacion{
+    height: 626px;
+    display: flex;
+}
+
+.seccionDorada{
+    background: #E7A65CFF;
+}
+
+#presentacion h1{
+    font-family: 'Chewy';
+    font-size: 64px; 
+    line-height: 84px; 
+    font-weight: 400; 
+    color: #171A1FFF;
+    width: 681px; 
+    height: 136px;
+}
+
+#presentacion p{
+    font-family: 'Fredoka';
+    font-size: 24px; 
+    line-height: 36px; 
+    font-weight: 400; 
+    color: #171A1FFF;
+    width: 681px; 
+    height: 72px;
+    margin-top: 150px;
+    font-weight: normal;
+}
+
+#presentacion button{
+    width: 444px; 
+    height: 66px; 
+    padding: 0 20px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-family: Fredoka; 
+    font-size: 20px; 
+    line-height: 30px; 
+    font-weight: 500; 
+    color: #FFFFFFFF; 
+    background: #171A1FE6; 
+    opacity: 1; 
+    border: none; 
+    border-radius: 8px;
+    margin-top: 50px;
+}
+
+#perro{
+    width: 546px; 
+    height: 592px;
+    margin-top: 101px;
+    margin-left: 200px;
+}
+
+#estrellas{
+    width: 90px; 
+    height: 90px;
+    fill: #000000d9;
+    margin-top: 120px;
+    margin-left: -120px;
+}
+
+#eslogan{
+    width: 50px; 
+    height: 30px;
+}
+
+#presentacion span{
+    width: 681px; 
+    height: 448px;
+    margin-left: 50px;
+}
+
+.medkit{
+    width: 132px; 
+    height: 132px; 
+    fill: #171A1FFF;
+    margin-top: 20px;
+}
+
+.tituloServicios{
+    display: flex;
+    justify-content: space-between;
+    margin: 50px;
+}
+
+.tituloServicios h1{
+    width: 590px; 
+    font-family: 'Chewy'; 
+    font-size: 64px; 
+    line-height: 84px; 
+    font-weight: 700; 
+    color: #171A1FFF;
+    text-align: center;
+}
+
+.descripcionServicio{
+    width: 345px; 
+    height: 349px; 
+    background: #FFFBDFCC; 
+    border-radius: 8px; 
+    box-shadow: 0px 0px 1px #171a1f, 0px 0px 2px #171a1f;
+}
+
+.descripcionServicio img{
+    width: 100%; 
+    height: 231px; 
+    border-radius: 8px 8px 0px 0px;
+}
+
+#contenedorServicios{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+#contenedorServicios h2{
+    font-family: 'Chewy';
+    font-size: 24px; 
+    line-height: 36px; 
+    font-weight: 700; 
+    color: #171A1FFF;
+    margin-left: 30px;
+}
+
+#contenedorServicios p{
+    font-family: 'Fredoka';
+    font-size: 14px; 
+    line-height: 22px; 
+    font-weight: 400; 
+    color: #323743FF;
+    margin-left: 30px;
+}
+
+#btnServicios{
+    display: flex;
+    justify-content: center;
+}
+
+#servicios button{
+    height: 44px; 
+    padding: 0 16px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    font-family: Fredoka; 
+    font-size: 16px; 
+    line-height: 26px; 
+    font-weight: 400; 
+    color: #FFFFFFFF;
+    background: #171A1FFF;
+    opacity: 1; 
+    border: none; 
+    border-radius: 4px;
+    display: inline-block;
+    margin: 20px auto;
+    text-align: center;
+}
