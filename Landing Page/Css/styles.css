@@ -1,5 +1,83 @@
+body{
+    position: relative;
+    min-height: 100vh; /*Que ocupe toda la pantalla, para que el footer se quede abajo*/
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 13em;
+}
+
+/*header*/
+header{
+    position: fixed; /*El header se queda estático*/
+    top: 0; /*Mandarlo arriba del todo*/
+    width: 100%;
+    font-family: 'Fredoka';
+    padding: 0px;
+}
+
+.black{
+    background-color: #171A1FFF;
+}
+
+.centrar{
+    display: flex;
+    justify-content: center;
+    margin-left: 120px;
+}
+
+.derecha{
+    display: flex;
+    justify-content: end;
+    margin-right: 20px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    margin-left: 20px;
+}
+
+.navbar-brand h1{
+    font-size: 1.5em;
+    font-family: 'Chewy';
+    color: #E7A65CFF;
+}
+
+.iniciarSesion{
+    color: #E7A65CFF;
+    padding: 10px;
+    background-color: transparent;
+    border: none; /* Quita el borde si no se necesita */
+    font-family: "Fredoka", sans-serif;
+    margin-right: 25px;
+}
+
+.iniciarSesion:hover{
+    color: rgb(173, 125, 69);
+}
+
+.registrarse {
+    background-color: #E7A65CFF;
+    border-radius: 5px;
+    padding: 10px;
+    color: white;
+    border: none; /* Quita el borde si no se necesita */
+    font-family: "Fredoka", sans-serif;
+}
+
+.registrarse:hover{
+    background-color: rgb(173, 125, 69);
+}
+/*header*/
+
+/*main*/
+main{
+    margin-top: 122px;
+}
+
 #presentacion{
-    height: 626px;
     display: flex;
 }
 
@@ -161,3 +239,80 @@
     margin: 20px auto;
     text-align: center;
 }
+/*main*/
+
+/*Inicio Footer*/
+footer{
+    display: flex;
+    flex-direction: row;
+    background-color: #212529;
+    color: white;
+    position: absolute; /*Que se quede en el mismo lugar*/
+    bottom: 0; /*Mandarlo hacia abajo*/
+    width: 100%; /*Ocupa todo el ancho*/
+    margin-bottom: 0px;
+    width: 100%;
+    font-family: 'Fredoka';
+    padding: 0px;
+}
+
+.contactos{
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    margin-top: 20px;
+}
+
+.logoIdioma{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: 20px;
+}
+
+.tarjeta{
+    display: flex;
+    align-items: start;
+    justify-content: start;
+    margin-right: 30px;
+}
+
+.tarjeta img{
+    margin-right: 15px;
+}
+
+.copyContactos{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: end;
+}
+
+.copyright{	
+    display: flex;
+}
+
+.copyright li{	
+    margin-left: 30px;
+}
+
+.down-footer{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.redesSociales{
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    margin-left: 50px;
+}
+
+.redesSociales img{
+    margin-left: 10px;
+}
+/*Fin Footer*/
