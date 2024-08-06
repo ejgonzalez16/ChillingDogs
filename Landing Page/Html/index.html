@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chilling Dogs</title>
-    <link rel="stylesheet" href="../Css/styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
@@ -42,15 +42,41 @@
     
     <main>
         <section id="presentacion" class="seccionDorada">
-            <span>
+            <span class="descripcionPresentacion">
                 <h1>Tu mascota tranqui, sana y en manos de los cracks del cuidado animal</h1>
                 <p>Queremos que tus lomitos estén siempre fresh y felices, en un lugar seguro y cozy para recuperarse y recibir su tratamiento.</p>
                 <button>Chécate nuestros Servicios</button>
             </span>
-            <img src="../sources/perroPresentacion.png" alt="Perro" id="perro">
-            <svg id="estrellas"class="w-6 h-6" fill="#686583" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4L6.5 9.5L1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg>
+            <div class="imagenesPresentacion">
+                <svg id="estrellas" class="w-6 h-6" fill="#686583" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M19 9l1.25-2.75L23 5l-2.75-1.25L19 1l-1.25 2.75L15 5l2.75 1.25L19 9zm-7.5.5L9 4L6.5 9.5L1 12l5.5 2.5L9 20l2.5-5.5L17 12l-5.5-2.5zM19 15l-1.25 2.75L15 19l2.75 1.25L19 23l1.25-2.75L23 19l-2.75-1.25L19 15z"/></svg> 
+                <img src="../sources/perroPresentacion.png" alt="Perro" id="perro">   
+            </div>
         </section>
-        <br>
+        
+        <section id="sobreNosotros" class="seccionAzul">
+            <div class="tituloNosotros">
+                <img src="../sources/hueso-rotated.png" alt="Huesito fasha">
+                <h1>¿Usted no sabe quiénes somos nosotros...?</h1>
+                <img src="../sources/hueso.png" alt="Huesito fasha">
+            </div>
+            <div class="contenedorNosotros">
+                <span class="descripcionNosotros">
+                    <div class="textoNosotros">
+                        <h2>Full confiables en lo que hacemos</h2>
+                        <p><br>El nombre Chilling Dogs refleja nuestra onda: un lugar donde tus perros están chill y seguros mientras reciben el mejor cuidado.<br>Ya sea que necesiten hospitalización, un chequeo o un tratamiento especial, estamos aquí para tus peluditos y para ti, dándote la tranquilidad de saber que están en buenas manos.</p>
+                    </div>
+                    <img src="../sources/corgi-points.png" alt="Puntos en forma rectangular" class="imagenNosotros">
+                </span>
+                <span class="descripcionNosotros">
+                    <img src="../sources/dogtor-points.png" alt="Dogtor calidoso" class="imagenNosotros">
+                    <div class="textoNosotros">
+                        <h2>Nuestro team de profesionales</h2>
+                        <p><br>En Chilling Dogs, empezamos con la idea de mejorar la vida de tus lomitos y ahora somos los cracks en atención veterinaria.<br>Nuestro team de veterinarios y el personal dedicado, trabajan a full para darte un servicio de excelencia, siempre poniendo primero la salud y la felicidad de tus mascotas.</p>
+                    </div>
+                </span>
+            </div>
+        </section>
+        
         <section id="servicios" class="seccionDorada">
             <div class="tituloServicios">
                 <svg class="medkit" class="w-6 h-6" fill="#686583" id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
@@ -79,6 +105,26 @@
                 </span>
             </div>
             <div id="btnServicios"><button>Ver más servicios</button></div>
+        </section>
+        
+        <section id="casosDeExito" class="seccionAzul">
+            <div class="tituloCasos">
+                <h1>Historias de nuestros peludos</h1>
+            </div>
+            <div class="wrapperExito">
+                <svg class="flechaWrapper" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm2.707 14.293-1.414 1.414L7.586 12l5.707-5.707 1.414 1.414L10.414 12l4.293 4.293z"></path></svg>
+                <div class="cardExito">
+                    <img src="../sources/bengie.png" alt="Perrito shih tzu" class="peludo-img">
+                    <div class="comentario">
+                        <div class="usuario">
+                            <img src="https://www.famousbirthdays.com/faces/vazquez-jovani-image.jpg" alt="Usuario" class="usuario-img">
+                            <p class="usuario-nombre">Daniel Silva - Benjamin Franklin III (Bengie)</p>
+                        </div>
+                        <p class="comentario-texto"><br>¡Gracias a Chilling Dogs, Bengie se recuperó de su cirugía y ahora está más feliz que nunca!</p>
+                    </div>
+                </div>
+                <svg class="flechaWrapper" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.293 15.707-1.414-1.414L13.586 12 9.293 7.707l1.414-1.414L16.414 12l-5.707 5.707z"></path></svg>
+            </div>
         </section>
     </main>
 
