@@ -8,12 +8,6 @@ El nombre Chilling Dogs refleja nuestra onda: un lugar donde tus perros están c
 _Clone el repositorio con el comando: git clone [https://github.com/ejgonzalez16/ChillingDogs.git]((https://github.com/ejgonzalez16/ChillingDogs.git))_
 
 ## `Visualización Interfaces Principales: `
-### Seguimiento en tiempo real de turistas 🧗
-
-<p align="center">
-  <img src="https://github.com/juanfra312003/pack-my-trip/assets/99839239/12a8d6ef-72d5-4f2c-b6e2-1258bfc49229" alt="Seguimiento" width="400">
-</p>
-
 ### Logo 🕶️
 
 <p align="center">
