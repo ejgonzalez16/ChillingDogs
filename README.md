@@ -7,11 +7,11 @@ El nombre Chilling Dogs refleja nuestra onda: un lugar donde tus perros están c
 
 _Clone el repositorio con el comando: git clone [https://github.com/ejgonzalez16/ChillingDogs.git]((https://github.com/ejgonzalez16/ChillingDogs.git))_
 
-## `Visualización Interfaces Principales: `
+## `Información principal de Chilling Dogs`
 ### Logo 🕶️
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/41f77210-e465-4ff2-a403-cbc7260e50d7" alt="Métricas Servicios" width="400">
+  <img src="https://github.com/user-attachments/assets/beacddf5-d884-49ea-b27b-eb1f420532c1" alt="Métricas Servicios" width="400">
 </p>
 
 ### Uml 🏛
