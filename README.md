@@ -64,7 +64,7 @@ _Herramientas utilizadas para crear el proyecto_
       <img src="https://avatars.githubusercontent.com/u/168678995?v=4" width="300" height="400">
     </td>
     <td align="center">
-      <img src="https://github.com/user-attachments/assets/7267752a-fdce-4376-b8f4-43285c0cfd89" width="300" height="400">
+      <img src="https://github.com/user-attachments/assets/7267752a-fdce-4376-b8f4-43285c0cfd89" width="300" height="200">
     </td>
   </tr>
 </table>
