@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chilling Dogs</title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <!--Lo hace responsive al navbar-->
+            <button class="navbar-toggler black" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="#">
+                <img src="/sources/logo.png" alt="logo" width="80px">
+                <h1>Chilling Dogs</h1>
+            </a>
+            <div class="collapse navbar-collapse centrar" id="navbar"> <!--Contiene el responsive de los elementos-->
+                <ul class="navbar-nav">
+                    <li class="nav-item"><a href="#sobreNosotros" class="nav-link">Sobre Nosotros</a></li>
+                    <li class="nav-item"><a href="#servicios" class="nav-link">Nuestros Servicios</a></li>
+                    <li class="nav-item"><a href="#casosDeExito" class="nav-link">Casos de éxito</a></li>
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse derecha" id="navbar2">
+                <ul class="navbar-nav">
+                    <li class="nav-item" ><button class="iniciarSesion">Iniciar Sesión</button></li>
+                    <li class="nav-item"><button class="registrarse">Registrarse</button></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+    
+    <main>
+        <section id="presentacion" class="seccionDorada">
+            <span class="descripcionPresentacion">
+                <h1>Tu mascota tranqui, sana y en manos de los cracks del cuidado animal</h1>
+                <p>Queremos que tus lomitos estén siempre fresh y felices, en un lugar seguro y cozy para recuperarse y recibir su tratamiento.</p>
+                <button>Chécate nuestros Servicios</button>
+            </span>
+            <div class="imagenesPresentacion">
+                <img src="/sources/perro-presentacion-no-bg.png" alt="Perro" id="perro">
+            </div>
+        </section>
+        
+        <section id="sobreNosotros" class="seccionAzul">
+            <div class="tituloNosotros">
+                <img src="/sources/hueso-rotated.png" alt="Huesito fasha">
+                <h1>¿Usted no sabe quiénes somos nosotros...?</h1>
+                <img src="/sources/hueso.png" alt="Huesito fasha">
+            </div>
+            <div class="contenedorNosotros">
+                <span class="descripcionNosotros">
+                    <div class="textoNosotros">
+                        <h2>Full confiables en lo que hacemos</h2>
+                        <p><br>El nombre Chilling Dogs refleja nuestra onda: un lugar donde tus perros están chill y seguros mientras reciben el mejor cuidado.<br>Ya sea que necesiten hospitalización, un chequeo o un tratamiento especial, estamos aquí para tus peluditos y para ti, dándote la tranquilidad de saber que están en buenas manos.</p>
+                    </div>
+                    <img src="/sources/corgi-points.png" alt="Puntos en forma rectangular" class="imagenNosotros">
+                </span>
+                <span class="descripcionNosotros">
+                    <img src="/sources/dogtor-points.png" alt="Dogtor calidoso" class="imagenNosotros">
+                    <div class="textoNosotros">
+                        <h2>Nuestro team de profesionales</h2>
+                        <p><br>En Chilling Dogs, empezamos con la idea de mejorar la vida de tus lomitos y ahora somos los cracks en atención veterinaria.<br>Nuestro team de veterinarios y el personal dedicado, trabajan a full para darte un servicio de excelencia, siempre poniendo primero la salud y la felicidad de tus mascotas.</p>
+                    </div>
+                </span>
+            </div>
+        </section>
+        
+        <section id="servicios" class="seccionDorada">
+            <div class="tituloServicios">
+                <svg class="medkit w-6 h-6" fill="#686583" id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path d="M216,64H176V56a24,24,0,0,0-24-24H104A24,24,0,0,0,80,56v8H40A16,16,0,0,0,24,80V208a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64Zm-64,88H136v16a8,8,0,0,1-16,0V152H104a8,8,0,0,1,0-16h16V120a8,8,0,0,1,16,0v16h16a8,8,0,0,1,0,16Zm8-88H96V56a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8Z"/>
+                </svg>
+                <h1>Se le tiene...</h1>
+                <svg class="medkit w-6 h-6" fill="#686583" id="Flat" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+                    <path d="M216,64H176V56a24,24,0,0,0-24-24H104A24,24,0,0,0,80,56v8H40A16,16,0,0,0,24,80V208a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V80A16,16,0,0,0,216,64Zm-64,88H136v16a8,8,0,0,1-16,0V152H104a8,8,0,0,1,0-16h16V120a8,8,0,0,1,16,0v16h16a8,8,0,0,1,0,16Zm8-88H96V56a8,8,0,0,1,8-8h48a8,8,0,0,1,8,8Z"/>
+                </svg>
+            </div>
+            <div id="contenedorServicios">
+                <span class="descripcionServicio">
+                    <img src="/sources/hospitalizacion.jpeg" alt="hospitalizacion">
+                    <h2>Hospitalización</h2>
+                    <p>Cuidados intensivos y monitoreo constante.</p>
+                </span>
+                <span class="descripcionServicio">
+                    <img src="/sources/consulta-general.jpeg" alt="consultas Generales">
+                    <h2>Consultas Generales</h2>
+                    <p>Evaluaciones de salud y chequeos regulares.</p>
+                </span>
+                <span class="descripcionServicio">
+                    <img src="/sources/vacunacion.jpeg" alt="vacunacion">
+                    <h2>Vacunación</h2>
+                    <p>Protección contra enfermedades comunes.</p>
+                </span>
+            </div>
+            <div id="btnServicios"><button>Ver más servicios</button></div>
+        </section>
+        
+        <section id="casosDeExito" class="seccionAzul">
+            <div class="tituloCasos">
+                <h1>Historias de nuestros peludos</h1>
+            </div>
+            <div class="wrapperExito">
+                <svg class="flechaWrapper" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm2.707 14.293-1.414 1.414L7.586 12l5.707-5.707 1.414 1.414L10.414 12l4.293 4.293z"></path></svg>
+                <div class="cardExito">
+                    <img src="/sources/bengie.png" alt="Perrito shih tzu" class="peludo-img">
+                    <div class="comentario">
+                        <div class="usuario">
+                            <img src="https://www.famousbirthdays.com/faces/vazquez-jovani-image.jpg" alt="Usuario" class="usuario-img">
+                            <p class="usuario-nombre">Daniel Silva - Benjamin Franklin III (Bengie)</p>
+                        </div>
+                        <p class="comentario-texto"><br>¡Gracias a Chilling Dogs, Bengie se recuperó de su cirugía y ahora está más feliz que nunca!</p>
+                    </div>
+                </div>
+                <svg class="flechaWrapper" xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 24 24"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm-1.293 15.707-1.414-1.414L13.586 12 9.293 7.707l1.414-1.414L16.414 12l-5.707 5.707z"></path></svg>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="logoIdioma">
+            <img src="/sources/logo.png" alt="logo" width="160px">
+            <select name="idioma" id="SeleccionaIdioma">
+                <option value="esp">Español</option>
+                <option value="eng">Inglés</option>
+            </select>
+        </div>
+
+        <div class="copyContactos">
+            <section class="contactos">
+                <article>
+                    <h5>Portal</h5>
+                    <div class="tarjeta">
+                        <img src="/sources/administrador.svg" alt="">
+                        <p>Administrador</p>
+                    </div>
+        
+                    <div class="tarjeta">
+                        <img src="/sources/veterinarios.svg" alt="">
+                        <p>Veterinarios</p>
+                    </div>
+                </article>
+        
+                <article>
+                    <h5>Compañia</h5>
+                    <div class="tarjeta">
+                        <img src="/sources/sobre-nosotros.svg" alt="">
+                        <p>Sobre Nosotros</p>
+                    </div>
+        
+                    <div class="tarjeta">
+                        <img src="/sources/nuestros-servicios.svg" alt="">
+                        <p>Nuestros Servicios</p>
+                    </div>
+                </article>
+        
+                <article>
+                    <h5>Contáctanos</h5>
+                    <div class="tarjeta">
+                        <img src="/sources/telefono.svg" alt="">
+                        <p>+57 300 331 4403</p>
+                    </div>
+        
+                    <div class="tarjeta">
+                        <img src="/sources/mail.svg" alt="">
+                        <p>contacto@chilling_dogs.com</p>
+                    </div>
+                </article>
+            </section>
+            
+           
+            
+            <div class="down-footer">
+                <ul class="copyright">
+                    &copy; 2024 Chilling Dogs
+                    <li>Privacidad</li>
+                    <li>Términos y condiciones</li>
+                </ul>
+                <article class="redesSociales">
+                    <img src="/sources/instagram.svg" alt="" width="20px">
+                    <img src="/sources/facebook.svg" alt="" width="20px">
+                    <img src="/sources/linkedin.svg" alt="" width="15px">
+                    <img src="/sources/youtube.svg" alt="" width="20px">
+                </article>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
