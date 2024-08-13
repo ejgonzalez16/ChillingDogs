@@ -13,8 +13,6 @@ body {
     min-height: 100vh; /*Que ocupe toda la pantalla, para que el footer se quede abajo*/
     width: 100%;
     height: 100%;
-    background-color: var(--secondary-color);
-
 }
 
 main{
@@ -38,7 +36,6 @@ main h1{
 }
 
 main table{
-
     margin-left: 15px;
     margin-right: 15px;
     text-align: center;
@@ -59,8 +56,23 @@ main tbody tr:nth-child(even){
     background: var(--color-6);
 }
 
+
+td input[type="checkbox"]:disabled {
+    opacity: 1; /* Eliminar el efecto de opacidad */
+    cursor: not-allowed; /* Indica que está deshabilitado */
+}
+
+td{
+    vertical-align: middle;
+}
+
+td input[type="checkbox"]:checked {
+    background-color: #bc711c;
+    border-color: #bc711c;
+}
+
 main button{
-    margin-top: 100px;
+    margin-top: 50px;
     width: 15em;
     height: 2.5em;
     padding: 0 20px;
@@ -71,4 +83,8 @@ main button{
     background: var(--text-dark);
     border: none;
     border-radius: 10px;
+}
+
+.huesoTabla{
+    fill: #DB8421FF;
 }
