@@ -10,4 +10,5 @@ import java.util.Collection;
 @Service
 public interface MascotaService{
     public Collection<Mascota> searchAll();
+    public Mascota findById(int id);
 }

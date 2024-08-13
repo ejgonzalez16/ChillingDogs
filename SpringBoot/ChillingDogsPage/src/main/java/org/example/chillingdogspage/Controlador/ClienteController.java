@@ -14,16 +14,17 @@ public class ClienteController {
     @Autowired
     MascotaService mascotaService;
 
-    //http://localhost:8080/mis-mascotas
+    //http://localhost:8080/mascotas
     @GetMapping("mis-mascotas")
     public String misMascotas(Model model){
         model.addAttribute("mascotas", mascotaService.searchAll());
         return "mis_mascotas";
     }
 
-    //http://localhost:8080/mi-mascota
+    //http://localhost:8080/mascotas/{id}
     @GetMapping("mi-mascota")
-    public String miMascota(){
+    public String miMascota(Model model){
+        model.addAttribute("mascota", mascotaService.findById(1));
         return "mi_mascota";
     }
 }

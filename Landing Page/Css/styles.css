@@ -120,15 +120,17 @@ section {
 }
 
 #presentacion h1{
-    font-size: 64px; 
-    line-height: 84px; 
+    /* Antes f-s: 64px, l-h: 84px */
+    font-size: 4.6vw; 
+    line-height: 1.3em; 
     font-weight: 400; 
     color: var(--text-dark);
 }
 
 #presentacion p{
-    font-size: 24px; 
-    line-height: 36px; 
+    /* Antes f-s: 24px, l-h: 36px */
+    font-size: 1.7vw; 
+    line-height: 1.5em; 
     font-weight: 400; 
     color: var(--text-dark);
     font-weight: normal;
@@ -224,6 +226,7 @@ section {
 }
 
 .textoNosotros p {
+    font-size: 1.2rem;
     margin: 0;
 }
 

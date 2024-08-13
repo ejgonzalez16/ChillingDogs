@@ -17,4 +17,9 @@ public class MascotaServiceImpl implements MascotaService {
     public Collection<Mascota> searchAll() {
         return repository.findAll();
     }
+
+    @Override
+    public Mascota findById(int id) {
+        return repository.findById(id);
+    }
 }
