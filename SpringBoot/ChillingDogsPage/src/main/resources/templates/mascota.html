@@ -43,13 +43,13 @@
 
     <main>
         <section id="seccionPeludo">
-            <h1 th:text="|Estado de ${mascota.nombre}|"></h1>
+            <h1 th:text="|Revisa el estado de ${mascota.nombre}|"></h1>
             <div class = "estadoPeludo">
                 <table>
                     <tbody>
                         <tr>
-                            <td>
-                                <svg></svg>
+                            <td class="imagenEstado">
+                                <img src="/sources/estado.svg" alt="estado" height="24px">
                             </td>
                             <td>
                                 Estado
@@ -60,8 +60,8 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>
-                                <svg></svg>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/raza.svg" alt="raza" height="24px">
                             </td>
                             <td>
                                 Raza
@@ -69,8 +69,8 @@
                             <td th:text="${mascota.raza}"></td>
                         </tr>
                         <tr>
-                            <td>
-                                <svg></svg>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/edad.svg" alt="raza" height="24px">
                             </td>
                             <td>
                                 Edad
@@ -78,8 +78,8 @@
                             <td th:text="|${mascota.edad} añitos|"></td>
                         </tr>
                         <tr>
-                            <td>
-                                <svg></svg>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/peso.svg" alt="raza" height="24px">
                             </td>
                             <td>
                                 Peso
@@ -87,8 +87,8 @@
                             <td th:text="|${mascota.peso} kg|"></td>
                         </tr>
                         <tr>
-                            <td>
-                                <svg></svg>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/enfermedad.svg" alt="raza" height="24px">
                             </td>
                             <td>
                                 Enfermedad
@@ -96,8 +96,8 @@
                             <td th:text="${mascota.enfermedad}"></td>
                         </tr>
                         <tr>
-                            <td>
-                                <svg></svg>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="" alt="raza" height="24px">
                             </td>
                             <td>
                                 Dueño
