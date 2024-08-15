@@ -24,20 +24,6 @@
                 <img src="/sources/logo.png" alt="logo" width="80px">
                 <h1>Chilling Dogs</h1>
             </a>
-            <div class="collapse navbar-collapse centrar" id="navbar"> <!--Contiene el responsive de los elementos-->
-                <ul class="navbar-nav">
-                    <li class="nav-item"><a href="#sobreNosotros" class="nav-link">Sobre Nosotros</a></li>
-                    <li class="nav-item"><a href="#servicios" class="nav-link">Nuestros Servicios</a></li>
-                    <li class="nav-item"><a href="#casosDeExito" class="nav-link">Casos de éxito</a></li>
-                </ul>
-            </div>
-
-            <div class="collapse navbar-collapse derecha" id="navbar2">
-                <ul class="navbar-nav">
-                    <li class="nav-item" ><button class="iniciarSesion">Iniciar Sesión</button></li>
-                    <li class="nav-item"><button class="registrarse">Registrarse</button></li>
-                </ul>
-            </div>
         </nav>
     </header>
 
@@ -51,7 +37,7 @@
                             <td class="imagenEstado">
                                 <img src="/sources/estado.svg" alt="estado" height="24px">
                             </td>
-                            <td>
+                            <td class="celdaSinPadding">
                                 Estado
                             </td>
                             <td>
@@ -63,7 +49,7 @@
                             <td class="imagenEstado">
                                 <img class="imagenEstado" src="/sources/raza.svg" alt="raza" height="24px">
                             </td>
-                            <td>
+                            <td class="celdaSinPadding">
                                 Raza
                             </td>
                             <td th:text="${mascota.raza}"></td>
@@ -72,7 +58,7 @@
                             <td class="imagenEstado">
                                 <img class="imagenEstado" src="/sources/edad.svg" alt="raza" height="24px">
                             </td>
-                            <td>
+                            <td class="celdaSinPadding">
                                 Edad
                             </td>
                             <td th:text="|${mascota.edad} añitos|"></td>
@@ -81,7 +67,7 @@
                             <td class="imagenEstado">
                                 <img class="imagenEstado" src="/sources/peso.svg" alt="raza" height="24px">
                             </td>
-                            <td>
+                            <td class="celdaSinPadding">
                                 Peso
                             </td>
                             <td th:text="|${mascota.peso} kg|"></td>
@@ -90,16 +76,16 @@
                             <td class="imagenEstado">
                                 <img class="imagenEstado" src="/sources/enfermedad.svg" alt="raza" height="24px">
                             </td>
-                            <td>
-                                Enfermedad
+                            <td class="celdaSinPadding">
+                                Malestar
                             </td>
                             <td th:text="${mascota.enfermedad}"></td>
                         </tr>
                         <tr>
                             <td class="imagenEstado">
-                                <img class="imagenEstado" src="" alt="raza" height="24px">
+                                <img class="imagenEstado userImg" src="https://www.famousbirthdays.com/faces/vazquez-jovani-image.jpg" alt="raza" height="24px">
                             </td>
-                            <td>
+                            <td class="celdaSinPadding">
                                 Dueño
                             </td>
                             <td>Undefined</td>
@@ -109,7 +95,7 @@
                 <img alt="Perro de Undefined" th:src="${mascota.foto}">
             </div>
         </section>
-        <button>Volver</button>
+        <a href="http://localhost:8099/mascotas"><button>Volver</button></a>
     </main>
 
     <footer>
