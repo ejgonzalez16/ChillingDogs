@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-dark bg-dark navbar-expand-lg">
+            <!--Lo hace responsive al navbar-->
+            <button class="navbar-toggler black" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-expanded="false">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <a class="navbar-brand" href="#">
+                <img src="/sources/logo.png" alt="logo" width="80px">
+                <h1>Chilling Dogs</h1>
+            </a>
+        </nav>
+    </header>
+    <main>
+        <section id="seccionPeludo">
+            <h1 th:text="|Revisa el estado de ${mascota.nombre}|"></h1>
+            <div class = "estadoPeludo">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td class="imagenEstado">
+                                <img src="/sources/estado.svg" alt="estado" height="24px">
+                            </td>
+                            <td class="celdaSinPadding">
+                                Estado
+                            </td>
+                            <td>
+                                <button th:if="${mascota.estado} == 'Activo'" class = "estadoActivo">Activo</button>
+                                <button th:if="${mascota.estado} == 'Inactivo'" class = "estadoInactivo">Inactivo</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/raza.svg" alt="raza" height="24px">
+                            </td>
+                            <td class="celdaSinPadding">
+                                Raza
+                            </td>
+                            <td th:text="${mascota.raza}"></td>
+                        </tr>
+                        <tr>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/edad.svg" alt="raza" height="24px">
+                            </td>
+                            <td class="celdaSinPadding">
+                                Edad
+                            </td>
+                            <td th:text="|${mascota.edad} añitos|"></td>
+                        </tr>
+                        <tr>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/peso.svg" alt="raza" height="24px">
+                            </td>
+                            <td class="celdaSinPadding">
+                                Peso
+                            </td>
+                            <td th:text="|${mascota.peso} kg|"></td>
+                        </tr>
+                        <tr>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado" src="/sources/enfermedad.svg" alt="raza" height="24px">
+                            </td>
+                            <td class="celdaSinPadding">
+                                Malestar
+                            </td>
+                            <td th:text="${mascota.enfermedad}"></td>
+                        </tr>
+                        <tr>
+                            <td class="imagenEstado">
+                                <img class="imagenEstado userImg" src="https://www.famousbirthdays.com/faces/vazquez-jovani-image.jpg" alt="raza" height="24px">
+                            </td>
+                            <td class="celdaSinPadding">
+                                Dueño
+                            </td>
+                            <td>Undefined</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <img alt="Perro de Undefined" th:src="${mascota.foto}">
+            </div>
+        </section>
+        <a href="http://localhost:8099/mascotas"><button>Volver</button></a>
+    </main>
+    <footer>
+        <div class="logoIdioma">
+            <img src="/sources/logo.png" alt="logo" width="160px">
+            <select name="idioma" id="SeleccionaIdioma">
+                <option value="esp">Español</option>
+                <option value="eng">Inglés</option>
+            </select>
+        </div>
+        <div class="copyContactos">
+            <section class="contactos">
+                <article>
+                    <h5>Portal</h5>
+                    <div class="tarjeta">
+                        <img src="/sources/administrador.svg" alt="">
+                        <p>Administrador</p>
+                    </div>
+
+                    <div class="tarjeta">
+                        <img src="/sources/veterinarios.svg" alt="">
+                        <p>Veterinarios</p>
+                    </div>
+                </article>
+
+                <article>
+                    <h5>Compañia</h5>
+                    <div class="tarjeta">
+                        <img src="/sources/sobre-nosotros.svg" alt="">
+                        <p>Sobre Nosotros</p>
+                    </div>
+
+                    <div class="tarjeta">
+                        <img src="/sources/nuestros-servicios.svg" alt="">
+                        <p>Nuestros Servicios</p>
+                    </div>
+                </article>
+
+                <article>
+                    <h5>Contáctanos</h5>
+                    <div class="tarjeta">
+                        <img src="/sources/telefono.svg" alt="">
+                        <p>+57 300 331 4403</p>
+                    </div>
+
+                    <div class="tarjeta">
+                        <img src="/sources/mail.svg" alt="">
+                        <p>contacto@chilling_dogs.com</p>
+                    </div>
+                </article>
+            </section>
+            <div class="down-footer">
+                <ul class="copyright">
+                    &copy; 2024 Chilling Dogs
+                    <li>Privacidad</li>
+                    <li>Términos y condiciones</li>
+                </ul>
+                <article class="redesSociales">
+                    <img src="/sources/instagram.svg" alt="" width="20px">
+                    <img src="/sources/facebook.svg" alt="" width="20px">
+                    <img src="/sources/linkedin.svg" alt="" width="15px">
+                    <img src="/sources/youtube.svg" alt="" width="20px">
+                </article>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
