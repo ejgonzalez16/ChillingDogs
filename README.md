@@ -47,7 +47,7 @@ _Herramientas utilizadas para crear el proyecto_
 ### `Desarrollado por: 💻`
 
 * [Carlos Andrés Carrero Sandoval](https://github.com/sharly-dev)
-* [Daniel Santiago Silva Gómez](https://github.com/DFallenKnight)
+* [Daniel Santiago Silva Gómez](https://github.com/silvag-daniels)
 * [Édgar Julián González Sierra](https://github.com/ejgonzalez16)
 
 <table align="center">
