@@ -10,4 +10,10 @@ import java.util.Collection;
 @Service
 public interface ClienteService{
     public Cliente buscarCliente(String cedula);
+
+    public void registrarCliente(Cliente cliente);
+
+    public void modificarCliente(Integer cedula, Cliente cliente);
+
+    public void eliminarCliente(Cliente cliente);
 }

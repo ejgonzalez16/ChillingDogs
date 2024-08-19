@@ -9,13 +9,15 @@ public class Cliente {
     private String nombre;
     private String correo;
     private String celular;
+    private String foto;
     private List<Mascota> mascotas;
 
-    public Cliente(String cedula, String nombre, String correo, String celular, List<Mascota> mascotas) {
+    public Cliente(String cedula, String nombre, String correo, String celular, String foto, List<Mascota> mascotas) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
+        this.foto = foto;
         this.mascotas = mascotas;
     }
 
@@ -49,6 +51,14 @@ public class Cliente {
 
     public void setCelular(String celular) {
         this.celular = celular;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public List<Mascota> getMascotas() {
