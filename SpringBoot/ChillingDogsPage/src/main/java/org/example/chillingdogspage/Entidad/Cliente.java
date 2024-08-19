@@ -53,6 +53,14 @@ public class Cliente {
         this.celular = celular;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public List<Mascota> getMascotas() {
         return mascotas;
     }
