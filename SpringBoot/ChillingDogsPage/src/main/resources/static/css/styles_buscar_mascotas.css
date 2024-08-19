@@ -1,0 +1,116 @@
+:root{
+    --primary-color: #e7a65c;
+    --secondary-color: #b2f0ff;
+    --color-3: black;
+    --color-4: white;
+    --color-5: #f8e9c4;
+    --color-6: #EDFBFF;
+    --text-dark: #16191e;
+    --text-light: white;
+}
+
+body {
+    align-items: center;
+    min-height: 100vh; /*Que ocupe toda la pantalla, para que el footer se quede abajo*/
+    width: 100%;
+    height: 100%;
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary-color);
+    width: 100%;
+    height: 100%;
+    min-height: 85vh;
+}
+
+main button {
+    margin-top: 50px;
+    margin-bottom: 50px;
+    width: 10em;
+    height: 2.5em;
+    padding: 0 20px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    color: var(--color-3);
+    background: var(--secondary-color);
+    border: none;
+    border-radius: 10px;
+}
+
+.buscarPerro{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.buscarPerro input{
+    width: 20em;
+    height: 2.5em;
+    border: 0 transparent solid;
+    border-radius: 4px 0px 0px 4px;
+    padding: 15px;
+}
+
+.buscarPerro button{
+    width: 4em;
+    height: 2.0em;
+    border-radius: 0px 4px 4px 0px;;
+}
+
+body {
+    min-height: 100vh; /*Que ocupe toda la pantalla, para que el footer se quede abajo*/
+    width: 100%;
+    height: 100%;
+}
+
+.contenedorTabla{
+    width: 80%;
+}
+
+main h1{
+    margin-top: 50px;
+    margin-bottom: 50px;
+    height: 100%;
+}
+
+main table{
+    margin-left: 15px;
+    margin-right: 15px;
+    text-align: center;
+    width: 100%;
+}
+
+main thead{
+    background: #00bceb;
+    color: var(--color-4);
+    font-size: 1.7em;
+}
+
+main tbody tr:nth-child(odd){
+    background: var(--color-4);
+}
+
+main tbody tr:nth-child(even){
+    background: var(--color-6);
+}
+
+
+td input[type="checkbox"]:disabled {
+    opacity: 1; /* Eliminar el efecto de opacidad */
+    cursor: not-allowed; /* Indica que está deshabilitado */
+}
+
+td{
+    vertical-align: middle;
+}
+
+td input[type="checkbox"]:checked {
+    background-color: #25a3c7;
+    border-color: #25a3c7;
+}

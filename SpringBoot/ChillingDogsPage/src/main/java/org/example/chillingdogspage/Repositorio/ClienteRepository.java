@@ -62,4 +62,14 @@ public class ClienteRepository {
         }
         data.remove(pos);
     }
+    public Cliente buscarClientePorMascota(int idMascota){
+        for (Map.Entry<Integer, Cliente> entry : data.entrySet()) {
+            for(Mascota mascota: entry.getValue().getMascotas()){
+                if(mascota.getId() == idMascota){
+                    return entry.getValue();
+                }
+            }
+        }
+        return null;
+    }
 }

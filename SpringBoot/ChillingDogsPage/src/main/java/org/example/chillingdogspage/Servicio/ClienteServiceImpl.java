@@ -12,6 +12,7 @@ import java.util.List;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
+  
     @Autowired
     ClienteRepository repository;
 
@@ -33,5 +34,10 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public void eliminarCliente(Cliente cliente){
         repository.eliminarCliente(cliente);
+    }
+  
+    @Override
+    public Cliente buscarClientePorMascota(int idMascota) {
+        return repository.buscarClientePorMascota(idMascota);
     }
 }

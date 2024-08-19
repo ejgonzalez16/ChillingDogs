@@ -69,6 +69,14 @@ public class Cliente {
         this.mascotas = mascotas;
     }
 
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
+    }
+
     public List<Mascota> mostrarMascotasTratamiento() throws ExecutionControl.NotImplementedException {
         // TODO
         throw new ExecutionControl.NotImplementedException("No implementado :D");

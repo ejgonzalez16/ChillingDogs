@@ -1,0 +1,16 @@
+main{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #b2f0ff;
+    min-height: 80vh;
+}
+
+main img{
+    width: 30%;
+}
+
+main h1{
+    margin-bottom: 30px;
+}
