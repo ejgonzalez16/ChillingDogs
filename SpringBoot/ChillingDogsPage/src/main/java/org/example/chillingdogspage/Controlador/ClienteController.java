@@ -1,6 +1,5 @@
 package org.example.chillingdogspage.Controlador;
 
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Servicio.ClienteService;
@@ -16,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
+
+
     @GetMapping("buscar")
     public String verClienteyMascotas(Model model){
         String cedulaCliente = "";

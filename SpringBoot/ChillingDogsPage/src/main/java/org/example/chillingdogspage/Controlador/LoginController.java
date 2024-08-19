@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/login/")
+@RequestMapping("/login")
 public class LoginController {
 
     //http://localhost:8099/login/
-    @GetMapping()
+    @GetMapping
     public String login(){
         return "login";
     }

@@ -10,4 +10,6 @@ import java.util.Collection;
 @Service
 public interface ClienteService{
     public Cliente buscarCliente(String cedula);
+
+    public Cliente buscarClientePorMascota(int idMascota);
 }

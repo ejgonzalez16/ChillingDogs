@@ -19,4 +19,9 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente buscarCliente(String cedula){
         return repository.findByCedula(cedula);
     }
+
+    @Override
+    public Cliente buscarClientePorMascota(int idMascota) {
+        return repository.buscarClientePorMascota(idMascota);
+    }
 }
