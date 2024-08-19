@@ -50,6 +50,20 @@ public class MascotaController {
         return "buscar_mascotas";
     }
 
+    //http://localhost:8099/mascotas/modificar
+    @GetMapping("mascotas/modificar")
+    public String modificarMascotas(Model model){
+        List<Mascota> mascotas =  mascotaService.searchAll().stream().toList();
+        List<MascotaCliente> mascotaClientes = new ArrayList<>();
+        for (Mascota mascota : mascotas) {
+            Cliente cliente = clienteService.buscarClientePorMascota(mascota.getId());
+            MascotaCliente mascotaCliente = new MascotaCliente(cliente.getCedula(), cliente.getNombre(), mascota);
+            mascotaClientes.add(mascotaCliente);
+        }
+        model.addAttribute("mascotas", mascotaClientes);
+        return "modificar_mascotas";
+    }
+
     //http://localhost:8099/mascotas/detalles-completos/{id}
     @GetMapping("mascotas/detalles-completos/{id}")
     public String detallesCompletos(Model model, @PathVariable int id){
@@ -57,7 +71,8 @@ public class MascotaController {
         Cliente cliente = clienteService.buscarClientePorMascota(mascota.getId());
         MascotaCliente mascotaCliente = new MascotaCliente(cliente.getCedula(), cliente.getNombre(), mascota);
         model.addAttribute("mascota", mascotaCliente);
-        return "detalles-completos";
+        model.addAttribute("cliente", cliente);
+        return "detalles_completos";
     }
 
     //http://localhost:8099/mascotas

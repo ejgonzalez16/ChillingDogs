@@ -40,9 +40,9 @@ function actualizarTabla(busqueda){
             duenhoCelda.textContent = mascota.nombreDueno
             let detallesCelda = document.createElement("td")
             let linkDetalles = document.createElement("a")
-            linkDetalles.href = "/mascotas/detalles-completos/" + mascota.mascota.id
+            linkDetalles.href = "/mascotas/modificar/" + mascota.mascota.id
             let imagenDetalles = document.createElement("img")
-            imagenDetalles.src = "/sources/detalles-tabla.png"
+            imagenDetalles.src = "/sources/editar-mascota.png"
             imagenDetalles.alt = "Detalles"
             imagenDetalles.height = 24
             linkDetalles.appendChild(imagenDetalles)

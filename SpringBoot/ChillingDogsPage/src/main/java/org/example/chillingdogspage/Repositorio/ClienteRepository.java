@@ -18,14 +18,14 @@ public class ClienteRepository {
     public ClienteRepository(){
         List<Mascota> mascotas1 = new ArrayList<>();
         mascotas1.add( new Mascota( 1,"Bengie", "Shih Tzu", 10, 10.0f, "Ser la mascota de Silva", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN6Ul9KehKdD7lzzGS90l7nyXattlnZcrMug&s", "Activo"));
-        data.put(1, new Cliente( "1234567891", "Daniel Silva", "silva@silva.com", "3155784455", mascotas1));
+        data.put(1, new Cliente( "1234567891", "Daniel Silva", "silva@silva.com", "3155784455", "https://www.famousbirthdays.com/faces/vazquez-jovani-image.jpg",mascotas1));
         List<Mascota> mascotas2 = new ArrayList<>();
         mascotas2.add(new Mascota( 2,"Max", "Husky Siberiano", 10, 10.0f, "Ser la mascota de Silva", "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-08Siberian20Husky2.jpg?itok=d5njFuxB", "Inactivo"));
-        data.put(2, new Cliente("3245789023", "Kurosaki Carlos", "carlos@carlos.com", "3234567789", mascotas2));
+        data.put(2, new Cliente("3245789023", "Kurosaki Carlos", "carlos@carlos.com", "3234567789", "https://www.famousbirthdays.com/faces/vazquez-jovani-image.jpg", mascotas2));
         List<Mascota> mascotas3 = new ArrayList<>();
         mascotas3.add(new Mascota( 3,"Luna", "Golden Retriever", 10, 10.0f, "Ser la mascota de Silva", "https://www.purina.es/sites/default/files/styles/ttt_image_510/public/2024-02/sitesdefaultfilesstylessquare_medium_440x440public2022-09golden20retriever.jpg?itok=48StbVfe", "Inactivo"));
         mascotas3.add(new Mascota( 4,"Goku", "Pastor Alemán", 10, 10.0f, "Ser la mascota de Silva", "https://es.mypet.com/wp-content/uploads/sites/23/2021/03/razas-de-perros-pastor-aleman-570x455-1.jpg", "Activo"));
-        data.put(3, new Cliente("5234567890", "Julius Novachrono", "edgar@edgar.com", "3195678341", mascotas3));
+        data.put(3, new Cliente("5234567890", "Julius Novachrono", "edgar@edgar.com", "3195678341", "https://www.famousbirthdays.com/faces/vazquez-jovani-image.jpg", mascotas3));
     }
 
     public Cliente findByCedula(String cedula){
