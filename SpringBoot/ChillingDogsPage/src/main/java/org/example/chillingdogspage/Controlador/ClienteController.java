@@ -1,5 +1,6 @@
 package org.example.chillingdogspage.Controlador;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.ui.Model;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Servicio.ClienteService;
@@ -14,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("clientes")
 public class ClienteController {
     @Autowired
-    ClienteService clienteServicio;
+    ClienteService clienteService;
     @GetMapping("buscar")
     public String verClienteyMascotas(Model model){
         String cedulaCliente = "";
@@ -24,7 +25,7 @@ public class ClienteController {
 
     @PostMapping("/buscar/{cedula}")
     public String verClienteyMascotas(@PathVariable("cedula") String cedula, Model model){
-        model.addAttribute("cliente", clienteServicio.buscarCliente(cedula));
+        model.addAttribute("cliente", clienteService.buscarCliente(cedula));
         return "verClienteyMascotasCedula";
     }
 }
