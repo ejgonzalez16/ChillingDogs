@@ -84,7 +84,16 @@ td{
     padding-left: 0.5em;
 }
 
-#clienteFoto{
+button {
+    opacity: 0.5;
+}
+
+#activo {
+    opacity: 1;
+    background: green;
+}
+
+#fotoRegistro {
     height: 90%;
     width: 90%;
 }

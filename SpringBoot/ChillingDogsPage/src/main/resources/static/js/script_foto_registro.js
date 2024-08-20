@@ -9,13 +9,23 @@ document.addEventListener('DOMContentLoaded', function () {
                 img.src = url;
             } else {
                 img.src = url;
-                img.alt = 'Foto de cliente';
+                img.alt = 'Foto de registro';
                 img.style.height = '10em';
                 img.style.width = '10em';
                 img.style.objectFit = 'contain';
-                const fotoDefault = document.getElementById('clienteFoto');
+                const fotoDefault = document.getElementById('fotoRegistro');
                 fotoDefault.replaceWith(img);
             }
         }
     });
 });
+
+function activarBoton(tipoBoton) {
+    let boton = document.getElementsByClassName(tipoBoton)[0];
+    let botonActivo = document.getElementById("botonActivo");
+    if (boton === botonActivo) {
+        return;
+    }
+    botonActivo.id = "";
+    boton.id = "botonActivo";
+}

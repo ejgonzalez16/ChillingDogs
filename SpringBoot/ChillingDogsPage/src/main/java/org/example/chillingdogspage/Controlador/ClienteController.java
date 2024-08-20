@@ -16,10 +16,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
-  
+
+    // Create ===========================================================================================
+    @GetMapping("registrar")
+    public String registrarCliente(Model model) {
+        Cliente cliente = new Cliente("","","","", "",null);
+        model.addAttribute("cliente", cliente);
+        return "registrar_cliente";
+    }
+
+    @PostMapping("registrar")
+    public String registrarCliente(Model model, Cliente cliente) {
+        clienteService.registrarCliente(cliente);
+        return "redirect:/clientes/buscar";
+    }
+
+    // Retrieve ===========================================================================================
     @GetMapping("buscar")
-    public String verClienteyMascotas() {
-        return "verClienteyMascotas";
+    public String verClienteyMascotas(Model model) {
+        model.addAttribute("clientes", clienteService.obtenerClientes().stream().toList());
+        return "buscar_clientes";
     }
 
     @PostMapping("buscar")
@@ -31,25 +47,13 @@ public class ClienteController {
     public String verClienteyMascotas(@PathVariable("cedula") Integer cedula, Model model) {
         Cliente cliente = clienteService.buscarCliente(cedula.toString());
         model.addAttribute("cliente", cliente);
-        return "verClienteyMascotasCedula";
+        return "detalles_cliente_cedula";
     }
 
-    @GetMapping("registrar")
-    public String registrarCliente(Model model) {
-        Cliente cliente = new Cliente("","","","", "",null);
-        model.addAttribute("cliente", cliente);
-        return "registrarCliente";
-    }
-
-    @PostMapping("registrar")
-    public String registrarCliente(Model model, Cliente cliente) {
-        clienteService.registrarCliente(cliente);
-        return "redirect:/clientes/buscar";
-    }
-
+    // Update ===========================================================================================
     @GetMapping("modificar")
     public String modificarCliente() {
-        return "modificarCliente";
+        return "modificar_cliente";
     }
 
     @PostMapping("modificar")
@@ -62,7 +66,7 @@ public class ClienteController {
         Cliente cliente = clienteService.buscarCliente(cedula.toString());
         model.addAttribute("cliente", cliente);
         model.addAttribute("cedulaAnterior", cedula);
-        return "modificarClienteCedula";
+        return "modificar_cliente_cedula";
     }
 
     @PostMapping("modificar/{cedula}")
@@ -71,9 +75,10 @@ public class ClienteController {
         return "redirect:/clientes/buscar";
     }
 
+    // Delete ===========================================================================================
     @GetMapping("eliminar")
     public String eliminarCliente() {
-        return "eliminarCliente";
+        return "eliminar_cliente";
     }
 
     @PostMapping("eliminar")
@@ -85,7 +90,7 @@ public class ClienteController {
     public String eliminarCliente(@PathVariable("cedula") Integer cedula, Model model) {
         Cliente cliente = clienteService.buscarCliente(cedula.toString());
         model.addAttribute("cliente", cliente);
-        return "eliminarClienteCedula";
+        return "eliminar_cliente_cedula";
     }
 
     @PostMapping("eliminar/{cedula}")

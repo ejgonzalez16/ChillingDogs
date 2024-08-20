@@ -9,6 +9,7 @@ import java.util.Collection;
 
 @Service
 public interface ClienteService{
+    public Collection<Cliente> obtenerClientes();
   
     public Cliente buscarCliente(String cedula);
   

@@ -11,4 +11,6 @@ import java.util.Collection;
 public interface MascotaService{
     public Collection<Mascota> searchAll();
     public Mascota findById(int id);
+    public void deleteById(int id);
+    public void registrarMascota(Mascota mascota);
 }
