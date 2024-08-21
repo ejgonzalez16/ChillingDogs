@@ -14,6 +14,11 @@ public class MascotaServiceImpl implements MascotaService {
     MascotaRepository repository;
 
     @Override
+    public void registrarMascota(Mascota mascota) {
+        repository.save(mascota);
+    }
+
+    @Override
     public Collection<Mascota> searchAll() {
         return repository.findAll();
     }
@@ -21,5 +26,10 @@ public class MascotaServiceImpl implements MascotaService {
     @Override
     public Mascota findById(int id) {
         return repository.findById(id);
+    }
+
+    @Override
+    public void deleteById(int id) {
+        repository.deleteById(id);
     }
 }

@@ -106,6 +106,7 @@ section h1{
 }
 
 .estadoPeludo img{
+    max-width: fit-content;
     margin-right: 60px;
 }
 

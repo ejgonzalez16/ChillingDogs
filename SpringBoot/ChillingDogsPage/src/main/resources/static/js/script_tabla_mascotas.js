@@ -1,7 +1,7 @@
 function buscar(){
     let busqueda = document.getElementById("buscarInput").value
     if(busqueda === ""){
-        alert("inserte algo a buscar")
+        alert("Debe ingresar el nombre de la mascota en la barra de búsqueda")
         return
     }
     actualizarTabla(busqueda)
@@ -40,10 +40,22 @@ function actualizarTabla(busqueda){
             duenhoCelda.textContent = mascota.nombreDueno
             let detallesCelda = document.createElement("td")
             let linkDetalles = document.createElement("a")
-            linkDetalles.href = "/mascotas/detalles-completos/" + mascota.mascota.id
             let imagenDetalles = document.createElement("img")
-            imagenDetalles.src = "/sources/detalles-tabla.png"
-            imagenDetalles.alt = "Detalles"
+            // Obtener la URL actual
+            let currentURL = window.location.href
+            if (currentURL.includes("modificar")) {
+                linkDetalles.href = "/mascotas/modificar/" + mascota.mascota.id
+                imagenDetalles.src = "/sources/editar-mascota.png"
+                imagenDetalles.alt = "Modificar"
+            } else if (currentURL.includes("eliminar")) {
+                linkDetalles.href = "/mascotas/eliminar/" + mascota.mascota.id
+                imagenDetalles.src = "/sources/eliminar-mascota.png"
+                imagenDetalles.alt = "Eliminar"
+            } else {
+                linkDetalles.href = "/mascotas/detalles-completos/" + mascota.mascota.id
+                imagenDetalles.src = "/sources/detalles-tabla.png"
+                imagenDetalles.alt = "Detalles"
+            }
             imagenDetalles.height = 24
             linkDetalles.appendChild(imagenDetalles)
             detallesCelda.appendChild(linkDetalles)

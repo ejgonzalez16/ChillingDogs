@@ -12,14 +12,35 @@ import java.util.List;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
+  
     @Autowired
     ClienteRepository repository;
+
+    @Override
+    public Collection<Cliente> obtenerClientes(){
+        return repository.allClientes();
+    }
 
     @Override
     public Cliente buscarCliente(String cedula){
         return repository.findByCedula(cedula);
     }
 
+    @Override
+    public void registrarCliente(Cliente cliente){
+        repository.registrarCliente(cliente);
+    }
+
+    @Override
+    public void modificarCliente(Integer cedula, Cliente cliente){
+        repository.modificarCliente(cedula, cliente);
+    }
+
+    @Override
+    public void eliminarCliente(Cliente cliente){
+        repository.eliminarCliente(cliente);
+    }
+  
     @Override
     public Cliente buscarClientePorMascota(int idMascota) {
         return repository.buscarClientePorMascota(idMascota);

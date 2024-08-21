@@ -463,3 +463,15 @@ footer{
     margin-left: 10px;
 }
 /*Fin Footer*/
+
+/*Cositas pa todos*/
+
+/*Estado activo inactivo del perro*/
+
+.estadoActivo{
+    background-color: #4CE77FFF;
+}
+
+.estadoInactivo{
+    background-color: #ff5d60;
+}
