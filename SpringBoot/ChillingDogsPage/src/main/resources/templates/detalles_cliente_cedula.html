@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Buscar Cliente</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/styles_verClienteyMascotas.css">
+    <link rel="stylesheet" href="/css/styles_buscar_clientes.css">
     <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
@@ -85,6 +85,12 @@
             </table>
             <h3 th:if="${cliente.mascotas} == null">No tiene mascotas registradas</h3>
         </div>
+        <form th:object="${cliente}" th:action="@{/clientes/eliminar/{cedula}(cedula=${cliente.cedula})}" method="post" id="eliminarForm">
+            <div class="contenedorBoton"><button type="submit" id="btnEliminar">Eliminar</button></div>
+        </form>
+        <form th:object="${cliente}" th:action="@{/clientes/modificar/{cedula}(cedula=${cliente.cedula})}">
+            <div class="contenedorBoton"><button type="submit" id="btnModificar">Modificar</button></div>
+        </form>
         <a href="http://localhost:8099/clientes/buscar"><button id="btnVolver">Volver</button></a>
     </main>
     <footer>

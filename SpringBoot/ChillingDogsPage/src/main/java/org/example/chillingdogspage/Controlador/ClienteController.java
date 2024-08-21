@@ -11,6 +11,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("clientes")
 public class ClienteController {
@@ -34,7 +37,8 @@ public class ClienteController {
     // Retrieve ===========================================================================================
     @GetMapping("buscar")
     public String verClienteyMascotas(Model model) {
-        model.addAttribute("clientes", clienteService.obtenerClientes().stream().toList());
+        List<Cliente> clientes = clienteService.obtenerClientes().stream().toList();
+        model.addAttribute("clientes", clientes);
         return "buscar_clientes";
     }
 

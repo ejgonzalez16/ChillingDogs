@@ -64,8 +64,8 @@ public class MascotaController {
         return "mascotas";
     }
 
-    //http://localhost:8099/mascotas/buscar-por-nombre
-    @GetMapping("mascotas/buscar-por-nombre")
+    //http://localhost:8099/mascotas/buscar
+    @GetMapping("mascotas/buscar")
     public String buscarPorNombre(Model model){
         actualizarMascotasCliente(model);
         return "buscar_mascotas";

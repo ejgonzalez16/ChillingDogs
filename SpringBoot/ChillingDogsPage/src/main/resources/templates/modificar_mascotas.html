@@ -50,7 +50,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="mascota : ${mascotas.subList(0, 4)}"> <!--Limitar la cantidad de filas iniciales-->
+                <tr th:each="mascota : ${mascotas}"> <!--Limitar la cantidad de filas iniciales-->
                     <td>
                         <input class="form-check-input" th:if="${mascota.mascota.estado == 'Activo'}"  type="checkbox" checked disabled>
                         <input class="form-check-input" th:if="${mascota.mascota.estado == 'Inactivo'}"  type="checkbox" disabled>

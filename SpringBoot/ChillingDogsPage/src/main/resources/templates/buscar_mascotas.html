@@ -47,10 +47,12 @@
                     <th scope="col">Raza</th>
                     <th scope="col">Dueño</th>
                     <th scope="col">Detalles</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="mascota : ${mascotas.subList(0, 4)}"> <!--Limitar la cantidad de filas iniciales-->
+                <tr th:each="mascota : ${mascotas}"> <!--Limitar la cantidad de filas iniciales-->
                     <td>
                         <input class="form-check-input" th:if="${mascota.mascota.estado == 'Activo'}"  type="checkbox" checked disabled>
                         <input class="form-check-input" th:if="${mascota.mascota.estado == 'Inactivo'}"  type="checkbox" disabled>
@@ -64,6 +66,16 @@
                     <td>
                         <a th:href="@{/mascotas/detalles-completos/{id}(id=${mascota.mascota.id})}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#0094ba" viewBox="0 0 256 256"><path d="M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64Zm8,72h72a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16Zm88,48H40a8,8,0,0,0,0,16h88a8,8,0,0,0,0-16Zm109.66,13.66a8,8,0,0,1-11.32,0L206,177.36A40,40,0,1,1,217.36,166l20.3,20.3A8,8,0,0,1,237.66,197.66ZM184,168a24,24,0,1,0-24-24A24,24,0,0,0,184,168Z"></path></svg>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/mascotas/modificar/{id}(id=${mascota.mascota.id})}">
+                            <img src="/sources/editar-mascota.png" alt="Modificar" width="32px">
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/mascotas/eliminar/' + ${mascota.mascota.id}}">
+                            <svg width="32" height="97px" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <defs> <style>.cls-1{fill:#ffffff;}.cls-1,.cls-2,.cls-3{stroke:#0094ba;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;}.cls-2{fill:#ddf8ff;}.cls-3{fill:none;}</style> </defs> <title>bones</title> <g id="bones"> <path class="cls-1" d="M21.87,49.29,34.06,37.1,49.79,21.37A5,5,0,1,0,52.6,12.9a5,5,0,1,0-8.47,2.81L25.4,34.44l-9.19,9.19A5,5,0,1,0,13.4,52.1a5,5,0,1,0,8.47-2.81Z"></path> <path class="cls-2" d="M49.79,43.63,37.6,31.44,21.87,15.71A5,5,0,1,0,13.4,12.9a5,5,0,1,0,2.81,8.47L34.94,40.1l9.19,9.19A5,5,0,1,0,52.6,52.1a5,5,0,1,0-2.81-8.47Z"></path> <line class="cls-3" x1="45" y1="21" x2="42.5" y2="23.5"></line> <line class="cls-3" x1="22" y1="42" x2="18" y2="46"></line> <line class="cls-3" x1="42" y1="41" x2="43.5" y2="42.5"></line> <line class="cls-3" x1="32" y1="33" x2="33.5" y2="34.5"></line> <line class="cls-3" x1="30" y1="31" x2="29" y2="30"></line> <line class="cls-3" x1="24" y1="21" x2="21" y2="18"></line> </g> </g></svg>
                         </a>
                     </td>
                 </tr>
