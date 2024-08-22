@@ -38,33 +38,45 @@ function actualizarTabla(busqueda){
             razaCelda.textContent = mascota.mascota.raza
             let duenhoCelda = document.createElement("td")
             duenhoCelda.textContent = mascota.nombreDueno
+
             let detallesCelda = document.createElement("td")
             let linkDetalles = document.createElement("a")
             let imagenDetalles = document.createElement("img")
-            // Obtener la URL actual
-            let currentURL = window.location.href
-            if (currentURL.includes("modificar")) {
-                linkDetalles.href = "/mascotas/modificar/" + mascota.mascota.id
-                imagenDetalles.src = "/sources/editar-mascota.png"
-                imagenDetalles.alt = "Modificar"
-            } else if (currentURL.includes("eliminar")) {
-                linkDetalles.href = "/mascotas/eliminar/" + mascota.mascota.id
-                imagenDetalles.src = "/sources/eliminar-mascota.png"
-                imagenDetalles.alt = "Eliminar"
-            } else {
-                linkDetalles.href = "/mascotas/detalles-completos/" + mascota.mascota.id
-                imagenDetalles.src = "/sources/detalles-tabla.png"
-                imagenDetalles.alt = "Detalles"
-            }
+            linkDetalles.href = "/mascotas/detalles-completos/" + mascota.mascota.id
+            imagenDetalles.src = "/sources/detalles-tabla.png"
+            imagenDetalles.alt = "Detalles"
             imagenDetalles.height = 24
             linkDetalles.appendChild(imagenDetalles)
             detallesCelda.appendChild(linkDetalles)
+
+            let modificarCelda = document.createElement("td")
+            let linkModificar = document.createElement("a")
+            let imagenModificar = document.createElement("img")
+            linkModificar.href = "/mascotas/modificar/" + mascota.mascota.id
+            imagenModificar.src = "/sources/editar-mascota.png"
+            imagenModificar.alt = "Modificar"
+            imagenModificar.height = 24
+            linkModificar.appendChild(imagenModificar)
+            modificarCelda.appendChild(linkModificar)
+
+            let eliminarCelda = document.createElement("td")
+            let linkEliminar = document.createElement("a")
+            let imagenEliminar = document.createElement("img")
+            linkEliminar.href = "/mascotas/eliminar/" + mascota.mascota.id
+            imagenEliminar.src = "/sources/eliminar-mascota.png"
+            imagenEliminar.alt = "Eliminar"
+            imagenEliminar.height = 24
+            linkEliminar.appendChild(imagenEliminar)
+            eliminarCelda.appendChild(linkEliminar)
+
             tr.appendChild(celdaEstado)
             tr.appendChild(celdaImagen)
             tr.appendChild(nombreCelda)
             tr.appendChild(razaCelda)
             tr.appendChild(duenhoCelda)
             tr.appendChild(detallesCelda)
+            tr.appendChild(modificarCelda)
+            tr.appendChild(eliminarCelda)
             cuerpoTabla.appendChild(tr)
         }
     }

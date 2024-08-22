@@ -91,7 +91,8 @@
                 <div class="contenedorBoton"><button type="submit" id="btnModificar">Guardar cambios</button></div>
             </form>
         </section>
-        <a href="http://localhost:8099/clientes/modificar"><button id="btnVolver">Volver</button></a>
+        <!-- Boton volver redirige a http://localhost:8099/clientes/buscar/{cedula} -->
+        <a th:href="@{'/clientes/buscar/' + ${cedulaAnterior}}"><button id="btnVolver">Volver</button></a>
     </main>
     <footer>
         <div class="logoIdioma">

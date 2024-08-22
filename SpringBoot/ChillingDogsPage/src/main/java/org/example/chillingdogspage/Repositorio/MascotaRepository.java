@@ -35,4 +35,8 @@ public class MascotaRepository {
     public void deleteById(int id) {
         data.remove(id);
     }
+
+    public void update(Mascota mascota) {
+        data.put(mascota.getId(), mascota);
+    }
 }

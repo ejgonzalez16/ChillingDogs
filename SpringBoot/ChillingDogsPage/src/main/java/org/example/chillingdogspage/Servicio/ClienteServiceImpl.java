@@ -45,4 +45,9 @@ public class ClienteServiceImpl implements ClienteService {
     public Cliente buscarClientePorMascota(int idMascota) {
         return repository.buscarClientePorMascota(idMascota);
     }
+
+    @Override
+    public void registrarMascota(String cedula, Mascota mascota){
+        repository.registrarMascota(cedula, mascota);
+    }
 }

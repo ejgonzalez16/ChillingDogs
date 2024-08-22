@@ -45,15 +45,18 @@ public class MascotaController {
     // Create =============================================================
     @GetMapping("mascotas/registrar")
     public String registrarMascota(Model model) {
-        Mascota mascota = new Mascota(-1,"","",-1,-1.0f, "", "", "");
+        Mascota mascota = new Mascota();
         model.addAttribute("mascota", mascota);
+        model.addAttribute("clientes", clienteService.obtenerClientes());
         return "registrar_mascota";
     }
 
     @PostMapping("mascotas/registrar")
     public String registrarMascota(Mascota mascota) {
         mascotaService.registrarMascota(mascota);
-        return "redirect:/mascotas";
+        mascota.setId(mascotaService.searchAll().size());
+        clienteService.registrarMascota(mascota.getCedulaCliente(), mascota);
+        return "redirect:/mascotas/buscar";
     }
 
     // Retrieve =============================================================
@@ -90,6 +93,18 @@ public class MascotaController {
         return "modificar_mascotas";
     }
 
+    @GetMapping("mascotas/modificar/{id}")
+    public String modificarMascota(@PathVariable("id") Integer id, Model model) {
+        Mascota mascota = mascotaService.findById(id);
+        model.addAttribute("mascota", mascota);
+        return "modificar_mascota";
+    }
+    @PostMapping("mascotas/modificar/{id}")
+    public String modificarMascota(@PathVariable("id") Integer id, Mascota mascota) {
+        mascotaService.updateMascota(mascota);
+        return "redirect:/mascotas/buscar";
+    }
+
     // Delete =============================================================
     //http://localhost:8099/mascotas/eliminar
     @GetMapping("mascotas/eliminar")
@@ -102,7 +117,7 @@ public class MascotaController {
     @GetMapping("mascotas/eliminar/{id}")
     public String eliminarMascota(Model model, @PathVariable int id){
         mascotaService.deleteById(id);
-        return "redirect:/mascotas/eliminar";
+        return "redirect:/mascotas/buscar";
     }
 
     // Metodos privaditos =====================================================

@@ -79,4 +79,13 @@ public class ClienteRepository {
         }
         return null;
     }
+
+    public void registrarMascota(String cedula, Mascota mascota) {
+        for (Map.Entry<Integer, Cliente> entry : data.entrySet()) {
+            if (entry.getValue().getCedula().equals(cedula)) {
+                entry.getValue().getMascotas().add(mascota);
+                break;
+            }
+        }
+    }
 }

@@ -32,4 +32,9 @@ public class MascotaServiceImpl implements MascotaService {
     public void deleteById(int id) {
         repository.deleteById(id);
     }
+
+    @Override
+    public void updateMascota(Mascota mascota) {
+        repository.update(mascota);
+    }
 }

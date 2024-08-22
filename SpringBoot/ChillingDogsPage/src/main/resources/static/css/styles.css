@@ -475,3 +475,21 @@ footer{
 .estadoInactivo{
     background-color: #ff5d60;
 }
+
+/* Estilo por defecto para botones no seleccionados */
+.btn-grey {
+    background-color: grey;
+    color: white;
+    border: none;
+}
+
+/* Estilo para botones seleccionados (color verde o rojo) */
+.btn-selected-green {
+    background-color: green;
+    color: white;
+}
+
+.btn-selected-red {
+    background-color: red;
+    color: white;
+}

@@ -20,4 +20,6 @@ public interface ClienteService{
     public void eliminarCliente(Cliente cliente);
 
     public Cliente buscarClientePorMascota(int idMascota);
+
+    void registrarMascota(String cedula, Mascota mascota);
 }
