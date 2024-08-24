@@ -11,20 +11,25 @@ _Clone el repositorio con el comando: git clone [https://github.com/ejgonzalez16
 ### Logo 🕶️
 
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/beacddf5-d884-49ea-b27b-eb1f420532c1" alt="Métricas Servicios" width="400">
+  <img src="https://github.com/user-attachments/assets/beacddf5-d884-49ea-b27b-eb1f420532c1" alt="Logo Chilling Dogs" width="400">
 </p>
 
 ### Uml 🏛
 
 <p align = "center">
- <img src = "https://github.com/user-attachments/assets/b98771c8-6b6a-458a-825f-549d2cf5628c" alt = "Chat" width = "400">
+ <img src = "https://github.com/user-attachments/assets/b98771c8-6b6a-458a-825f-549d2cf5628c" alt = "UML Chilling Dogs" width = "400">
 </p>
 
+### Diagrama entidad relación 🗂️
+
+<p align = "center">
+ <img src = "https://github.com/user-attachments/assets/1df29553-296f-4a5a-803c-d3d871fca1c2" alt = "Entidad relación Chilling Dogs" width = "400">
+</p>
 
 ### Paleta de colores 🎨
 
 <p align = "center">
- <img src = "https://github.com/user-attachments/assets/e828b23d-b038-43c2-adf9-522398e225e4" alt = "Agendamiento de Paquetes" width = "400">
+ <img src = "https://github.com/user-attachments/assets/e828b23d-b038-43c2-adf9-522398e225e4" alt = "Paleta de colores Chilling Dogs" width = "400">
 </p>
 
 ### `Pre-requisitos 📋`
