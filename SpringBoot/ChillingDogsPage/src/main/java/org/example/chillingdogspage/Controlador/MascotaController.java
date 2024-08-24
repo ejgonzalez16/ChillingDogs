@@ -3,6 +3,7 @@ package org.example.chillingdogspage.Controlador;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Entidad.MascotaCliente;
+import org.example.chillingdogspage.ErrorHandling.ClientNotFoundException;
 import org.example.chillingdogspage.Servicio.ClienteService;
 import org.springframework.ui.Model;
 import org.example.chillingdogspage.Servicio.MascotaService;
@@ -54,8 +55,6 @@ public class MascotaController {
     @PostMapping("mascotas/registrar")
     public String registrarMascota(Mascota mascota) {
         mascotaService.registrarMascota(mascota);
-        mascota.setId(mascotaService.searchAll().size());
-        clienteService.registrarMascota(mascota.getCedulaCliente(), mascota);
         return "redirect:/mascotas/buscar";
     }
 

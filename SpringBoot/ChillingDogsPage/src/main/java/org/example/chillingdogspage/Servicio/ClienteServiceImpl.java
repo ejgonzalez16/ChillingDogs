@@ -18,7 +18,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Collection<Cliente> obtenerClientes(){
-        return repository.allClientes();
+        return repository.findAll();
     }
 
     @Override
@@ -28,26 +28,21 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public void registrarCliente(Cliente cliente){
-        repository.registrarCliente(cliente);
+        repository.save(cliente);
     }
 
     @Override
-    public void modificarCliente(Integer cedula, Cliente cliente){
-        repository.modificarCliente(cedula, cliente);
+    public void modificarCliente(Cliente cliente){
+        repository.save(cliente);
     }
 
     @Override
     public void eliminarCliente(Cliente cliente){
-        repository.eliminarCliente(cliente);
+        repository.delete(cliente);
     }
   
     @Override
-    public Cliente buscarClientePorMascota(int idMascota) {
-        return repository.buscarClientePorMascota(idMascota);
-    }
-
-    @Override
-    public void registrarMascota(String cedula, Mascota mascota){
-        repository.registrarMascota(cedula, mascota);
+    public Cliente buscarClientePorMascota(Long idMascota) {
+        return repository.findByMascotaId(idMascota);
     }
 }

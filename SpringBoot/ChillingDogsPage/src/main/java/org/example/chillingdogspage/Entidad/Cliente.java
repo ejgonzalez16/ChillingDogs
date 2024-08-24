@@ -1,16 +1,25 @@
 package org.example.chillingdogspage.Entidad;
 
+import jakarta.persistence.*;
 import jdk.jshell.spi.ExecutionControl;
 
 import java.util.List;
 
+@Entity
 public class Cliente {
+    @GeneratedValue
+    @Id
+    private Long id;
     private String cedula;
     private String nombre;
     private String correo;
     private String celular;
     private String foto;
+    @OneToMany(mappedBy = "cliente")
     private List<Mascota> mascotas;
+
+    public Cliente() {
+    }
 
     public Cliente(String cedula, String nombre, String correo, String celular, String foto, List<Mascota> mascotas) {
         this.cedula = cedula;
@@ -19,6 +28,14 @@ public class Cliente {
         this.celular = celular;
         this.foto = foto;
         this.mascotas = mascotas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCedula() {

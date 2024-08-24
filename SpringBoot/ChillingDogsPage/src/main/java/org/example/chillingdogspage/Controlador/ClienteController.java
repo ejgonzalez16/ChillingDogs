@@ -75,7 +75,7 @@ public class ClienteController {
 
     @PostMapping("modificar/{cedula}")
     public String modificarCliente(Model model, Cliente cliente, @PathVariable("cedula") Integer cedulaAnterior) {
-        clienteService.modificarCliente(cedulaAnterior, cliente);
+        clienteService.modificarCliente(cliente);
         return "redirect:/clientes/buscar";
     }
 

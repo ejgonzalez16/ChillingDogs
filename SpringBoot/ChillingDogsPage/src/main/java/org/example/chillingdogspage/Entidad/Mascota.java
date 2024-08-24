@@ -1,7 +1,15 @@
 package org.example.chillingdogspage.Entidad;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+
+@Entity
 public class Mascota {
-    private int id;
+    @GeneratedValue
+    @Id
+    private Long id;
     private String nombre;
     private String raza;
     private int edad;
@@ -10,17 +18,8 @@ public class Mascota {
     private String foto;
     private String estado;
     private String cedulaCliente;
-
-    public Mascota(int id, String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado) {
-        this.id = id;
-        this.nombre = nombre;
-        this.raza = raza;
-        this.edad = edad;
-        this.peso = peso;
-        this.enfermedad = enfermedad;
-        this.foto = foto;
-        this.estado = estado;
-    }
+    @ManyToOne
+    private Cliente cliente;
 
     public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado) {
         this.nombre = nombre;
@@ -36,11 +35,11 @@ public class Mascota {
         estado = "Activo";
     }
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
