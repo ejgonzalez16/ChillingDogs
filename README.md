@@ -17,7 +17,7 @@ _Clone el repositorio con el comando: git clone [https://github.com/ejgonzalez16
 ### Uml 🏛
 
 <p align = "center">
- <img src = "https://github.com/user-attachments/assets/b98771c8-6b6a-458a-825f-549d2cf5628c" alt = "UML Chilling Dogs" width = "400">
+ <img src = "https://github.com/user-attachments/assets/fe47e53e-71f7-4124-bf5a-ae98e51554fc" alt = "UML Chilling Dogs" width = "400">
 </p>
 
 ### Diagrama entidad relación 🗂️
