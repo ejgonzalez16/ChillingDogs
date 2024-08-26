@@ -2,7 +2,6 @@ package org.example.chillingdogspage.Controlador;
 
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Mascota;
-import org.example.chillingdogspage.Entidad.MascotaCliente;
 import org.example.chillingdogspage.ErrorHandling.ClientNotFoundException;
 import org.example.chillingdogspage.Servicio.ClienteService;
 import org.springframework.ui.Model;
@@ -11,20 +10,20 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@RequestMapping
+@RequestMapping("mascotas")
 public class MascotaController {
     @Autowired
     MascotaService mascotaService;
     @Autowired
     ClienteService clienteService;
+    String carpeta = "mascotas/";
 
     // URLs del Cliente =====================================================
     // Retrieve =============================================================
-    //http://localhost:8099/mis-mascotas/{cedula}
+    //http://localhost:8099/mascotas/mis-mascotas/{cedula}
     @GetMapping("mis-mascotas/{cedula}")
     public String misMascotas(Model model, @PathVariable String cedula){
         Cliente cliente = clienteService.buscarCliente(cedula);
@@ -32,73 +31,64 @@ public class MascotaController {
             throw new ClientNotFoundException(cedula);
         }
         model.addAttribute("cliente", cliente);
-        return "mis_mascotas";
+        return carpeta + "mis_mascotas";
     }
 
     //http://localhost:8099/mascotas/
-    @GetMapping("mascotas/{id}")
+    @GetMapping("{id}")
     public String miMascota(Model model, @PathVariable int id){
         model.addAttribute("mascota", mascotaService.findById(id));
-        return "mascota";
+        return carpeta + "mascota";
     }
 
     // URLs del Veterinario =====================================================
     // Create =============================================================
-    @GetMapping("mascotas/registrar")
+    @GetMapping("registrar")
     public String registrarMascota(Model model) {
         Mascota mascota = new Mascota();
         model.addAttribute("mascota", mascota);
         model.addAttribute("clientes", clienteService.obtenerClientes());
-        return "registrar_mascota";
+        return carpeta + "registrar_mascota";
     }
 
-    @PostMapping("mascotas/registrar")
+    @PostMapping("registrar")
     public String registrarMascota(Mascota mascota) {
+        mascota.setCliente(clienteService.buscarCliente(mascota.getCliente().getCedula()));
         mascotaService.registrarMascota(mascota);
         return "redirect:/mascotas/buscar";
     }
 
     // Retrieve =============================================================
     //http://localhost:8099/mascotas
-    @GetMapping("mascotas")
+    @GetMapping
     public String getMascotas(Model model){
         actualizarMascotasCliente(model);
-        return "mascotas";
+        return carpeta + "mascotas";
     }
 
     //http://localhost:8099/mascotas/buscar
-    @GetMapping("mascotas/buscar")
+    @GetMapping("buscar")
     public String buscarPorNombre(Model model){
         actualizarMascotasCliente(model);
-        return "buscar_mascotas";
+        return carpeta + "buscar_mascotas";
     }
 
     //http://localhost:8099/mascotas/detalles-completos/{id}
-    @GetMapping("mascotas/detalles-completos/{id}")
+    @GetMapping("detalles-completos/{id}")
     public String detallesCompletos(Model model, @PathVariable int id){
         Mascota mascota =  mascotaService.findById(id);
-        Cliente cliente = clienteService.buscarClientePorMascota(mascota.getId());
-        MascotaCliente mascotaCliente = new MascotaCliente(cliente.getCedula(), cliente.getNombre(), mascota);
-        model.addAttribute("mascota", mascotaCliente);
-        model.addAttribute("cliente", cliente);
-        return "detalles_mascota";
+        model.addAttribute("mascota", mascota);
+        return carpeta + "detalles_mascota";
     }
 
     // Update =============================================================
-    //http://localhost:8099/mascotas/modificar
-    @GetMapping("mascotas/modificar")
-    public String modificarMascotas(Model model){
-        actualizarMascotasCliente(model);
-        return "modificar_mascotas";
-    }
-
-    @GetMapping("mascotas/modificar/{id}")
+    @GetMapping("modificar/{id}")
     public String modificarMascota(@PathVariable("id") Integer id, Model model) {
         Mascota mascota = mascotaService.findById(id);
         model.addAttribute("mascota", mascota);
-        return "modificar_mascota";
+        return carpeta + "modificar_mascota";
     }
-    @PostMapping("mascotas/modificar/{id}")
+    @PostMapping("modificar/{id}")
     public String modificarMascota(@PathVariable("id") Integer id, Mascota mascota) {
         mascotaService.updateMascota(mascota);
         return "redirect:/mascotas/buscar";
@@ -106,14 +96,14 @@ public class MascotaController {
 
     // Delete =============================================================
     //http://localhost:8099/mascotas/eliminar
-    @GetMapping("mascotas/eliminar")
+    @GetMapping("eliminar")
     public String eliminarMascotas(Model model){
         actualizarMascotasCliente(model);
-        return "eliminar_mascotas";
+        return carpeta + "eliminar_mascotas";
     }
 
     //http://localhost:8099/mascotas/eliminar/
-    @GetMapping("mascotas/eliminar/{id}")
+    @GetMapping("eliminar/{id}")
     public String eliminarMascota(Model model, @PathVariable int id){
         mascotaService.deleteById(id);
         return "redirect:/mascotas/buscar";
@@ -122,12 +112,6 @@ public class MascotaController {
     // Metodos privaditos =====================================================
     private void actualizarMascotasCliente(Model model) {
         List<Mascota> mascotas =  mascotaService.searchAll().stream().toList();
-        List<MascotaCliente> mascotaClientes = new ArrayList<>();
-        for (Mascota mascota : mascotas) {
-            Cliente cliente = clienteService.buscarClientePorMascota(mascota.getId());
-            MascotaCliente mascotaCliente = new MascotaCliente(cliente.getCedula(), cliente.getNombre(), mascota);
-            mascotaClientes.add(mascotaCliente);
-        }
-        model.addAttribute("mascotas", mascotaClientes);
+        model.addAttribute("mascotas", mascotas);
     }
 }

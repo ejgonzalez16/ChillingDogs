@@ -72,7 +72,7 @@ td input[type="checkbox"]:checked {
 }
 
 main button{
-    margin-top: 50px;
+    margin: 50px 0px;
     width: 15em;
     height: 2.5em;
     padding: 0 20px;

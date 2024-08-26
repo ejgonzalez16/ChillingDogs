@@ -1,8 +1,10 @@
 package org.example.chillingdogspage.Entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jdk.jshell.spi.ExecutionControl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -16,18 +18,18 @@ public class Cliente {
     private String celular;
     private String foto;
     @OneToMany(mappedBy = "cliente")
-    private List<Mascota> mascotas;
+    @JsonManagedReference
+    private List<Mascota> mascotas = new ArrayList<>();
 
     public Cliente() {
     }
 
-    public Cliente(String cedula, String nombre, String correo, String celular, String foto, List<Mascota> mascotas) {
+    public Cliente(String cedula, String nombre, String correo, String celular, String foto) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
         this.foto = foto;
-        this.mascotas = mascotas;
     }
 
     public Long getId() {

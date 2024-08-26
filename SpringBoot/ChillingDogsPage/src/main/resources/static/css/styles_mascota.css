@@ -103,6 +103,8 @@ section h1{
 
 .userImg{
     border-radius: 50%;
+    /*Hacer que la imagen se le recorte el sobrante, que no haga cover*/
+    object-fit: cover;
 }
 
 section table{

@@ -1,9 +1,7 @@
 package org.example.chillingdogspage.Entidad;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
 
 @Entity
 public class Mascota {
@@ -17,11 +15,11 @@ public class Mascota {
     private String enfermedad;
     private String foto;
     private String estado;
-    private String cedulaCliente;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonBackReference
     private Cliente cliente;
 
-    public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado) {
+    public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado, Cliente cliente) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -29,10 +27,12 @@ public class Mascota {
         this.enfermedad = enfermedad;
         this.foto = foto;
         this.estado = estado;
+        this.cliente = cliente;
     }
 
     public Mascota() {
         estado = "Activo";
+        this.cliente = new Cliente();
     }
 
     public Long getId() {
@@ -99,11 +99,11 @@ public class Mascota {
         this.estado = estado;
     }
 
-    public String getCedulaCliente() {
-        return cedulaCliente;
+    public Cliente getCliente() {
+        return cliente;
     }
 
-    public void setCedulaCliente(String cedulaCliente) {
-        this.cedulaCliente = cedulaCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

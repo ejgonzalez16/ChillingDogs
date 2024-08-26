@@ -15,34 +15,37 @@ function actualizarTabla(busqueda){
         cuerpoTabla.removeChild(cuerpoTabla.firstChild);
     }
     for(let mascota of mascotas){
-        if(mascota.mascota.nombre.toUpperCase() === busqueda.toUpperCase()){
+        if(mascota.nombre.toUpperCase() === busqueda.toUpperCase()){
             let tr = document.createElement("tr")
             let celdaEstado = document.createElement("td")
             let inputEstado = document.createElement("input")
             inputEstado.type = "checkbox"
             inputEstado.disabled = true
             inputEstado.className = "form-check-input"
-            if(mascota.mascota.estado === "Activo"){
+            if(mascota.estado === "Activo"){
                 inputEstado.checked = true
             }
             celdaEstado.appendChild(inputEstado)
+
             let celdaImagen = document.createElement("td")
             let imagenMascota = document.createElement("img")
-            imagenMascota.src = mascota.mascota.foto
-            imagenMascota.alt = "Foto de " + mascota.mascota.nombre
+            imagenMascota.src = mascota.foto
+            imagenMascota.alt = "Foto de " + mascota.nombre
             imagenMascota.height = 66
+            imagenMascota.width = 88
             celdaImagen.appendChild(imagenMascota)
+
             let nombreCelda = document.createElement("td")
-            nombreCelda.textContent = mascota.mascota.nombre
+            nombreCelda.textContent = mascota.nombre
             let razaCelda = document.createElement("td")
-            razaCelda.textContent = mascota.mascota.raza
+            razaCelda.textContent = mascota.raza
             let duenhoCelda = document.createElement("td")
-            duenhoCelda.textContent = mascota.nombreDueno
+            duenhoCelda.textContent = mascota.cliente.nombre
 
             let detallesCelda = document.createElement("td")
             let linkDetalles = document.createElement("a")
             let imagenDetalles = document.createElement("img")
-            linkDetalles.href = "/mascotas/detalles-completos/" + mascota.mascota.id
+            linkDetalles.href = "/mascotas/detalles-completos/" + mascota.id
             imagenDetalles.src = "/sources/detalles-tabla.png"
             imagenDetalles.alt = "Detalles"
             imagenDetalles.height = 24
@@ -52,7 +55,7 @@ function actualizarTabla(busqueda){
             let modificarCelda = document.createElement("td")
             let linkModificar = document.createElement("a")
             let imagenModificar = document.createElement("img")
-            linkModificar.href = "/mascotas/modificar/" + mascota.mascota.id
+            linkModificar.href = "/mascotas/modificar/" + mascota.id
             imagenModificar.src = "/sources/editar-mascota.png"
             imagenModificar.alt = "Modificar"
             imagenModificar.height = 24
@@ -62,7 +65,7 @@ function actualizarTabla(busqueda){
             let eliminarCelda = document.createElement("td")
             let linkEliminar = document.createElement("a")
             let imagenEliminar = document.createElement("img")
-            linkEliminar.href = "/mascotas/eliminar/" + mascota.mascota.id
+            linkEliminar.href = "/mascotas/eliminar/" + mascota.id
             imagenEliminar.src = "/sources/eliminar-mascota.png"
             imagenEliminar.alt = "Eliminar"
             imagenEliminar.height = 24

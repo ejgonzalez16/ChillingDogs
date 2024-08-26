@@ -23,7 +23,7 @@ public class ClienteController {
     // Create ===========================================================================================
     @GetMapping("registrar")
     public String registrarCliente(Model model) {
-        Cliente cliente = new Cliente("","","","", "",null);
+        Cliente cliente = new Cliente("","","","", "");
         model.addAttribute("cliente", cliente);
         return "registrar_cliente";
     }

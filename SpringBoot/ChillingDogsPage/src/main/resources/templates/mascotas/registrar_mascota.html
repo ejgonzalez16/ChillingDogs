@@ -92,7 +92,7 @@
                                 Peso
                             </td>
                             <td>
-                                <input th:field="${mascota.peso}" type="number" id="peso" name="peso" placeholder="Peso" required>
+                                <input th:field="${mascota.peso}" type="number" id="peso" name="peso" placeholder="Peso" step="0.01" required>
                             </td>
                         </tr>
                         <tr>
@@ -115,7 +115,7 @@
                                 Dueño
                             </td>
                             <td>
-                                <select th:field="${mascota.cedulaCliente}" id="cliente" name="cliente" required>
+                                <select th:field="${mascota.cliente.cedula}" id="cliente" name="cliente" required>
                                     <option th:each="cliente : ${clientes}" th:value="${cliente.cedula}" th:text="${cliente.nombre}"></option>
                                 </select>
                             </td>
