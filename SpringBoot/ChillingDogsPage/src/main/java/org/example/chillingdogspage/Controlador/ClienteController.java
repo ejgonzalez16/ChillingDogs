@@ -1,5 +1,6 @@
 package org.example.chillingdogspage.Controlador;
 
+import org.example.chillingdogspage.Servicio.MascotaService;
 import org.springframework.ui.Model;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Servicio.ClienteService;
@@ -11,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -20,7 +20,11 @@ public class ClienteController {
     @Autowired
     ClienteService clienteService;
 
+    @Autowired
+    MascotaService mascotaService;
+
     // Create ===========================================================================================
+    //http://localhost:8099/clientes/registrar
     @GetMapping("registrar")
     public String registrarCliente(Model model) {
         Cliente cliente = new Cliente("","","","", "");
@@ -35,6 +39,8 @@ public class ClienteController {
     }
 
     // Retrieve ===========================================================================================
+
+    //http://localhost:8099/clientes/buscar
     @GetMapping("buscar")
     public String verClienteyMascotas(Model model) {
         List<Cliente> clientes = clienteService.obtenerClientes().stream().toList();
@@ -47,6 +53,7 @@ public class ClienteController {
         return "redirect:/clientes/buscar/" + cedulaCliente;
     }
 
+    //http://localhost:8099/clientes/buscar/{cedula}
     @GetMapping("buscar/{cedula}")
     public String verClienteyMascotas(@PathVariable("cedula") Integer cedula, Model model) {
         Cliente cliente = clienteService.buscarCliente(cedula.toString());
@@ -55,6 +62,7 @@ public class ClienteController {
     }
 
     // Update ===========================================================================================
+    //http://localhost:8099/clientes/modificar
     @GetMapping("modificar")
     public String modificarCliente() {
         return "modificar_cliente";
@@ -65,6 +73,7 @@ public class ClienteController {
         return "redirect:/clientes/modificar/" + cedulaCliente;
     }
 
+    //http://localhost:8099/clientes/modificar/{cedula}
     @GetMapping("modificar/{cedula}")
     public String modificarCliente(@PathVariable("cedula") Integer cedula, Model model) {
         Cliente cliente = clienteService.buscarCliente(cedula.toString());
@@ -80,6 +89,8 @@ public class ClienteController {
     }
 
     // Delete ===========================================================================================
+
+    //http://localhost:8099/clientes/eliminar
     @GetMapping("eliminar")
     public String eliminarCliente() {
         return "eliminar_cliente";
@@ -90,6 +101,7 @@ public class ClienteController {
         return "redirect:/clientes/eliminar/" + cedulaCliente;
     }
 
+    //http://localhost:8099/clientes/eliminar/{cedula}
     @GetMapping("eliminar/{cedula}")
     public String eliminarCliente(@PathVariable("cedula") Integer cedula, Model model) {
         Cliente cliente = clienteService.buscarCliente(cedula.toString());
@@ -99,7 +111,7 @@ public class ClienteController {
 
     @PostMapping("eliminar/{cedula}")
     public String eliminarCliente(Model model, Cliente cliente) {
-        clienteService.eliminarCliente(cliente);
+        clienteService.eliminarCliente(cliente.getCedula());
         return "redirect:/clientes/buscar";
     }
     

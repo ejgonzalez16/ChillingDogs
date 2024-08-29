@@ -32,69 +32,69 @@
             <div class = "estadoPeludo">
                 <table>
                     <tbody>
-                        <tr>
-                            <td class="imagenEstado">
-                                <img src="/sources/estado.svg" alt="estado" height="24px">
-                            </td>
-                            <td class="celdaSinPadding">
-                                Estado
-                            </td>
-                            <td>
-                                <button th:if="${mascota.estado} == 'Activo'" class = "estadoActivo">Activo</button>
-                                <button th:if="${mascota.estado} == 'Inactivo'" class = "estadoInactivo">Inactivo</button>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="imagenEstado">
-                                <img class="imagenEstado" src="/sources/raza.svg" alt="raza" height="24px">
-                            </td>
-                            <td class="celdaSinPadding">
-                                Raza
-                            </td>
-                            <td th:text="${mascota.raza}"></td>
-                        </tr>
-                        <tr>
-                            <td class="imagenEstado">
-                                <img class="imagenEstado" src="/sources/edad.svg" alt="raza" height="24px">
-                            </td>
-                            <td class="celdaSinPadding">
-                                Edad
-                            </td>
-                            <td th:text="|${mascota.edad} añitos|"></td>
-                        </tr>
-                        <tr>
-                            <td class="imagenEstado">
-                                <img class="imagenEstado" src="/sources/peso.svg" alt="raza" height="24px">
-                            </td>
-                            <td class="celdaSinPadding">
-                                Peso
-                            </td>
-                            <td th:text="|${mascota.peso} kg|"></td>
-                        </tr>
-                        <tr>
-                            <td class="imagenEstado">
-                                <img class="imagenEstado" src="/sources/enfermedad.svg" alt="raza" height="24px">
-                            </td>
-                            <td class="celdaSinPadding">
-                                Malestar
-                            </td>
-                            <td th:text="${mascota.enfermedad}"></td>
-                        </tr>
-                        <tr>
-                            <td class="imagenEstado">
-                                <img class="imagenEstado userImg" th:src="${mascota.cliente.foto}" th:alt="|Imagen de ${mascota.cliente.nombre}|" height="24px" width="24px">
-                            </td>
-                            <td class="celdaSinPadding">
-                                Dueño
-                            </td>
-                            <td th:text="${mascota.cliente.nombre}"></td>
-                        </tr>
+                    <tr>
+                        <td class="imagenEstado">
+                            <img src="/sources/estado.svg" alt="estado" height="24px">
+                        </td>
+                        <td class="celdaSinPadding">
+                            Estado
+                        </td>
+                        <td>
+                            <button th:if="${mascota.estado} == 'Activo'" class = "estadoActivo">Activo</button>
+                            <button th:if="${mascota.estado} == 'Inactivo'" class = "estadoInactivo">Inactivo</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="imagenEstado">
+                            <img class="imagenEstado" src="/sources/raza.svg" alt="raza" height="24px">
+                        </td>
+                        <td class="celdaSinPadding">
+                            Raza
+                        </td>
+                        <td th:text="${mascota.raza}"></td>
+                    </tr>
+                    <tr>
+                        <td class="imagenEstado">
+                            <img class="imagenEstado" src="/sources/edad.svg" alt="raza" height="24px">
+                        </td>
+                        <td class="celdaSinPadding">
+                            Edad
+                        </td>
+                        <td th:text="|${mascota.edad} añitos|"></td>
+                    </tr>
+                    <tr>
+                        <td class="imagenEstado">
+                            <img class="imagenEstado" src="/sources/peso.svg" alt="raza" height="24px">
+                        </td>
+                        <td class="celdaSinPadding">
+                            Peso
+                        </td>
+                        <td th:text="|${mascota.peso} kg|"></td>
+                    </tr>
+                    <tr>
+                        <td class="imagenEstado">
+                            <img class="imagenEstado" src="/sources/enfermedad.svg" alt="raza" height="24px">
+                        </td>
+                        <td class="celdaSinPadding">
+                            Malestar
+                        </td>
+                        <td th:text="${mascota.enfermedad}"></td>
+                    </tr>
+                    <tr>
+                        <td class="imagenEstado">
+                            <img class="imagenEstado userImg" th:src="${mascota.cliente.foto}" th:alt="|Imagen de ${mascota.cliente.nombre}|" height="24px" width="24px">
+                        </td>
+                        <td class="celdaSinPadding">
+                            Dueño
+                        </td>
+                        <td th:text="${mascota.cliente.nombre}"></td>
+                    </tr>
                     </tbody>
                 </table>
                 <img class="peludo-img" alt="Perro de Undefined" th:src="${mascota.foto}">
             </div>
         </section>
-        <a href="http://localhost:8099/mascotas"><button>Volver</button></a>
+        <a href="http://localhost:8099/mascotas/buscar"><button>Volver</button></a>
     </main>
 
     <footer>

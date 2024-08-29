@@ -34,6 +34,7 @@
         </form>
         <section>
             <form th:object="${cliente}" th:action="@{/clientes/modificar/{cedula}(cedula=${cedulaAnterior})}" method="post" id="modificarForm">
+                <input th:field="${cliente.id}" type="number" id="id" name="id" hidden>
                 <div class="contenedorForm">
                     <table>
                         <tbody>

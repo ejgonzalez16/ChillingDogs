@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <title>Detalles Completos</title>
     <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/styles_detalles_completos.css">
+    <!--<link rel="stylesheet" href="/css/styles_detalles_completos.css">-->
+    <link rel="stylesheet" href="/css/styles_mascota.css">
     <link href='https://fonts.googleapis.com/css?family=Chewy' rel='stylesheet'>
     <link href='https://fonts.googleapis.com/css?family=Fredoka One' rel='stylesheet'>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
@@ -83,7 +84,7 @@
                     </tr>
                     <tr>
                         <td class="imagenEstado">
-                            <img class="imagenEstado userImg" th:src="${cliente.foto}" th:alt="|Imagen de ${cliente.nombre}|" height="24px">
+                            <img class="imagenEstado userImg" th:src="${mascota.cliente.foto}" th:alt="|Imagen de ${mascota.cliente.nombre}|" height="24px">
                         </td>
                         <td class="celdaSinPadding">
                             Dueño
@@ -92,7 +93,7 @@
                     </tr>
                     </tbody>
                 </table>
-                <img th:alt="|Perro de ${mascota.cliente.nombre}|" th:src="${mascota.foto}" class="imagenPeludo">
+                <img th:alt="|Perro de ${mascota.cliente.nombre}|" th:src="${mascota.foto}" class="peludo-img">
             </div>
         </section>
 
@@ -100,19 +101,19 @@
             <h1 th:text="|Dueño de ${mascota.nombre}|"></h1>
             <article class="datosDueno">
                 <section class="imagenesDueno" id="seccionImagenes">
-                    <img class="imagenDueno userImg" th:src="${cliente.foto}" th:alt="|Imagen de ${cliente.nombre}|">
+                    <img class="imagenDueno userImg" th:src="${mascota.cliente.foto}" th:alt="|Imagen de ${mascota.cliente.nombre}|">
                 </section>
 
                 <section class="datosNumericos" id="seccionNumericos">
                     <article>
-                        <div class="datoDueno  espacioTitulo espacioEntreDatosDer">
+                        <div class="datoDueno espacioTitulo espacioEntreDatosDer">
                             <h3>Cédula</h3>
-                            <p th:text="${cliente.cedula}"></p>
+                            <p th:text="${mascota.cliente.cedula}"></p>
                         </div>
 
                         <div class="datoDueno espacioEntreDatosArriba espacioEntreDatosDer">
                             <h3>Nombre</h3>
-                            <p th:text="${cliente.nombre}"></p>
+                            <p th:text="${mascota.cliente.nombre}"></p>
                         </div>
 
                     </article>
@@ -120,12 +121,12 @@
                     <article class="columnaDosDatos">
                         <div class="datoDueno espacioTitulo">
                             <h3>Correo</h3>
-                            <p th:text="${cliente.correo}"></p>
+                            <p th:text="${mascota.cliente.correo}"></p>
                         </div>
 
                         <div class="datoDueno espacioEntreDatosArriba">
                             <h3>Celular</h3>
-                            <p th:text="${cliente.celular}"></p>
+                            <p th:text="${mascota.cliente.celular}"></p>
                         </div>
                     </article>
                 </section>

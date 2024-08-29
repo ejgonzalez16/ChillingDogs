@@ -15,8 +15,7 @@ public class Mascota {
     private String enfermedad;
     private String foto;
     private String estado;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonBackReference
+    @ManyToOne()
     private Cliente cliente;
 
     public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado, Cliente cliente) {

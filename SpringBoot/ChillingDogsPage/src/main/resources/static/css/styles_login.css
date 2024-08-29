@@ -43,7 +43,7 @@ main{
     display: flex;
     flex-direction: column;
     height: 65%;
-    width: 50%;
+    width: 100%;
 }
 
 .login-part h1{
@@ -52,7 +52,7 @@ main{
 }
 
 .login-part label{
-    margin-top: 40px;
+    margin-top: 30px;
     margin-bottom: 10px;
 }
 
@@ -76,7 +76,8 @@ main{
 .login-button{
     background-color: #E7A65CFF;
     color: #FFFFFFFF;
-    padding: 5px;
+    margin-top: 30px;
+    padding: 7px;
     border-radius: 4px;
 }
 

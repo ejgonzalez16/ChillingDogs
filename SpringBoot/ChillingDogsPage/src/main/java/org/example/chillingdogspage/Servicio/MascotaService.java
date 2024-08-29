@@ -15,4 +15,5 @@ public interface MascotaService{
     public void registrarMascota(Mascota mascota);
 
     void updateMascota(Mascota mascota);
+    public Collection<Mascota> searchBySimilarName(String nombre);
 }

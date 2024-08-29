@@ -12,13 +12,6 @@ document.addEventListener('DOMContentLoaded', function () {
         fotoDefault.replaceWith(img);
     }
 
-    let input = document.getElementById('estado');
-    if (input.value === 'Activo') {
-        selectButton(document.getElementById('btnActivo'), 'green');
-    } else if (input.value === 'Inactivo') {
-        selectButton(document.getElementById('btnInactivo'), 'red');
-    }
-
     fotoInput.addEventListener('input', function () {
         const url = fotoInput.value;
         if (url) {

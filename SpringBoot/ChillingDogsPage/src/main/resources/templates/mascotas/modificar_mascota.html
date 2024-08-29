@@ -31,6 +31,7 @@
         <section>
             <form th:object="${mascota}" th:action="@{/mascotas/modificar/{id}(id=${mascota.id})}" method="post">
                 <h1>Registra un nuevo peludito</h1>
+                <input th:field="${mascota.cliente.id}" type="number" id="id" name="id" hidden>
                 <div class="contenedorForm">
                     <table>
                         <tbody>

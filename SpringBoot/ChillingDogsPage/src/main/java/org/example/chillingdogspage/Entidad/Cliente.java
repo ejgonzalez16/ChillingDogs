@@ -17,8 +17,7 @@ public class Cliente {
     private String correo;
     private String celular;
     private String foto;
-    @OneToMany(mappedBy = "cliente")
-    @JsonManagedReference
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Mascota> mascotas = new ArrayList<>();
 
     public Cliente() {

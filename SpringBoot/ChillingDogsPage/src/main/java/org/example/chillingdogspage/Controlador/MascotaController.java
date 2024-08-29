@@ -1,5 +1,6 @@
 package org.example.chillingdogspage.Controlador;
 
+import org.apache.catalina.valves.rewrite.InternalRewriteMap;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.ErrorHandling.ClientNotFoundException;
@@ -59,17 +60,24 @@ public class MascotaController {
     }
 
     // Retrieve =============================================================
-    //http://localhost:8099/mascotas
-    @GetMapping
-    public String getMascotas(Model model){
+    //http://localhost:8099/mascotas/buscar
+    @GetMapping("buscar")
+    public String buscar(Model model){
         actualizarMascotasCliente(model);
-        return carpeta + "mascotas";
+        return carpeta + "buscar_mascotas";
     }
 
     //http://localhost:8099/mascotas/buscar
-    @GetMapping("buscar")
-    public String buscarPorNombre(Model model){
-        actualizarMascotasCliente(model);
+    @PostMapping("buscar")
+    public String buscarPorNombre(Model model, @RequestParam("nombrePerro") String nombre){
+        // Poner el nombre en minúsculas
+        nombre = nombre.toLowerCase();
+        List<Mascota> mascotas =  mascotaService.searchBySimilarName(nombre).stream().toList();
+        if (mascotas.isEmpty()) {
+            return "redirect:/mascotas/buscar";
+        }
+
+        model.addAttribute("mascotas", mascotas);
         return carpeta + "buscar_mascotas";
     }
 
@@ -95,13 +103,6 @@ public class MascotaController {
     }
 
     // Delete =============================================================
-    //http://localhost:8099/mascotas/eliminar
-    @GetMapping("eliminar")
-    public String eliminarMascotas(Model model){
-        actualizarMascotasCliente(model);
-        return carpeta + "eliminar_mascotas";
-    }
-
     //http://localhost:8099/mascotas/eliminar/
     @GetMapping("eliminar/{id}")
     public String eliminarMascota(Model model, @PathVariable int id){
