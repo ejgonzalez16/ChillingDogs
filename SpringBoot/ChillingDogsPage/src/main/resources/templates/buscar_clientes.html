@@ -39,6 +39,9 @@
                     <th scope="col">Foto</th>
                     <th scope="col">Nombre</th>
                     <th scope="col">Correo</th>
+                    <th scope="col">Detalles</th>
+                    <th scope="col">Modificar</th>
+                    <th scope="col">Eliminar</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -50,6 +53,22 @@
                     </td>
                     <td th:text="${cliente.nombre}"></td>
                     <td th:text="${cliente.correo}"></td>
+
+                    <td>
+                        <a th:href="@{/clientes/buscar/{id}(id=${cliente.cedula})}">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="#000000" viewBox="0 0 256 256"><path d="M32,64a8,8,0,0,1,8-8H216a8,8,0,0,1,0,16H40A8,8,0,0,1,32,64Zm8,72h72a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16Zm88,48H40a8,8,0,0,0,0,16h88a8,8,0,0,0,0-16Zm109.66,13.66a8,8,0,0,1-11.32,0L206,177.36A40,40,0,1,1,217.36,166l20.3,20.3A8,8,0,0,1,237.66,197.66ZM184,168a24,24,0,1,0-24-24A24,24,0,0,0,184,168Z"></path></svg>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/clientes/modificar/{id}(id=${cliente.cedula})}">
+                            <svg class="w-6 h-6" fill="#000000" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path d="M14.06 9.02l.92.92L5.92 19H5v-.92l9.06-9.06M17.66 3c-.25 0-.51.1-.7.29l-1.83 1.83l3.75 3.75l1.83-1.83a.996.996 0 0 0 0-1.41l-2.34-2.34c-.2-.2-.45-.29-.71-.29zm-3.6 3.19L3 17.25V21h3.75L17.81 9.94l-3.75-3.75z"/></svg>
+                        </a>
+                    </td>
+                    <td>
+                        <a th:href="@{/clientes/eliminar/{id}(id=${cliente.cedula})}">
+                            <img src="/sources/bote-basura.png" alt="Modificar" width="32px">
+                        </a>
+                    </td>
                 </tr>
                 </tbody>
             </table>
