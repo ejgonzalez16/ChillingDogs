@@ -21,6 +21,7 @@ body {
     width: 100%;
     height: 100%;
     padding-bottom: 13em;
+    background-color: #212529 !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -474,4 +475,22 @@ footer{
 
 .estadoInactivo{
     background-color: #ff5d60;
+}
+
+/* Estilo por defecto para botones no seleccionados */
+.btn-grey {
+    background-color: grey;
+    color: white;
+    border: none;
+}
+
+/* Estilo para botones seleccionados (color verde o rojo) */
+.btn-selected-green {
+    background-color: green;
+    color: white;
+}
+
+.btn-selected-red {
+    background-color: red;
+    color: white;
 }

@@ -1,24 +1,42 @@
 package org.example.chillingdogspage.Entidad;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import jakarta.persistence.*;
 import jdk.jshell.spi.ExecutionControl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Cliente {
+    @GeneratedValue
+    @Id
+    private Long id;
     private String cedula;
     private String nombre;
     private String correo;
     private String celular;
     private String foto;
-    private List<Mascota> mascotas;
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Mascota> mascotas = new ArrayList<>();
 
-    public Cliente(String cedula, String nombre, String correo, String celular, String foto, List<Mascota> mascotas) {
+    public Cliente() {
+    }
+
+    public Cliente(String cedula, String nombre, String correo, String celular, String foto) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
         this.foto = foto;
-        this.mascotas = mascotas;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getCedula() {

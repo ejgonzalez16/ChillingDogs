@@ -161,8 +161,48 @@ td input[type="checkbox"]:checked {
     fill: #DB8421FF;
 }
 
-#contenedorTabla{
-    width: 100%;
+.contenedorTabla{
+    width: 80%;
+}
+
+#contenedorBoton{
+    width: 10em;
+}
+
+#btnEliminar{
+    margin-top: 0.2em;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Chewy;
+    font-size: 40px;
+    line-height: 56px;
+    font-weight: 400;
+    color: #171A1FFF;
+    background: #FFFFFFFF;
+    opacity: 1;
+    border: none;
+    border-radius: 4px;
+    width: 19em;
+}
+
+#btnModificar{
+    margin-top: 0.2em;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: Chewy;
+    font-size: 40px;
+    line-height: 56px;
+    font-weight: 400;
+    color: #171A1FFF;
+    background: #FFFFFFFF;
+    opacity: 1;
+    border: none;
+    border-radius: 4px;
+    width: 19em;
 }
 
 #btnVolver{
@@ -177,4 +217,5 @@ td input[type="checkbox"]:checked {
     background: var(--text-dark);
     border: none;
     border-radius: 10px;
+    margin-bottom: 50px;
 }

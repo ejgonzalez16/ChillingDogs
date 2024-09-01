@@ -1,4 +1,4 @@
-package org.example.chillingdogspage.Controlador;
+package org.example.chillingdogspage.ErrorHandling;
 
 public class ClientNotFoundException extends RuntimeException{
     private String cedula;

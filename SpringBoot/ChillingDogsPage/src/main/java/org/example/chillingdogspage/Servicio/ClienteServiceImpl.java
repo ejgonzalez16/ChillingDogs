@@ -18,31 +18,34 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Collection<Cliente> obtenerClientes(){
-        return repository.allClientes();
+        Collection<Cliente> clientes = repository.findAll();
+        return clientes;
     }
 
     @Override
     public Cliente buscarCliente(String cedula){
-        return repository.findByCedula(cedula);
+        Cliente cliente = repository.findByCedula(cedula);
+        return cliente;
     }
 
     @Override
     public void registrarCliente(Cliente cliente){
-        repository.registrarCliente(cliente);
+        repository.save(cliente);
     }
 
     @Override
-    public void modificarCliente(Integer cedula, Cliente cliente){
-        repository.modificarCliente(cedula, cliente);
+    public void modificarCliente(Cliente cliente){
+        repository.save(cliente);
     }
 
     @Override
-    public void eliminarCliente(Cliente cliente){
-        repository.eliminarCliente(cliente);
+    public void eliminarCliente(String cedulaCliente){
+        Cliente cliente = repository.findByCedula(cedulaCliente);
+        repository.delete(cliente);
     }
   
     @Override
-    public Cliente buscarClientePorMascota(int idMascota) {
-        return repository.buscarClientePorMascota(idMascota);
+    public Cliente buscarClientePorMascota(Long idMascota) {
+        return repository.findByMascotaId(idMascota);
     }
 }

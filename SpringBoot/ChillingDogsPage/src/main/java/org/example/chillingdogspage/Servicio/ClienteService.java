@@ -15,9 +15,9 @@ public interface ClienteService{
   
     public void registrarCliente(Cliente cliente);
 
-    public void modificarCliente(Integer cedula, Cliente cliente);
+    public void modificarCliente(Cliente cliente);
 
-    public void eliminarCliente(Cliente cliente);
+    public void eliminarCliente(String cedulaCliente);
 
-    public Cliente buscarClientePorMascota(int idMascota);
+    public Cliente buscarClientePorMascota(Long idMascota);
 }

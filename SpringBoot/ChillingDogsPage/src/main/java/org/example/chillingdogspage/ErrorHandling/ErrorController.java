@@ -1,4 +1,4 @@
-package org.example.chillingdogspage.Controlador;
+package org.example.chillingdogspage.ErrorHandling;
 
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;

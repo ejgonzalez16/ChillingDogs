@@ -20,16 +20,30 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public Collection<Mascota> searchAll() {
-        return repository.findAll();
+        Collection<Mascota> mascotas = repository.findAll();
+        /*for (Mascota mascota : mascotas) {
+            mascota.getCliente().setMascotas(null);
+        }*/
+        return mascotas;
     }
 
     @Override
     public Mascota findById(int id) {
-        return repository.findById(id);
+        return repository.findById((long)id).get();
     }
 
     @Override
     public void deleteById(int id) {
-        repository.deleteById(id);
+        repository.deleteById((long)id);
+    }
+
+    @Override
+    public void updateMascota(Mascota mascota) {
+        repository.save(mascota);
+    }
+
+    @Override
+    public Collection<Mascota> searchBySimilarName(String nombre) {
+        return repository.searchBySimilarName(nombre);
     }
 }

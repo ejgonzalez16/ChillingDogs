@@ -13,4 +13,7 @@ public interface MascotaService{
     public Mascota findById(int id);
     public void deleteById(int id);
     public void registrarMascota(Mascota mascota);
+
+    void updateMascota(Mascota mascota);
+    public Collection<Mascota> searchBySimilarName(String nombre);
 }

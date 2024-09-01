@@ -1,7 +1,13 @@
 package org.example.chillingdogspage.Entidad;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import jakarta.persistence.*;
+
+@Entity
 public class Mascota {
-    private int id;
+    @GeneratedValue
+    @Id
+    private Long id;
     private String nombre;
     private String raza;
     private int edad;
@@ -9,9 +15,10 @@ public class Mascota {
     private String enfermedad;
     private String foto;
     private String estado;
+    @ManyToOne()
+    private Cliente cliente;
 
-    public Mascota(int id, String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado) {
-        this.id = id;
+    public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado, Cliente cliente) {
         this.nombre = nombre;
         this.raza = raza;
         this.edad = edad;
@@ -19,13 +26,19 @@ public class Mascota {
         this.enfermedad = enfermedad;
         this.foto = foto;
         this.estado = estado;
+        this.cliente = cliente;
     }
 
-    public int getId() {
+    public Mascota() {
+        estado = "Activo";
+        this.cliente = new Cliente();
+    }
+
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -83,5 +96,13 @@ public class Mascota {
 
     public void setEstado(String estado) {
         this.estado = estado;
+    }
+
+    public Cliente getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 }

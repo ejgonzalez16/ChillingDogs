@@ -29,11 +29,23 @@
 
     <main>
         <section>
-            <form th:object="${mascota}" th:action="@{/mascotas/registrar}" method="post">
+            <form th:object="${mascota}" th:action="@{/mascotas/modificar/{id}(id=${mascota.id})}" method="post">
                 <h1>Registra un nuevo peludito</h1>
+                <input th:field="${mascota.cliente.id}" type="number" id="id" name="id" hidden>
                 <div class="contenedorForm">
                     <table>
                         <tbody>
+                        <tr>
+                            <td class="imagenEstado">
+                                <img src="/sources/raza.svg" alt="nombre" height="24px">
+                            </td>
+                            <td class="celdaSinPadding">
+                                Nombre
+                            </td>
+                            <td>
+                                <input th:field="${mascota.nombre}" type="text" id="nombre" name="nombre" placeholder="Nombre" required>
+                            </td>
+                        </tr>
                         <tr>
                             <td class="imagenEstado">
                                 <img src="/sources/estado.svg" alt="estado" height="24px">
@@ -42,9 +54,12 @@
                                 Estado
                             </td>
                             <td>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <button id="botonActivo" onclick="activarBoton('estadoActivo')" type="button" class="btn btn-secondary estadoActivo">Activo</button>
-                                    <button onclick="activarBoton('estadoInactivo')" type="button" class="btn btn-secondary estadoInactivo">Inactivo</button>
+                                <!-- La propiedad mascota.estado corresponde al botón que no tenga la clase btn-grey (que se quita en el js) -->
+                                <!-- Se le asigna el valor del botón seleccionado -->
+                                <input th:field="${mascota.estado}" type="text" id="estado" name="estado" hidden>
+                                <div class="btn-group" id="buttonGroup">
+                                    <button type="button" class="btn-grey" id="btnActivo" onclick="selectButton(this, 'green')">Activo</button>
+                                    <button type="button" class="btn-grey" id="btnInactivo" onclick="selectButton(this, 'red')">Inactivo</button>
                                 </div>
                             </td>
                         </tr>
@@ -99,10 +114,10 @@
                         <input th:field="${mascota.foto}" type="text" id="foto" name="foto" placeholder="Foto" required>
                     </div>
                 </div>
-                <div class="contenedorBoton"><button type="submit" id="btnRegistro">Registrar</button></div>
+                <div class="contenedorBoton"><button type="submit" id="btnRegistro">Modificar</button></div>
             </form>
         </section>
-        <a href="http://localhost:8099/landing"><button id="btnVolver">Volver</button></a>
+        <a href="http://localhost:8099/mascotas/buscar"><button id="btnVolver">Volver</button></a>
     </main>
 
     <footer>

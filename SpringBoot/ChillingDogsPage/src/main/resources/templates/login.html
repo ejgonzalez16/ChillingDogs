@@ -29,18 +29,21 @@
 
     <main>
         <section class="login-black">
-            <div class="type-user-buttons">
-                <button class="type-button-selected">Cliente</button>
-                <button class="type-button">Veterinario</button>
-                <button class="type-button">Administrador</button>
-            </div>
-            <div class="login-part">
-                <h1>Iniciar Sesión</h1>
-                <label for="cedulaTxt">Cédula</label>
-                <input type="number" id="cedulaTxt" maxlength="10">
-            </div>
+            <form onsubmit="return hacerLogin()" method="get">
+                <div class="type-user-buttons">
+                    <button class="type-button-selected">Cliente</button>
+                    <button class="type-button">Veterinario</button>
+                    <button class="type-button">Administrador</button>
+                </div>
+                <div class="login-part">
+                    <h1>Iniciar Sesión</h1>
 
-            <button class="login-button" onclick="hacerLogin()">Iniciar Sesión</button>
+                    <label for="cedulaTxt">Cédula</label>
+                    <input type="number" id="cedulaTxt" name="cedulaTxt" maxlength="10" required>
+
+                    <button type="submit" class="login-button">Iniciar Sesión</button>
+                </div>
+            </form>
         </section>
         <section class="login-image">
             <img src="/sources/login-dog.png" alt="Login Dog">

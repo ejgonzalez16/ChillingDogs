@@ -103,6 +103,8 @@ section h1{
 
 .userImg{
     border-radius: 50%;
+    /*Hacer que la imagen se le recorte el sobrante, que no haga cover*/
+    object-fit: cover;
 }
 
 section table{
@@ -116,4 +118,61 @@ section td{
 .peludo-img{
     max-width: 40vh;
     max-height: fit-content;
+}
+
+.seccionDueno{
+    margin-top: 50px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+
+.datosDueno{
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+}
+
+.datoDueno{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px 0px;
+}
+
+/*.espacioTitulo{
+    margin-top: 46px;
+}*/
+
+.espacioEntreDatosArriba{
+    margin-top: 20px;
+}
+
+.espacioEntreDatosDer{
+    margin-right: 100px;
+}
+
+.datosNumericos{
+    display: flex;
+    flex-direction: row;
+}
+
+.datosNumericos p{
+    font-size: medium;
+}
+
+.imagenesDueno{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.imagenDueno{
+    height: 200px;
+    width: 200px;
+    margin-right: 40px;
+    margin-left: 40px;
+}
+
+.columnaDosDatos{
+    margin-right: 40px;
 }
