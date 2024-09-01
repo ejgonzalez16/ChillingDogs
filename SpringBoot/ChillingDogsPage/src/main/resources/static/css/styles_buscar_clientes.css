@@ -38,6 +38,7 @@ main{
     width: 60%;
     height: 2em;
     padding-left: 1em;
+    margin-bottom: 50px;
 }
 
 input::-webkit-outer-spin-button,
@@ -68,10 +69,11 @@ form{
     border-radius: 0px 4px 4px 0px; 
     gap: 0px;
     height: 2.25em;
+    margin-bottom: 50px;
 }
 
 main h1{
-    margin-top: 50px;
+    margin-top: 100px;
     margin-bottom: 50px;
     height: 100%;
 }
@@ -165,9 +167,6 @@ td input[type="checkbox"]:checked {
     width: 80%;
 }
 
-#contenedorBoton{
-    width: 10em;
-}
 
 #btnEliminar{
     margin-top: 0.2em;
@@ -184,7 +183,7 @@ td input[type="checkbox"]:checked {
     opacity: 1;
     border: none;
     border-radius: 4px;
-    width: 19em;
+    width: 5em;
 }
 
 #btnModificar{
@@ -202,7 +201,7 @@ td input[type="checkbox"]:checked {
     opacity: 1;
     border: none;
     border-radius: 4px;
-    width: 19em;
+    width: 5em;
 }
 
 #btnVolver{
@@ -218,4 +217,13 @@ td input[type="checkbox"]:checked {
     border: none;
     border-radius: 10px;
     margin-bottom: 50px;
+}
+
+.botonesAccion{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 50px;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
 }

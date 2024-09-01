@@ -54,6 +54,14 @@
                 </div>
             </div>
         </section>
+        <div class="botonesAccion">
+            <form th:object="${cliente}" th:action="@{/clientes/eliminar/{cedula}(cedula=${cliente.cedula})}" method="post" id="eliminarForm">
+                <div class="contenedorBoton"><button type="submit" id="btnEliminar">Eliminar</button></div>
+            </form>
+            <form th:object="${cliente}" th:action="@{/clientes/modificar/{cedula}(cedula=${cliente.cedula})}">
+                <div class="contenedorBoton"><button type="submit" id="btnModificar">Modificar</button></div>
+            </form>
+        </div>
         <h2>Mascotas</h2>
         <div class="contenedorTabla">
             <table th:if="${cliente.mascotas} != null">
@@ -85,12 +93,7 @@
             </table>
             <h3 th:if="${cliente.mascotas} == null">No tiene mascotas registradas</h3>
         </div>
-        <form th:object="${cliente}" th:action="@{/clientes/eliminar/{cedula}(cedula=${cliente.cedula})}" method="post" id="eliminarForm">
-            <div class="contenedorBoton"><button type="submit" id="btnEliminar">Eliminar</button></div>
-        </form>
-        <form th:object="${cliente}" th:action="@{/clientes/modificar/{cedula}(cedula=${cliente.cedula})}">
-            <div class="contenedorBoton"><button type="submit" id="btnModificar">Modificar</button></div>
-        </form>
+
         <a href="http://localhost:8099/clientes/buscar"><button id="btnVolver">Volver</button></a>
     </main>
     <footer>

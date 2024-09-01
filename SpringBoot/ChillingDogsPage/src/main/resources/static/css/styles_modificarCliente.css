@@ -81,8 +81,9 @@ input[type=number] {
     width: 10em;
 }
 
-section h1{
+main h1{
     text-align: center;
+    margin-bottom: 50px;
 }
 
 td{
