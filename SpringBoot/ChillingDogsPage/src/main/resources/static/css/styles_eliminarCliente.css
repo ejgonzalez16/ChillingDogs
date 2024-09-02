@@ -70,6 +70,10 @@ input[type=number] {
     height: 2.25em;
 }
 
+#btnForm:hover{
+    background-color: #7bdff8;
+}
+
 main h1{
     margin-top: 50px;
     margin-bottom: 50px;
@@ -176,7 +180,12 @@ td input[type="checkbox"]:checked {
     color: var(--text-light);
     background: var(--text-dark);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
+}
+
+#btnVolver:hover{
+    background-color: white;
+    color: var(--text-dark);
 }
 
 #btnEliminar{
@@ -193,8 +202,13 @@ td input[type="checkbox"]:checked {
     background: #FFFFFFFF;
     opacity: 1; 
     border: none; 
-    border-radius: 4px;
+    border-radius: 30px;
     width: 19em;
+}
+
+#btnEliminar:hover{
+    background-color: var(--text-dark);
+    color: white;
 }
 
 #contenedorBoton{

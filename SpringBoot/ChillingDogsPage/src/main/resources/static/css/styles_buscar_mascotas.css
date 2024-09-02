@@ -39,49 +39,32 @@ main button {
     color: var(--color-3);
     background: var(--secondary-color);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
-form{
-    width: 50%;
+main button:hover{
+    background-color: #7bdff8;
+}
+
+.buscarPerro{
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-#nombrePerroField{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    font-family: Fredoka;
-    font-size: 18px;
-    line-height: 28px;
-    font-weight: 400;
-    background: #FCFCFCFF; /* tertiary2-350 */
-    border-radius: 4px 0px 0px 4px; /* border-tl-m border-bl-m */
-    border-width: 1px;
-    border-color: #FBFBFBFF; /* tertiary2-300 */
-    border-style: solid;
-    outline: none;
-    width: 60%;
-    height: 2em;
-    padding-left: 1em;
+.buscarPerro input{
+    width: 20em;
+    height: 2.5em;
+    border: 0 transparent solid;
+    border-radius: 4px 0px 0px 4px;
+    padding: 15px;
 }
 
-#btnForm{
-    margin-top: 50px;
-    margin-bottom: 50px;
-    padding: 0 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #006c87;
-    background: #D7F7FFFF;
-    opacity: 1;
-    border: none;
+.buscarPerro button{
+    width: 4em;
+    height: 2.0em;
     border-radius: 0px 4px 4px 0px;
-    gap: 0px;
-    width: 5%;
-    height: 1.8em;
+    margin-left: -0.35ch;
 }
 
 body {

@@ -78,7 +78,7 @@ main h1{
     font-weight: 500;
     color: var(--color-3);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
 }
 
 .estadoActivo{
