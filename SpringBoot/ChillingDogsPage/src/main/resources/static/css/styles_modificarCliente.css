@@ -39,7 +39,11 @@ main{
     color: var(--color-3);
     background: var(--secondary-color);
     border: none;
-    border-radius: 10px;
+    border-radius: 30px;
+}
+
+#btnVolver:hover{
+    background-color: #7bdff8;
 }
 
 .contenedorForm{
@@ -123,8 +127,13 @@ input{
     background: #FFFFFFFF;
     opacity: 1; 
     border: none; 
-    border-radius: 4px;
+    border-radius: 30px;
     width: 18.5em;
+}
+
+#btnModificar:hover{
+    background-color: var(--text-dark);
+    color: white;
 }
 
 table{
