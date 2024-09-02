@@ -1,6 +1,5 @@
 package org.example.chillingdogspage.Controlador;
 
-import org.apache.catalina.valves.rewrite.InternalRewriteMap;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.ErrorHandling.ClientNotFoundException;

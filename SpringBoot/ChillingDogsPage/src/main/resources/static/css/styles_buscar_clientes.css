@@ -25,8 +25,7 @@ main{
 }
 
 #cedulaField{
-    font-family: Fredoka; 
-    font-size: 18px; 
+    font-size: 18px;
     line-height: 28px; 
     font-weight: 400; 
     background: #FCFCFCFF; /* tertiary2-350 */
@@ -57,27 +56,36 @@ form{
     justify-content: center;
 }
 
-#btnForm{
-    padding: 0 14px; 
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
+.btnForm{
+    padding: 0 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     color: #006c87;
     background: #D7F7FFFF;
-    opacity: 1; 
-    border: none; 
-    border-radius: 0px 4px 4px 0px; 
+    opacity: 1;
+    border: none;
+    border-radius: 0px 4px 4px 0px;
     gap: 0px;
     height: 2.25em;
     margin-bottom: 50px;
 }
 
-#btnForm:hover{
+.btnForm:hover{
     background-color: #7bdff8;
 }
 
-#btnForm:hover{
-    background-color: #7bdff8;
+.primer-btn {
+    border-radius: 0;
+}
+
+.crear-btn {
+    background: #b8f5cd;
+    color: #0a4d20;
+}
+
+.crear-btn:hover {
+    background-color: #4CE77FFF;
 }
 
 main h1{
@@ -215,24 +223,4 @@ td input[type="checkbox"]:checked {
 #btnModificar:hover, #btnEliminar:hover{
     background-color: var(--text-dark);
     color: white;
-}
-
-#btnVolver{
-    margin-top: 50px;
-    width: 15em;
-    height: 2.5em;
-    padding: 0 20px;
-    font-size: 20px;
-    line-height: 30px;
-    font-weight: 500;
-    color: var(--text-light);
-    background: var(--text-dark);
-    border: none;
-    border-radius: 30px;
-    margin-bottom: 50px;
-}
-
-#btnVolver:hover{
-    background-color: white;
-    color: var(--text-dark);
 }

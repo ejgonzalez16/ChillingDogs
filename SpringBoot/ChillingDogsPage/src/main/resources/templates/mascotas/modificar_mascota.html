@@ -20,10 +20,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/landing">
                 <img src="/sources/logo.png" alt="logo" width="80px">
                 <h1>Chilling Dogs</h1>
             </a>
+
+            <div class="collapse navbar-collapse centrar-vet" id="navbar"> <!--Contiene el responsive de los elementos-->
+                <ul class="navbar-nav navigation">
+                    <li class="nav-item enlacesSecciones">
+                        <a class="button bg-dark" href="/mascotas/buscar">
+                            <img src="/sources/mascotas-vet-option.png">
+                            <div class="logout">Mascotas</div>
+                        </a>
+                    </li>
+                    <li class="nav-item enlacesSecciones">
+                        <a class="button bg-dark" href="/clientes/buscar">
+                            <img src="/sources/clientes-vet-option.png">
+                            <div class="logout">Clientes</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
 
@@ -57,7 +74,7 @@
                                 <!-- La propiedad mascota.estado corresponde al botón que no tenga la clase btn-grey (que se quita en el js) -->
                                 <!-- Se le asigna el valor del botón seleccionado -->
                                 <input th:field="${mascota.estado}" type="text" id="estado" name="estado" hidden>
-                                <div class="grupo-btn" id="buttonGroup">
+                                <div class="btn-group" id="buttonGroup">
                                     <button type="button" class="btn-grey" id="btnActivo" onclick="selectButton(this, 'green')">Activo</button>
                                     <button type="button" class="btn-grey" id="btnInactivo" onclick="selectButton(this, 'red')">Inactivo</button>
                                 </div>
@@ -114,7 +131,7 @@
                         <input th:field="${mascota.foto}" type="text" id="foto" name="foto" placeholder="Foto" required>
                     </div>
                 </div>
-                <div class="contenedorBoton"><button type="submit" id="btnRegistro">Modificar</button></div>
+                <div class="contenedorBoton"><button type="submit" class="present-button">Modificar</button></div>
             </form>
         </section>
         <a href="http://localhost:8099/mascotas/buscar"><button id="btnVolver">Volver</button></a>

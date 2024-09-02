@@ -20,14 +20,24 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/landing">
                 <img src="/sources/logo.png" alt="logo" width="80px">
                 <h1>Chilling Dogs</h1>
             </a>
+
+            <div class="collapse navbar-collapse" id="navbar">
+                <!-- Alinear items a la derecha utilizando ms-auto -->
+                <div class="ms-auto navigation">
+                    <a class="button bg-dark" href="/login">
+                        <img th:src="${cliente.foto}" th:alt="|${cliente.nombre}|">
+                        <div class="logout">Cerrar Sesión</div>
+                    </a>
+                </div>
+            </div>
         </nav>
     </header>
 
-    <main class="carousel slide">
+    <main>
         <h1>Tus peluditos registrados</h1>
         <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
             <div class="carousel-inner">

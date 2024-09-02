@@ -34,6 +34,7 @@ header{
     top: 0; /*Mandarlo arriba del todo*/
     width: 100%;
     padding: 0px;
+    z-index: 1;
 }
 
 .black{
@@ -68,13 +69,13 @@ header{
     color: var(--primary-color);
 }
 
+/* Navbar Landing --------------------------------------------------------------*/
 .iniciarSesion{
     color: var(--primary-color);
-    padding: 10px;
     background-color: transparent;
+    padding: 10px;
+    min-width: 10vw;
     border: none; /* Quita el borde si no se necesita */
-    margin-right: 25px;
-    border-radius: 30px;
 }
 
 .iniciarSesion:hover{
@@ -92,9 +93,71 @@ header{
 .registrarse:hover{
     background-color: rgb(226, 133, 26);
 }
+
+/* Navbar Usuario Logueado --------------------------------------------------------------*/
+.navigation {
+    margin-right: 2vw;
+}
+
+.navigation img {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    /*Hacer que la imagen se le recorte el sobrante, que no haga cover*/
+    object-fit: cover;
+    float: left;
+}
+
+.navigation .logout {
+    font-size: 0.9em;
+    position: relative;
+    right: -18px;
+    overflow: hidden;
+    letter-spacing: 2px;
+    opacity: 0;
+    transition: opacity 0.45s;
+    -webkit-transition: opacity 0.35s;
+}
+
+.navigation .button {
+    text-decoration: none;
+    float: right;
+    color: white;
+    width: 50px;
+    margin-left: 50px;
+    transition: width 0.35s;
+    -webkit-transition: width 0.35s;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+}
+
+.navigation a:hover {
+    width: 14vw;
+
+    .logout {
+        opacity: 0.9;
+    }
+}
+
+.navigation a {
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Navbar Veterinario --------------------------------------------------------------*/
+.centrar-vet {
+    display: flex;
+    justify-content: center;
+    width: 70%;
+    margin-right: 18vw;
+}
+
 /*header*/
 
-/*main*/
+/*main ==================================================================================*/
 main{
     margin-top: 121.98px;
 }
@@ -141,7 +204,7 @@ section {
     margin: 20px 0;
 }
 
-#presentacion button{
+.present-button{
     width: 444px; 
     height: 66px; 
     padding: 0 20px; 
@@ -155,7 +218,7 @@ section {
     margin-top: 20px;
 }
 
-#presentacion button:hover{
+.present-button:hover{
     background-color: white;
     color: var(--text-dark);
 }
@@ -492,6 +555,26 @@ footer svg{
 /*Fin Footer*/
 
 /*Cositas pa todos*/
+
+#btnVolver{
+    margin-top: 50px;
+    width: 15em;
+    height: 2.5em;
+    padding: 0 20px;
+    font-size: 20px;
+    line-height: 30px;
+    font-weight: 500;
+    color: var(--text-light);
+    background: var(--text-dark);
+    border: none;
+    border-radius: 30px;
+    margin-bottom: 50px;
+}
+
+#btnVolver:hover{
+    background-color: white;
+    color: var(--text-dark);
+}
 
 /*Estado activo inactivo del perro*/
 

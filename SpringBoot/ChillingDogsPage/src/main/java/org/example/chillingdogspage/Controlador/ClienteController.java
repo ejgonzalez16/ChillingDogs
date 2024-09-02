@@ -62,17 +62,6 @@ public class ClienteController {
     }
 
     // Update ===========================================================================================
-    //http://localhost:8099/clientes/modificar
-    @GetMapping("modificar")
-    public String modificarCliente() {
-        return "modificar_cliente";
-    }
-
-    @PostMapping("modificar")
-    public String modificarCliente(@RequestParam("cedulaCliente") Integer cedulaCliente) {
-        return "redirect:/clientes/modificar/" + cedulaCliente;
-    }
-
     //http://localhost:8099/clientes/modificar/{cedula}
     @GetMapping("modificar/{cedula}")
     public String modificarCliente(@PathVariable("cedula") Integer cedula, Model model) {
@@ -89,19 +78,7 @@ public class ClienteController {
     }
 
     // Delete ===========================================================================================
-
-    //http://localhost:8099/clientes/eliminar
-    @GetMapping("eliminar")
-    public String eliminarCliente() {
-        return "eliminar_cliente";
-    }
-
-    @PostMapping("eliminar")
-    public String eliminarCliente(@RequestParam("cedulaCliente") Integer cedulaCliente) {
-        return "redirect:/clientes/eliminar/" + cedulaCliente;
-    }
-
-    //http://localhost:8099/clientes/eliminar/{cedula}
+    // http://localhost:8099/clientes/eliminar/{cedula}
     @GetMapping("eliminar/{cedula}")
     public String eliminarCliente(@PathVariable("cedula") Integer cedula, Model model) {
         Cliente cliente = clienteService.buscarCliente(cedula.toString());

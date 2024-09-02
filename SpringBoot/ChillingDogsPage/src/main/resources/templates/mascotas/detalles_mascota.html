@@ -21,10 +21,27 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
     
-            <a class="navbar-brand" href="#">
+            <a class="navbar-brand" href="/landing">
                 <img src="/sources/logo.png" alt="logo" width="80px">
                 <h1>Chilling Dogs</h1>
             </a>
+
+            <div class="collapse navbar-collapse centrar-vet" id="navbar"> <!--Contiene el responsive de los elementos-->
+                <ul class="navbar-nav navigation">
+                    <li class="nav-item enlacesSecciones">
+                        <a class="button bg-dark" href="/mascotas/buscar">
+                            <img src="/sources/mascotas-vet-option.png">
+                            <div class="logout">Mascotas</div>
+                        </a>
+                    </li>
+                    <li class="nav-item enlacesSecciones">
+                        <a class="button bg-dark" href="/clientes/buscar">
+                            <img src="/sources/clientes-vet-option.png">
+                            <div class="logout">Clientes</div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </nav>
     </header>
     
@@ -135,7 +152,7 @@
             </article>
 
         </section>
-        <a href="http://localhost:8099/mascotas/buscar"><button>Volver</button></a>
+        <a href="http://localhost:8099/mascotas/buscar"><button id="btnVolver">Volver</button></a>
     </main>
     
     <footer>
