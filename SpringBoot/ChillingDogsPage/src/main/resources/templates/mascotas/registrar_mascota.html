@@ -56,7 +56,7 @@
                                 <!-- La propiedad mascota.estado corresponde al botón que no tenga la clase btn-grey (que se quita en el js) -->
                                 <!-- Se le asigna el valor del botón seleccionado -->
                                 <input th:field="${mascota.estado}" type="text" id="estado" name="estado" hidden>
-                                <div class="btn-group" id="buttonGroup">
+                                <div class="grupo-btn" id="buttonGroup">
                                     <button type="button" class="btn-grey" id="btnActivo" onclick="selectButton(this, 'green')">Activo</button>
                                     <button type="button" class="btn-grey" id="btnInactivo" onclick="selectButton(this, 'red')">Inactivo</button>
                                 </div>
