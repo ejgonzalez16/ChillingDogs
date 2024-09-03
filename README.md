@@ -23,7 +23,7 @@ _Clone el repositorio con el comando: git clone [https://github.com/ejgonzalez16
 ### Diagrama entidad relación 🗂️
 
 <p align = "center">
- <img src = "https://github.com/user-attachments/assets/1df29553-296f-4a5a-803c-d3d871fca1c2" alt = "Entidad relación Chilling Dogs" width = "400">
+ <img src = "https://github.com/user-attachments/assets/20c95340-ee14-4efd-a218-81d83ef9f3bf" alt = "Entidad relación Chilling Dogs" width = "400">
 </p>
 
 ### Paleta de colores 🎨
