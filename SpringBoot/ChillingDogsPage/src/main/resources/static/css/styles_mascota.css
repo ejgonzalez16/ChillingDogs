@@ -40,10 +40,6 @@ main button {
     border-radius: 30px;
 }
 
-main button:hover{
-    background-color: #7bdff8;
-}
-
 main section{
     background-color: var(--color-4);
 }

@@ -3,6 +3,9 @@ package org.example.chillingdogspage.Entidad;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 public class Mascota {
     @GeneratedValue
@@ -17,6 +20,8 @@ public class Mascota {
     private String estado;
     @ManyToOne()
     private Cliente cliente;
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado, Cliente cliente) {
         this.nombre = nombre;

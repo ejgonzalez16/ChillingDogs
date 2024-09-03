@@ -104,7 +104,7 @@
                 <img class="peludo-img" alt="Perro de Undefined" th:src="${mascota.foto}">
             </div>
         </section>
-        <a th:href="@{/mascotas/mis-mascotas/{cedula}(cedula=${mascota.cliente.cedula})}"><button>Volver</button></a>
+        <a th:href="@{/mascotas/mis-mascotas/{cedula}(cedula=${mascota.cliente.cedula})}"><button id="btnVolver">Volver</button></a>
     </main>
 
     <footer>
