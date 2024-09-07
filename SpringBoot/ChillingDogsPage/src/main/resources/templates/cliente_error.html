@@ -28,8 +28,19 @@
     </header>
 
     <main>
-        <h1 th:text="'El cliente con cédula ' + ${cedula} + ' no existe' "></h1>
-        <img src="/sources/sad-dog-error.png" alt="Sad Dog Error">
+        <div class="contenedorError">
+            <div class="tituloError">
+                <h1 th:text="'Algo salió mal :('"></h1>
+                <!--<h3 th:text="'Error ' + ${statusCode} + ': ' + ${errorMessage}"></h3>-->
+                <h3 th:text="'El cliente con cédula ' + ${cedula} + ' no existe' "></h3>
+            </div>
+            <div class="descripcionError">
+                <p>Lo sentimos, pero no pudimos encontrar la página que estás buscando.</p>
+                <p>Por favor, verifica la URL e inténtalo de nuevo.</p>
+                <button class="present-button" onclick="window.history.back()">Vuelve a la página anterior</button>
+            </div>
+        </div>
+        <img src="/sources/sad-dog-error.png" alt="Tristeza Perruna Error">
     </main>
 
 
