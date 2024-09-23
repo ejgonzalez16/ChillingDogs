@@ -20,8 +20,7 @@ public class Droga {
     public Droga() {
     }
 
-    public Droga(Long id, String nombre, Double precioCompra, Double precioVenta, Integer unidadesDisponibles) {
-        this.id = id;
+    public Droga(String nombre, Double precioCompra, Double precioVenta, Integer unidadesDisponibles) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;

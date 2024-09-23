@@ -171,13 +171,12 @@ public class DatabaseInit implements ApplicationRunner {
                     String[] datos = linea.split(";");
 
                     // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
-                    if (datos.length == 5) {
+                    if (datos.length == 4) {
                         Droga droga = new Droga(
-                                Long.parseLong(datos[0]), // id
-                                datos[1], // nombre
-                                Double.parseDouble(datos[2]), // precioCompra
-                                Double.parseDouble(datos[3]), // precioVenta
-                                Integer.parseInt(datos[4])  // unidadesDisponibles
+                                datos[0], // nombre
+                                Double.parseDouble(datos[1]), // precioCompra
+                                Double.parseDouble(datos[2]), // precioVenta
+                                Integer.parseInt(datos[3])  // unidadesDisponibles
                         );
                         // Guarda la droga en el repositorio
                         drogaRepository.save(droga);
