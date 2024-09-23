@@ -134,15 +134,14 @@ public class DatabaseInit implements ApplicationRunner {
                     String[] datos = linea.split(";");
 
                     // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
-                    if (datos.length == 7) {
+                    if (datos.length == 6) {
                         Veterinario veterinario = new Veterinario(
-                                Long.parseLong(datos[0]), // id
-                                datos[1], // cedula
-                                datos[2], // contrasena
-                                datos[3], // especialidad
-                                datos[4],  // nombre
-                                datos[5],  // estado
-                                datos[6]  // foto
+                                datos[0], // cedula
+                                datos[1], // contrasena
+                                datos[2], // especialidad
+                                datos[3],  // nombre
+                                datos[4],  // estado
+                                datos[5]  // foto
                         );
                         veterinarioRepository.save(veterinario); // Guarda el veterinario en el repositorio
                     } else {

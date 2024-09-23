@@ -23,8 +23,7 @@ public class Veterinario {
         this.estado = "activo";
     }
 
-    public Veterinario(Long id, String cedula, String contrasena, String especialidad, String nombre, String estado, String foto) {
-        this.id = id;
+    public Veterinario(String cedula, String contrasena, String especialidad, String nombre, String estado, String foto) {
         this.cedula = cedula;
         this.contrasena = contrasena;
         this.especialidad = especialidad;
