@@ -8,10 +8,11 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 @Controller
 @Transactional
@@ -32,13 +33,15 @@ public class DatabaseInit implements ApplicationRunner {
     private TratamientoRepository tratamientoRepository;
 
     @Override
-    public void run(ApplicationArguments args) throws Exception {
+    public void run(ApplicationArguments args) {
         // Save the data to the database
         leerClientes();
         leerMascotas();
         leerVeterinarios();
         leerDrogas();
         leerTratamientos();
+        // Descomentar para actualizar las historias de clientes Chilling
+        // generarHistoriasDeUsuario();
     }
 
     public void leerClientes() {
@@ -223,6 +226,90 @@ public class DatabaseInit implements ApplicationRunner {
                     }
                 }
             }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Método para generar historias de usuario
+    public void generarHistoriasDeUsuario() {
+        List<Cliente> clientes = clienteRepository.findAll();
+
+        // Crear carpeta "Historias de clientes Chilling" si no existe
+        String folderPath = "Historias de clientes Chilling";
+        File folder = new File(folderPath);
+        if (!folder.exists()) {
+            folder.mkdirs();
+        }
+
+        // Para cada cliente generar una historia en formato markdown
+        for (Cliente cliente : clientes) {
+            StringBuilder historia = new StringBuilder();
+
+            // Encabezado de la historia de usuario
+            historia.append("# ").append(cliente.getNombre()).append("\n\n");
+
+            // Sección "Mis datos"
+            historia.append("## Mis datos\n\n");
+            historia.append("Hola, soy ").append(cliente.getNombre()).append(", ");
+            historia.append("mi cédula es ").append(cliente.getCedula()).append(", ");
+            historia.append("mi correo es ").append(cliente.getCorreo()).append(" y ");
+            historia.append("mi celular es ").append(cliente.getCelular()).append(".\n\n");
+
+            // Sección "Mis peluditos"
+            historia.append("## Mis peluditos\n\n");
+            Collection<Mascota> mascotas = mascotaRepository.findAllByClienteId(cliente.getId());
+            if (mascotas.isEmpty()) {
+                historia.append("No tengo peluditos registrados.\n\n");
+            } else {
+                historia.append("Tengo ").append(mascotas.size()).append(" peluditos:\n\n");
+            }
+
+            for (Mascota mascota : mascotas) {
+                historia.append("### ").append(mascota.getNombre()).append("\n\n");
+                historia.append("Hola, soy ").append(mascota.getNombre()).append(", un ");
+                historia.append(mascota.getRaza()).append(" de ").append(mascota.getEdad()).append(" años y ");
+                historia.append(mascota.getPeso()).append(" kg.\n");
+                if (mascota.getEnfermedad().equals("vacio")) {
+                    historia.append("Soy un peludito sano y feliz.\n");
+                } else {
+                    historia.append("Actualmente estoy diagnosticado con ").append(mascota.getEnfermedad()).append(".\n");
+                }
+                if (mascota.getEstado().equals("activo")) {
+                    historia.append("Me encuentro en Chilling Dogs para recibir tratamiento.\n\n");
+                } else {
+                    historia.append("Me encuentro en casa.\n\n");
+                }
+
+                historia.append("#### Mis tratamientos\n\n");
+                Collection<Tratamiento> tratamientos = tratamientoRepository.findAllByMascotaId(mascota.getId());
+                if (tratamientos.isEmpty()) {
+                    historia.append("No he recibido ningún tratamiento.\n\n");
+                } else {
+                    historia.append("He recibido ").append(tratamientos.size()).append(" tratamientos:\n");
+                    for (Tratamiento tratamiento : tratamientos) {
+                        Droga droga = tratamiento.getDroga();
+                        Veterinario veterinario = tratamiento.getVeterinario();
+                        historia.append("- ").append(tratamiento.getFecha()).append(": ");
+                        historia.append("El veterinario ").append(veterinario.getNombre());
+                        historia.append(" me recetó ").append(droga.getNombre()).append(".\n");
+                    }
+                    historia.append("\n");
+                }
+            }
+
+            // Nombre del archivo basándonos en el nombre del cliente
+            String fileName = folderPath + "/" + cliente.getNombre().replace(" ", "_") + "_historia.md";
+
+            // Escribir el archivo Markdown
+            escribirArchivo(fileName, historia.toString());
+        }
+    }
+
+    // Método para escribir el contenido en un archivo .md
+    private void escribirArchivo(String filePath, String contenido) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(filePath))) {
+            writer.write(contenido);
         } catch (IOException e) {
             e.printStackTrace();
         }
