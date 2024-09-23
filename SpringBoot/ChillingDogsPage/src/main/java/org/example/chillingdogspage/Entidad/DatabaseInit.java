@@ -3,6 +3,7 @@ package org.example.chillingdogspage.Entidad;
 import jakarta.transaction.Transactional;
 import org.example.chillingdogspage.Repositorio.ClienteRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
+import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -22,11 +23,15 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     private MascotaRepository mascotaRepository;
 
+    @Autowired
+    private VeterinarioRepository veterinarioRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Save the data to the database
         leerClientes();
         leerMascotas();
+        leerVeterinarios();
     }
 
     public void leerClientes() {
@@ -97,6 +102,44 @@ public class DatabaseInit implements ApplicationRunner {
                         /* Así no va JAJA
                         Cliente cliente = clienteRepository.findById(Long.parseLong(datos[7])).get();
                         cliente.getMascotas().add(mascota);*/
+                    } else {
+                        System.out.println("Error en los datos de la fila: " + String.join(";", datos));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void leerVeterinarios() {
+        // Read the data from the database
+        String rutaArchivo = "static/sources/datos-quemados/veterinarios.csv";
+
+        try {
+            ClassPathResource resource = new ClassPathResource(rutaArchivo);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+                String linea;
+                // NO HAY ENCABEZADO HDP
+                // Leer y descartar el encabezado (QUE HIJO DE PUTA)
+                // br.readLine();
+
+                while ((linea = br.readLine()) != null) {
+                    // Dividir la línea por el delimitador ';'
+                    String[] datos = linea.split(";");
+
+                    // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
+                    if (datos.length == 7) {
+                        Veterinario veterinario = new Veterinario(
+                                Long.parseLong(datos[0]), // id
+                                datos[1], // cedula
+                                datos[2], // contrasena
+                                datos[3], // especialidad
+                                datos[4],  // nombre
+                                datos[5],  // estado
+                                datos[6]  // foto
+                        );
+                        veterinarioRepository.save(veterinario); // Guarda el veterinario en el repositorio
                     } else {
                         System.out.println("Error en los datos de la fila: " + String.join(";", datos));
                     }
