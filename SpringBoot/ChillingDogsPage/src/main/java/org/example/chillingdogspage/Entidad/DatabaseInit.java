@@ -2,6 +2,7 @@ package org.example.chillingdogspage.Entidad;
 
 import jakarta.transaction.Transactional;
 import org.example.chillingdogspage.Repositorio.ClienteRepository;
+import org.example.chillingdogspage.Repositorio.DrogaRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
 import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,12 +27,16 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     private VeterinarioRepository veterinarioRepository;
 
+    @Autowired
+    private DrogaRepository drogaRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Save the data to the database
         leerClientes();
         leerMascotas();
         leerVeterinarios();
+        leerDrogas();
     }
 
     public void leerClientes() {
@@ -140,6 +145,43 @@ public class DatabaseInit implements ApplicationRunner {
                                 datos[6]  // foto
                         );
                         veterinarioRepository.save(veterinario); // Guarda el veterinario en el repositorio
+                    } else {
+                        System.out.println("Error en los datos de la fila: " + String.join(";", datos));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void leerDrogas() {
+        // Read the data from the database
+        String rutaArchivo = "static/sources/datos-quemados/drogas.csv";
+
+        try {
+            ClassPathResource resource = new ClassPathResource(rutaArchivo);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+                String linea;
+                // NO HAY ENCABEZADO HDP
+                // Leer y descartar el encabezado (QUE HIJO DE PUTA)
+                // br.readLine();
+
+                while ((linea = br.readLine()) != null) {
+                    // Dividir la línea por el delimitador ';'
+                    String[] datos = linea.split(";");
+
+                    // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
+                    if (datos.length == 5) {
+                        Droga droga = new Droga(
+                                Long.parseLong(datos[0]), // id
+                                datos[1], // nombre
+                                Double.parseDouble(datos[2]), // precioCompra
+                                Double.parseDouble(datos[3]), // precioVenta
+                                Integer.parseInt(datos[4])  // unidadesDisponibles
+                        );
+                        // Guarda la droga en el repositorio
+                        drogaRepository.save(droga);
                     } else {
                         System.out.println("Error en los datos de la fila: " + String.join(";", datos));
                     }
