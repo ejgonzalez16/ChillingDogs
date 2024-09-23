@@ -1,10 +1,7 @@
 package org.example.chillingdogspage.Entidad;
 
 import jakarta.transaction.Transactional;
-import org.example.chillingdogspage.Repositorio.ClienteRepository;
-import org.example.chillingdogspage.Repositorio.DrogaRepository;
-import org.example.chillingdogspage.Repositorio.MascotaRepository;
-import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
+import org.example.chillingdogspage.Repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -14,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.time.LocalDateTime;
 
 @Controller
 @Transactional
@@ -30,6 +28,9 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     private DrogaRepository drogaRepository;
 
+    @Autowired
+    private TratamientoRepository tratamientoRepository;
+
     @Override
     public void run(ApplicationArguments args) throws Exception {
         // Save the data to the database
@@ -37,6 +38,7 @@ public class DatabaseInit implements ApplicationRunner {
         leerMascotas();
         leerVeterinarios();
         leerDrogas();
+        leerTratamientos();
     }
 
     public void leerClientes() {
@@ -180,6 +182,42 @@ public class DatabaseInit implements ApplicationRunner {
                         );
                         // Guarda la droga en el repositorio
                         drogaRepository.save(droga);
+                    } else {
+                        System.out.println("Error en los datos de la fila: " + String.join(";", datos));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void leerTratamientos() {
+        // Read the data from the database
+        String rutaArchivo = "static/sources/datos-quemados/tratamientos.csv";
+
+        try {
+            ClassPathResource resource = new ClassPathResource(rutaArchivo);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+                String linea;
+                // NO HAY ENCABEZADO HDP
+                // Leer y descartar el encabezado (QUE HIJO DE PUTA)
+                // br.readLine();
+
+                while ((linea = br.readLine()) != null) {
+                    // Dividir la línea por el delimitador ';'
+                    String[] datos = linea.split(";");
+
+                    // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
+                    if (datos.length == 4) {
+                        Tratamiento tratamiento = new Tratamiento(
+                                LocalDateTime.parse(datos[0]), // fecha
+                                mascotaRepository.findById(Long.parseLong(datos[1])).get(), // mascota
+                                drogaRepository.findById(Long.parseLong(datos[2])).get(), // droga
+                                veterinarioRepository.findById(Long.parseLong(datos[3])).get() // veterinario
+                        );
+                        // Guarda el tratamiento en el repositorio
+                        tratamientoRepository.save(tratamiento);
                     } else {
                         System.out.println("Error en los datos de la fila: " + String.join(";", datos));
                     }
