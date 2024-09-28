@@ -161,32 +161,32 @@ public class DatabaseInit implements ApplicationRunner {
 
     private void leerDrogas() {
         // Read the data from the database
-        String rutaArchivo = "static/sources/datos-quemados/drogas.csv";
+        String rutaArchivo = "static/sources/datos-quemados/medicamentos_veterinaria.csv";
 
         try {
             ClassPathResource resource = new ClassPathResource(rutaArchivo);
             try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
                 String linea;
-                // NO HAY ENCABEZADO HDP
-                // Leer y descartar el encabezado (QUE HIJO DE PUTA)
-                // br.readLine();
+                // Leer y descartar el encabezado
+                br.readLine();
 
                 while ((linea = br.readLine()) != null) {
                     // Dividir la línea por el delimitador ';'
                     String[] datos = linea.split(";");
 
                     // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
-                    if (datos.length == 4) {
+                    // Tiene 5 columnas, pero no se lee la última (unidades vendidas)
+                    if (datos.length == 5) {
                         Droga droga = new Droga(
                                 datos[0], // nombre
-                                Double.parseDouble(datos[1]), // precioCompra
-                                Double.parseDouble(datos[2]), // precioVenta
+                                Double.parseDouble(datos[1]), // precioVenta
+                                Double.parseDouble(datos[2]), // precioCompra
                                 Integer.parseInt(datos[3])  // unidadesDisponibles
                         );
                         // Guarda la droga en el repositorio
                         drogaRepository.save(droga);
                     } else {
-                        System.out.println("Error en los datos de la fila: " + String.join(";", datos));
+                        System.out.println("Error en la cantidad de datos de la fila: " + String.join(";", datos));
                     }
                 }
             }
