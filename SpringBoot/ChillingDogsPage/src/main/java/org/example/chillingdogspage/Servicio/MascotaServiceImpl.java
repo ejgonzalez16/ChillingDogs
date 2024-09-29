@@ -1,11 +1,12 @@
 package org.example.chillingdogspage.Servicio;
 
+import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Mascota;
+import org.example.chillingdogspage.Repositorio.ClienteRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -13,14 +14,22 @@ public class MascotaServiceImpl implements MascotaService {
     @Autowired
     MascotaRepository repository;
 
+    @Autowired
+    ClienteRepository clienteRepository;
+
     @Override
-    public void registrarMascota(Mascota mascota) {
-        repository.save(mascota);
+    public Mascota createMascota(Mascota mascota, String cedula) {
+        Cliente cliente = clienteRepository.findByCedula(cedula);
+        if (cliente == null) {
+            return null;
+        }
+        mascota.setCliente(cliente);
+        return repository.save(mascota);
     }
 
     @Override
-    public Collection<Mascota> searchAll() {
-        Collection<Mascota> mascotas = repository.findAll();
+    public List<Mascota> searchAll() {
+        List<Mascota> mascotas = repository.findAll();
         /*for (Mascota mascota : mascotas) {
             mascota.getCliente().setMascotas(null);
         }*/
@@ -28,22 +37,27 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public Mascota findById(int id) {
+    public Mascota findById(Long id) {
         return repository.findById((long)id).get();
     }
 
     @Override
-    public void deleteById(int id) {
+    public void deleteById(Long id) {
         repository.deleteById((long)id);
     }
 
     @Override
-    public void updateMascota(Mascota mascota) {
-        repository.save(mascota);
+    public Mascota updateMascota(Mascota mascota) {
+        return repository.save(mascota);
     }
 
     @Override
-    public Collection<Mascota> searchBySimilarName(String nombre) {
+    public List<Mascota> searchBySimilarName(String nombre) {
         return repository.searchBySimilarName(nombre);
+    }
+
+    @Override
+    public List<Mascota> findAllByClienteCedula(String cedula) {
+        return repository.findAllByClienteCedula(cedula);
     }
 }

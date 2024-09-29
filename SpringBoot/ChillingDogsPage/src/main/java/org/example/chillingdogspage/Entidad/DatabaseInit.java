@@ -10,8 +10,6 @@ import org.springframework.stereotype.Controller;
 
 import java.io.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -258,7 +256,7 @@ public class DatabaseInit implements ApplicationRunner {
 
             // Sección "Mis peluditos"
             historia.append("## Mis peluditos\n\n");
-            Collection<Mascota> mascotas = mascotaRepository.findAllByClienteId(cliente.getId());
+            List<Mascota> mascotas = mascotaRepository.findAllByClienteId(cliente.getId());
             if (mascotas.isEmpty()) {
                 historia.append("No tengo peluditos registrados.\n\n");
             } else {
@@ -282,7 +280,7 @@ public class DatabaseInit implements ApplicationRunner {
                 }
 
                 historia.append("#### Mis tratamientos\n\n");
-                Collection<Tratamiento> tratamientos = tratamientoRepository.findAllByMascotaId(mascota.getId());
+                List<Tratamiento> tratamientos = tratamientoRepository.findAllByMascotaId(mascota.getId());
                 if (tratamientos.isEmpty()) {
                     historia.append("No he recibido ningún tratamiento.\n\n");
                 } else {

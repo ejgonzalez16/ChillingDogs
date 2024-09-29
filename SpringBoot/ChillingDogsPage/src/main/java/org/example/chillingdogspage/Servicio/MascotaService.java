@@ -1,19 +1,18 @@
 package org.example.chillingdogspage.Servicio;
 
 import org.example.chillingdogspage.Entidad.Mascota;
-import org.example.chillingdogspage.Repositorio.MascotaRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
+import java.util.List;
 
 @Service
 public interface MascotaService{
-    public Collection<Mascota> searchAll();
-    public Mascota findById(int id);
-    public void deleteById(int id);
-    public void registrarMascota(Mascota mascota);
+    public List<Mascota> searchAll();
+    public Mascota findById(Long id);
+    public void deleteById(Long id);
+    public Mascota createMascota(Mascota mascota, String cedula);
 
-    void updateMascota(Mascota mascota);
-    public Collection<Mascota> searchBySimilarName(String nombre);
+    Mascota updateMascota(Mascota mascota);
+    public List<Mascota> searchBySimilarName(String nombre);
+    List<Mascota> findAllByClienteCedula(String cedula);
 }

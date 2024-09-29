@@ -1,5 +1,6 @@
 package org.example.chillingdogspage.Entidad;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -14,6 +15,7 @@ public class Droga {
     private Double precioCompra;
     private Double precioVenta;
     private Integer unidadesDisponibles;
+    @JsonIgnore
     @OneToMany(mappedBy = "droga", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
