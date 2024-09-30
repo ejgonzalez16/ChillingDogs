@@ -104,7 +104,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 datos[4], // enfermedad
                                 datos[5], // foto
                                 datos[6],  // estado
-                                clienteRepository.findById(Long.parseLong(datos[7])).get() // cliente
+                                clienteRepository.findById(Long.parseLong(datos[7])) // cliente
                         );
                         mascotaRepository.save(mascota); // Guarda la mascota en el repositorio
                         /* Así no va JAJA

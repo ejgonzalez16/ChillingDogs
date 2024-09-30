@@ -7,12 +7,11 @@ import java.util.List;
 
 @Service
 public interface MascotaService{
-    public List<Mascota> searchAll();
+    public List<Mascota> findAll();
     public Mascota findById(Long id);
-    public void deleteById(Long id);
-    public Mascota createMascota(Mascota mascota, String cedula);
-
-    Mascota updateMascota(Mascota mascota);
-    public List<Mascota> searchBySimilarName(String nombre);
+    public List<Mascota> findBySimilarName(String nombre);
     List<Mascota> findAllByClienteCedula(String cedula);
+    public Mascota createMascota(Mascota mascota, String cedula);
+    Mascota updateMascota(Mascota mascota);
+    public void deleteMascota(Long id);
 }

@@ -2,15 +2,10 @@ package org.example.chillingdogspage.Controlador;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Mascota;
-import org.example.chillingdogspage.ErrorHandling.ClientNotFoundException;
-import org.example.chillingdogspage.Servicio.ClienteService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
 import org.example.chillingdogspage.Servicio.MascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,7 +42,7 @@ public class MascotaController {
     @GetMapping("")
     @Operation(summary = "Mostrar todas las mascotas")
     public ResponseEntity<List<Mascota>> mostrarMascotas(){
-        List<Mascota> mascotas = mascotaService.searchAll();
+        List<Mascota> mascotas = mascotaService.findAll();
         return ResponseEntity.ok(mascotas); // 200 OK
     }
 
@@ -55,7 +50,7 @@ public class MascotaController {
     @GetMapping("nombre/{nombre}")
     @Operation(summary = "Mostrar las mascotas con nombre similar a 'nombre'")
     public ResponseEntity<List<Mascota>> mostrarMascotasPorNombre(@PathVariable("nombre") String nombre){
-        List<Mascota> mascotas = mascotaService.searchBySimilarName(nombre);
+        List<Mascota> mascotas = mascotaService.findBySimilarName(nombre);
         return ResponseEntity.ok(mascotas); // 200 OK
     }
 
@@ -81,7 +76,7 @@ public class MascotaController {
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una mascota por su ID")
     public ResponseEntity<Void> eliminarMascota(@PathVariable("id") Long id) {
-        mascotaService.deleteById(id);
+        mascotaService.deleteMascota(id);
         return ResponseEntity.noContent().build();  // 204 No Content
     }
 }

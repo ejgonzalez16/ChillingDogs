@@ -6,15 +6,17 @@ import java.util.List;
 
 @Service
 public interface ClienteService{
-    public List<Cliente> obtenerClientes();
+    public List<Cliente> findAll();
   
-    public Cliente buscarCliente(String cedula);
+    public Cliente findByCedula(String cedula);
   
-    public void registrarCliente(Cliente cliente);
+    public Cliente createCliente(Cliente cliente);
 
-    public void modificarCliente(Cliente cliente);
+    public Cliente updateCliente(Cliente cliente);
 
-    public void eliminarCliente(String cedulaCliente);
+    public boolean deleteCliente(Long id);
 
-    public Cliente buscarClientePorMascota(Long idMascota);
+    List<Cliente> findBySimilarName(String nombre);
+
+    //public Cliente buscarClientePorMascota(Long idMascota);
 }

@@ -28,7 +28,7 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public List<Mascota> searchAll() {
+    public List<Mascota> findAll() {
         List<Mascota> mascotas = repository.findAll();
         /*for (Mascota mascota : mascotas) {
             mascota.getCliente().setMascotas(null);
@@ -42,7 +42,7 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void deleteById(Long id) {
+    public void deleteMascota(Long id) {
         repository.deleteById((long)id);
     }
 
@@ -52,8 +52,8 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public List<Mascota> searchBySimilarName(String nombre) {
-        return repository.searchBySimilarName(nombre);
+    public List<Mascota> findBySimilarName(String nombre) {
+        return repository.findByNombreContaining(nombre.toLowerCase());
     }
 
     @Override

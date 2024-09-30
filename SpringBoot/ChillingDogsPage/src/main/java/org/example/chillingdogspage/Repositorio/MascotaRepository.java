@@ -12,7 +12,7 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
 
     // Hacer el query con m.nombre en minúsculas
     @Query("SELECT m FROM Mascota m WHERE LOWER(m.nombre) LIKE %?1%")
-    List<Mascota> searchBySimilarName(String nombre);
+    List<Mascota> findByNombreContaining(String nombre);
 
     // Hacer el query para encontrar todas las mascotas de un cliente
     @Query("SELECT m FROM Mascota m WHERE m.cliente.id = ?1")
