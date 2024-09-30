@@ -54,8 +54,6 @@ public class MascotaController {
         return ResponseEntity.ok(mascotas); // 200 OK
     }
 
-    // TODO: Devolver una mascota con detalles de su cliente
-
     // POST ============================================================================================================
     @PostMapping("/cliente/{cedula}")
     @Operation(summary = "Registrar una nueva mascota para un cliente")

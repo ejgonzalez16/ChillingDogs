@@ -22,7 +22,7 @@ public class ClienteController {
     //http://localhost:8099/clientes
     @GetMapping("")
     @Operation(summary = "Mostrar todos los clientes")
-    public ResponseEntity<List<Cliente>> mostrarClientes(){
+    public ResponseEntity<List<Cliente>> mostrarClientes() {
         List<Cliente> clientes = clienteService.findAll();
         return ResponseEntity.ok(clientes); // 200 OK
     }
@@ -41,7 +41,7 @@ public class ClienteController {
     //http://localhost:8099/clientes/nombre/{nombre}
     @GetMapping("nombre/{nombre}")
     @Operation(summary = "Mostrar los clientes con nombre similar a 'nombre'")
-    public ResponseEntity<List<Cliente>> mostrarClientesPorNombre(@PathVariable("nombre") String nombre){
+    public ResponseEntity<List<Cliente>> mostrarClientesPorNombre(@PathVariable("nombre") String nombre) {
         List<Cliente> clientes = clienteService.findBySimilarName(nombre);
         if (clientes.isEmpty()) {
             return ResponseEntity.status(404).body(null); // 404 Not Found
@@ -50,7 +50,6 @@ public class ClienteController {
     }
 
     // POST ============================================================================================================
-    // TODO: Validar cliente que llega sea en efecto un cliente?
     @PostMapping("")
     @Operation(summary = "Crear un nuevo cliente")
     public ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
@@ -60,8 +59,6 @@ public class ClienteController {
     
 
     // PUT =============================================================================================================
-    // TODO: Validar cliente que llega sea en efecto un cliente?
-    // TODO: Incluir en los parámetros el ID o cédula del cliente?
     @PutMapping("")
     @Operation(summary = "Actualizar los datos de un cliente")
     public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente cliente) {
