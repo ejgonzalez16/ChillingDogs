@@ -5,9 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+    Cliente findById(long id);
     Cliente findByCedula(String cedula);
-    @Query("SELECT c FROM Cliente c JOIN c.mascotas m WHERE m.id = :idMascota")
-    Cliente findByMascotaId(Long idMascota);
+
+    // Hacer el query con c.nombre en minúsculas
+    @Query("SELECT c FROM Cliente c WHERE LOWER(c.nombre) LIKE %?1%")
+    List<Cliente> findByNombreContaining(String nombre);
 }

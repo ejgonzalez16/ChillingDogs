@@ -1,13 +1,10 @@
 package org.example.chillingdogspage.Servicio;
 
 import org.example.chillingdogspage.Entidad.Cliente;
-import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Repositorio.ClienteRepository;
-import org.example.chillingdogspage.Repositorio.MascotaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
 import java.util.List;
 
 @Service
@@ -17,15 +14,16 @@ public class ClienteServiceImpl implements ClienteService {
     ClienteRepository repository;
 
     @Override
+    public List<Cliente> findAll(){
+        return repository.findAll();
     public List<Cliente> obtenerClientes(){
         Collection<Cliente> clientes = repository.findAll();
         return clientes.stream().toList();
     }
 
     @Override
-    public Cliente buscarCliente(String cedula){
-        Cliente cliente = repository.findByCedula(cedula);
-        return cliente;
+    public Cliente findByCedula(String cedula){
+        return repository.findByCedula(cedula);
     }
 
     @Override
@@ -34,20 +32,25 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public void registrarCliente(Cliente cliente){
-        repository.save(cliente);
+    public Cliente createCliente(Cliente cliente){
+        return repository.save(cliente);
     }
 
     @Override
-    public void modificarCliente(Cliente cliente){
-        repository.save(cliente);
+    public Cliente updateCliente(Cliente cliente){
+        return repository.save(cliente);
     }
 
     @Override
-    public void eliminarCliente(String cedulaCliente){
-        Cliente cliente = repository.findByCedula(cedulaCliente);
+    public boolean deleteCliente(Long id){
+        Cliente cliente = repository.findById(id).orElse(null);
+        if (cliente == null) {
+            return false;
+        }
         repository.delete(cliente);
+        return true;
     }
+
 
     @Override
     public void deleteClienteById(int id) {
@@ -55,7 +58,12 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    public List<Cliente> findBySimilarName(String nombre){
+        return repository.findByNombreContaining(nombre.toLowerCase());
+    }
+  
+    /*@Override
     public Cliente buscarClientePorMascota(Long idMascota) {
         return repository.findByMascotaId(idMascota);
-    }
+    }*/
 }
