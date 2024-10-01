@@ -1,20 +1,18 @@
 package org.example.chillingdogspage.Controlador;
 
+import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Servicio.MascotaService;
 import org.springframework.ui.Model;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Servicio.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin( origins = "http://localhost:4200/")
 @RequestMapping("clientes")
 public class ClienteController {
     @Autowired
@@ -25,6 +23,38 @@ public class ClienteController {
 
     // Create ===========================================================================================
     //http://localhost:8099/clientes/registrar
+
+
+    @GetMapping("all")
+    public List<Cliente> getClientes(){
+        return this.clienteService.obtenerClientes();
+    }
+
+    //http://localhost:8099/mascotas/{id}
+    @GetMapping("{id}")
+    public Cliente getCliente(@PathVariable int id){
+        return this.clienteService.getCliente(id);
+    }
+
+    @PostMapping("add")
+    public Cliente addCliente(@RequestBody Cliente cliente){
+        this.clienteService.registrarCliente(cliente);
+        return cliente;
+    }
+
+    @PutMapping("update/{id}")
+    public Cliente updateClientes(@RequestBody Cliente cliente){
+        this.clienteService.registrarCliente(cliente);
+        return cliente;
+    }
+
+    @DeleteMapping("delete/{id}")
+    public String deleteById(@PathVariable int id){
+        this.clienteService.deleteClienteById(id);
+        return "hecho";
+    }
+
+
     @GetMapping("registrar")
     public String registrarCliente(Model model) {
         Cliente cliente = new Cliente("","","","", "");

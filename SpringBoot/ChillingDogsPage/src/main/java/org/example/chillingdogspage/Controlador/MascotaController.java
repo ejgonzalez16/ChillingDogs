@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@CrossOrigin(origins = "http://localhost:4200/")
 @RequestMapping("mascotas")
 public class MascotaController {
     @Autowired
@@ -23,6 +24,13 @@ public class MascotaController {
 
     // URLs del Cliente =====================================================
     // Retrieve =============================================================
+    //http://localhost:8099/mascotas/all
+    @GetMapping("all")
+    public List<Mascota> getMascotas(){
+        return this.mascotaService.searchAll();
+    }
+
+    /*
     //http://localhost:8099/mascotas/mis-mascotas/{cedula}
     @GetMapping("mis-mascotas/{cedula}")
     public String misMascotas(Model model, @PathVariable String cedula){
@@ -32,13 +40,33 @@ public class MascotaController {
         }
         model.addAttribute("cliente", cliente);
         return carpeta + "mis_mascotas";
+    }*/
+
+    //http://localhost:8099/mascotas/{id}
+    @GetMapping("{id}")
+    public Mascota miMascota(@PathVariable int id){
+        return this.mascotaService.findById(id);
     }
 
-    //http://localhost:8099/mascotas/
-    @GetMapping("{id}")
-    public String miMascota(Model model, @PathVariable int id){
-        model.addAttribute("mascota", mascotaService.findById(id));
-        return carpeta + "mascota";
+    @GetMapping("cliente/{id}")
+    public List<Mascota> findByClienteId(@PathVariable int id){
+        return this.mascotaService.findByClienteId(id);
+    }
+
+    //http://localhost:8099/mascotas/add
+    @PostMapping("add")
+    public void addMascota(@RequestBody Mascota mascota){
+        this.mascotaService.registrarMascota(mascota);
+    }
+
+    @PutMapping("update/{id}")
+    public void updateMascota(@RequestBody Mascota mascota){
+        this.mascotaService.registrarMascota(mascota);
+    }
+
+    @DeleteMapping("delete/{id}")
+    public void deleteById(@PathVariable int id){
+        this.mascotaService.deleteById(id);
     }
 
     // URLs del Veterinario =====================================================

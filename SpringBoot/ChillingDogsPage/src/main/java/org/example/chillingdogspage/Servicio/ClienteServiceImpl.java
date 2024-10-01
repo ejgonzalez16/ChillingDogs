@@ -17,15 +17,20 @@ public class ClienteServiceImpl implements ClienteService {
     ClienteRepository repository;
 
     @Override
-    public Collection<Cliente> obtenerClientes(){
+    public List<Cliente> obtenerClientes(){
         Collection<Cliente> clientes = repository.findAll();
-        return clientes;
+        return clientes.stream().toList();
     }
 
     @Override
     public Cliente buscarCliente(String cedula){
         Cliente cliente = repository.findByCedula(cedula);
         return cliente;
+    }
+
+    @Override
+    public Cliente getCliente(int id) {
+        return repository.findById((long)id).get();
     }
 
     @Override
@@ -43,7 +48,12 @@ public class ClienteServiceImpl implements ClienteService {
         Cliente cliente = repository.findByCedula(cedulaCliente);
         repository.delete(cliente);
     }
-  
+
+    @Override
+    public void deleteClienteById(int id) {
+        this.repository.deleteById((long)id);
+    }
+
     @Override
     public Cliente buscarClientePorMascota(Long idMascota) {
         return repository.findByMascotaId(idMascota);
