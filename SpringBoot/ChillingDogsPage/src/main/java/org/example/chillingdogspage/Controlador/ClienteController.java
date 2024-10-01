@@ -1,5 +1,6 @@
 package org.example.chillingdogspage.Controlador;
 
+
 import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Servicio.MascotaService;
 import org.springframework.ui.Model;
@@ -7,27 +8,34 @@ import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Servicio.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
+import org.example.chillingdogspage.Entidad.Cliente;
+import org.example.chillingdogspage.Servicio.ClienteService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@CrossOrigin( origins = "http://localhost:4200/")
+@RestController // Devolver datos (en JSON) en lugar de una vista (HTML)
 @RequestMapping("clientes")
+@CrossOrigin(origins = "http://localhost:4200") // Solo la aplicación en Angular puede realizar peticiones a este controlador
+@Tag(name = "Cliente", description = "API para el manejo de clientes")  // Tag para la documentación de la API
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
-
     @Autowired
     MascotaService mascotaService;
 
-    // Create ===========================================================================================
-    //http://localhost:8099/clientes/registrar
 
-
+    // GET =============================================================================================================
+    //http://localhost:8099/clientes
     @GetMapping("all")
-    public List<Cliente> getClientes(){
-        return this.clienteService.obtenerClientes();
+    @Operation(summary = "Mostrar todos los clientes")
+    public ResponseEntity<List<Cliente>> getClientes(){
+        List<Cliente> clientes = clienteService.findAll();
+        return ResponseEntity.ok(clientes); // 200 OK
     }
 
     //http://localhost:8099/mascotas/{id}
@@ -36,90 +44,56 @@ public class ClienteController {
         return this.clienteService.getCliente(id);
     }
 
+    //http://localhost:8099/clientes/{cedula}
+    @GetMapping("/{cedula}")
+    @Operation(summary = "Obtener los detalles de un cliente por su cedula")
+    public ResponseEntity<Cliente> obtenerCliente(@PathVariable("cedula") String cedula) {
+        Cliente cliente = clienteService.findByCedula(cedula);
+        if (cliente == null) {
+            return ResponseEntity.status(404).body(null); // 404 Not Found
+        }
+        return ResponseEntity.ok(cliente);  // 200 OK
+    }
+
+    //http://localhost:8099/clientes/nombre/{nombre}
+    @GetMapping("nombre/{nombre}")
+    @Operation(summary = "Mostrar los clientes con nombre similar a 'nombre'")
+    public ResponseEntity<List<Cliente>> mostrarClientesPorNombre(@PathVariable("nombre") String nombre) {
+        List<Cliente> clientes = clienteService.findBySimilarName(nombre);
+        if (clientes.isEmpty()) {
+            return ResponseEntity.status(404).body(null); // 404 Not Found
+        }
+        return ResponseEntity.ok(clientes); // 200 OK
+    }
+
+    // POST ============================================================================================================
     @PostMapping("add")
-    public Cliente addCliente(@RequestBody Cliente cliente){
-        this.clienteService.registrarCliente(cliente);
-        return cliente;
+    @Operation(summary = "Crear un nuevo cliente")
+    public ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
+        Cliente clienteCreado = clienteService.createCliente(cliente);
+        return ResponseEntity.status(201).body(clienteCreado); // 201 Created
     }
+    
 
+    // PUT =============================================================================================================
     @PutMapping("update/{id}")
-    public Cliente updateClientes(@RequestBody Cliente cliente){
-        this.clienteService.registrarCliente(cliente);
-        return cliente;
+    @Operation(summary = "Actualizar los datos de un cliente")
+    public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente cliente) {
+        Cliente clienteActualizado = clienteService.updateCliente(cliente);
+        if (clienteActualizado == null) {
+            return ResponseEntity.status(404).body(null); // 404 Not Found
+        }
+        return ResponseEntity.ok(clienteActualizado); // 200 OK
     }
 
+    // DELETE ==========================================================================================================
     @DeleteMapping("delete/{id}")
-    public String deleteById(@PathVariable int id){
-        this.clienteService.deleteClienteById(id);
-        return "hecho";
-    }
-
-
-    @GetMapping("registrar")
-    public String registrarCliente(Model model) {
-        Cliente cliente = new Cliente("","","","", "");
-        model.addAttribute("cliente", cliente);
-        return "registrar_cliente";
-    }
-
-    @PostMapping("registrar")
-    public String registrarCliente(Model model, Cliente cliente) {
-        clienteService.registrarCliente(cliente);
-        return "redirect:/clientes/buscar";
-    }
-
-    // Retrieve ===========================================================================================
-
-    //http://localhost:8099/clientes/buscar
-    @GetMapping("buscar")
-    public String verClienteyMascotas(Model model) {
-        List<Cliente> clientes = clienteService.obtenerClientes().stream().toList();
-        model.addAttribute("clientes", clientes);
-        return "buscar_clientes";
-    }
-
-    @PostMapping("buscar")
-    public String buscarCliente(@RequestParam("cedulaCliente") Integer cedulaCliente) {
-        return "redirect:/clientes/buscar/" + cedulaCliente;
-    }
-
-    //http://localhost:8099/clientes/buscar/{cedula}
-    @GetMapping("buscar/{cedula}")
-    public String verClienteyMascotas(@PathVariable("cedula") Integer cedula, Model model) {
-        Cliente cliente = clienteService.buscarCliente(cedula.toString());
-        model.addAttribute("cliente", cliente);
-        return "detalles_cliente_cedula";
-    }
-
-    // Update ===========================================================================================
-    //http://localhost:8099/clientes/modificar/{cedula}
-    @GetMapping("modificar/{cedula}")
-    public String modificarCliente(@PathVariable("cedula") Integer cedula, Model model) {
-        Cliente cliente = clienteService.buscarCliente(cedula.toString());
-        model.addAttribute("cliente", cliente);
-        model.addAttribute("cedulaAnterior", cedula);
-        return "modificar_cliente_cedula";
-    }
-
-    @PostMapping("modificar/{cedula}")
-    public String modificarCliente(Model model, Cliente cliente, @PathVariable("cedula") Integer cedulaAnterior) {
-        clienteService.modificarCliente(cliente);
-        return "redirect:/clientes/buscar";
-    }
-
-    // Delete ===========================================================================================
-    // http://localhost:8099/clientes/eliminar/{cedula}
-    @GetMapping("eliminar/{cedula}")
-    public String eliminarCliente(@PathVariable("cedula") Integer cedula, Model model) {
-        Cliente cliente = clienteService.buscarCliente(cedula.toString());
-        model.addAttribute("cliente", cliente);
-        return "eliminar_cliente_cedula";
-    }
-
-    @PostMapping("eliminar/{cedula}")
-    public String eliminarCliente(Model model, Cliente cliente) {
-        clienteService.eliminarCliente(cliente.getCedula());
-        return "redirect:/clientes/buscar";
+    @Operation(summary = "Eliminar un cliente por su ID")
+    public ResponseEntity<String> eliminarCliente(@PathVariable("id") Long id) {
+        if (!clienteService.deleteCliente(id)) {
+            return ResponseEntity.status(404).body("Cliente no encontrado"); // 404 Not Found si no existe el cliente
+        }
+        return ResponseEntity.ok("Cliente eliminado exitosamente"); // 200 OK si se elimina correctamente
     }
     
 }

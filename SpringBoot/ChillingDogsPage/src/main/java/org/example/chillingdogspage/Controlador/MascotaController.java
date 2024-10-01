@@ -23,48 +23,6 @@ public class MascotaController {
 
     // URLs del Cliente =====================================================
     // Retrieve =============================================================
-    //http://localhost:8099/mascotas/mis-mascotas/{cedula}
-    @GetMapping("mis-mascotas/{cedula}")
-    public String misMascotas(Model model, @PathVariable String cedula){
-        Cliente cliente = clienteService.buscarCliente(cedula);
-        if(cliente == null){
-            throw new ClientNotFoundException(cedula);
-        }
-        model.addAttribute("cliente", cliente);
-        return carpeta + "mis_mascotas";
-    }
-
-    //http://localhost:8099/mascotas/
-    @GetMapping("{id}")
-    public String miMascota(Model model, @PathVariable int id){
-        model.addAttribute("mascota", mascotaService.findById(id));
-        return carpeta + "mascota";
-    }
-
-    // URLs del Veterinario =====================================================
-    // Create =============================================================
-    @GetMapping("registrar")
-    public String registrarMascota(Model model) {
-        Mascota mascota = new Mascota();
-        model.addAttribute("mascota", mascota);
-        model.addAttribute("clientes", clienteService.obtenerClientes());
-        return carpeta + "registrar_mascota";
-    }
-
-    @PostMapping("registrar")
-    public String registrarMascota(Mascota mascota) {
-        mascota.setCliente(clienteService.buscarCliente(mascota.getCliente().getCedula()));
-        mascotaService.registrarMascota(mascota);
-        return "redirect:/mascotas/buscar";
-    }
-
-    // Retrieve =============================================================
-    //http://localhost:8099/mascotas/buscar
-    @GetMapping("buscar")
-    public String buscar(Model model){
-        actualizarMascotasCliente(model);
-        return carpeta + "buscar_mascotas";
-    }
 
     //http://localhost:8099/mascotas/buscar
     @PostMapping("buscar")
@@ -79,11 +37,16 @@ public class MascotaController {
     }
 
     //http://localhost:8099/mascotas
-    @GetMapping("")
+    @GetMapping("all")
     @Operation(summary = "Mostrar todas las mascotas")
-    public ResponseEntity<List<Mascota>> mostrarMascotas(){
-        List<Mascota> mascotas = mascotaService.findAll();
-        return ResponseEntity.ok(mascotas); // 200 OK
+    public List<Mascota> mostrarMascotas(){
+        return mascotaService.findAll();
+    }
+
+    @GetMapping("cliente/{id}")
+    @Operation(summary = "Mostrar todas las mascotas")
+    public List<Mascota> findMascotasByClienteId(@PathVariable("id") String id){
+        return mascotaService.findByClienteId(id);;
     }
 
     //http://localhost:8099/mascotas/nombre/{nombre}
@@ -102,19 +65,23 @@ public class MascotaController {
         return ResponseEntity.status(201).body(nuevaMascota);   // 201 Created
     }
 
+    @PostMapping("add")
+    @Operation(summary = "Registrar una nueva mascota para un cliente")
+    public void registrarMascota(@RequestBody Mascota mascota) {
+        mascotaService.registrarMascota(mascota);
+    }
+
     // PUT =============================================================================================================
-    @PutMapping("")
+    @PutMapping("update/{id}")
     @Operation(summary = "Actualizar los datos de una mascota")
-    public ResponseEntity<Mascota> actualizarMascota(@RequestBody Mascota mascotaActualizada) {
-        Mascota mascota = mascotaService.updateMascota(mascotaActualizada);
-        return ResponseEntity.ok(mascota);  // 200 OK
+    public void actualizarMascota(@RequestBody Mascota mascotaActualizada) {
+        mascotaService.updateMascota(mascotaActualizada);
     }
 
     // DELETE ==========================================================================================================
-    @DeleteMapping("/{id}")
+    @DeleteMapping("delete/{id}")
     @Operation(summary = "Eliminar una mascota por su ID")
-    public ResponseEntity<Void> eliminarMascota(@PathVariable("id") Long id) {
+    public void eliminarMascota(@PathVariable("id") Long id) {
         mascotaService.deleteMascota(id);
-        return ResponseEntity.noContent().build();  // 204 No Content
     }
 }
