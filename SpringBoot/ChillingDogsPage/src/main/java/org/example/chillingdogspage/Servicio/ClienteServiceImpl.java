@@ -9,26 +9,18 @@ import java.util.List;
 
 @Service
 public class ClienteServiceImpl implements ClienteService {
-  
+
     @Autowired
     ClienteRepository repository;
 
     @Override
     public List<Cliente> findAll(){
         return repository.findAll();
-    public List<Cliente> obtenerClientes(){
-        Collection<Cliente> clientes = repository.findAll();
-        return clientes.stream().toList();
     }
 
     @Override
     public Cliente findByCedula(String cedula){
         return repository.findByCedula(cedula);
-    }
-
-    @Override
-    public Cliente getCliente(int id) {
-        return repository.findById((long)id).get();
     }
 
     @Override
@@ -51,17 +43,11 @@ public class ClienteServiceImpl implements ClienteService {
         return true;
     }
 
-
-    @Override
-    public void deleteClienteById(int id) {
-        this.repository.deleteById((long)id);
-    }
-
     @Override
     public List<Cliente> findBySimilarName(String nombre){
         return repository.findByNombreContaining(nombre.toLowerCase());
     }
-  
+
     /*@Override
     public Cliente buscarClientePorMascota(Long idMascota) {
         return repository.findByMascotaId(idMascota);

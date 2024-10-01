@@ -10,26 +10,28 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController // Devolver datos (en JSON) en lugar de una vista (HTML)
 @RequestMapping("mascotas")
 @CrossOrigin(origins = "http://localhost:4200") // Solo la aplicación en Angular puede realizar peticiones a este controlador
 @Tag(name = "Mascota", description = "API para el manejo de mascotas")  // Tag para la documentación de la API
 public class MascotaController {
     @Autowired
     MascotaService mascotaService;
-    @Autowired
-    ClienteService clienteService;
-    String carpeta = "mascotas/";
 
-    // URLs del Cliente =====================================================
-    // Retrieve =============================================================
+    // GET =============================================================================================================
+    //http://localhost:8099/mascotas/{id}
+    @GetMapping("/{id}")
+    @Operation(summary = "Obtener los detalles de una mascota por su ID")
+    public ResponseEntity<Mascota> obtenerMascota(@PathVariable("id") Long id) {
+        Mascota mascota = mascotaService.findById(id);
+        return ResponseEntity.ok(mascota);  // 200 OK
+    }
 
-    //http://localhost:8099/mascotas/buscar
-    @PostMapping("buscar")
-    public String buscarPorNombre(Model model, @RequestParam("nombrePerro") String nombre){
-        // Poner el nombre en minúsculas
-        nombre = nombre.toLowerCase();
-        List<Mascota> mascotas =  mascotaService.searchBySimilarName(nombre).stream().toList();
+    //http://localhost:8099/mascotas/cliente/{cedula}
+    @GetMapping("cliente/{cedula}")
+    @Operation(summary = "Mostrar las mascotas de un cliente")
+    public ResponseEntity<List<Mascota>> mostrarMascotasCliente(@PathVariable("cedula") String cedula){
+        List<Mascota> mascotas = mascotaService.findAllByClienteCedula(cedula);
         if (mascotas.isEmpty()) {
             return ResponseEntity.status(404).body(mascotas);
         }
@@ -37,16 +39,11 @@ public class MascotaController {
     }
 
     //http://localhost:8099/mascotas
-    @GetMapping("all")
+    @GetMapping("")
     @Operation(summary = "Mostrar todas las mascotas")
-    public List<Mascota> mostrarMascotas(){
-        return mascotaService.findAll();
-    }
-
-    @GetMapping("cliente/{id}")
-    @Operation(summary = "Mostrar todas las mascotas")
-    public List<Mascota> findMascotasByClienteId(@PathVariable("id") String id){
-        return mascotaService.findByClienteId(id);;
+    public ResponseEntity<List<Mascota>> mostrarMascotas(){
+        List<Mascota> mascotas = mascotaService.findAll();
+        return ResponseEntity.ok(mascotas); // 200 OK
     }
 
     //http://localhost:8099/mascotas/nombre/{nombre}
@@ -65,23 +62,19 @@ public class MascotaController {
         return ResponseEntity.status(201).body(nuevaMascota);   // 201 Created
     }
 
-    @PostMapping("add")
-    @Operation(summary = "Registrar una nueva mascota para un cliente")
-    public void registrarMascota(@RequestBody Mascota mascota) {
-        mascotaService.registrarMascota(mascota);
-    }
-
     // PUT =============================================================================================================
-    @PutMapping("update/{id}")
+    @PutMapping("")
     @Operation(summary = "Actualizar los datos de una mascota")
-    public void actualizarMascota(@RequestBody Mascota mascotaActualizada) {
-        mascotaService.updateMascota(mascotaActualizada);
+    public ResponseEntity<Mascota> actualizarMascota(@RequestBody Mascota mascotaActualizada) {
+        Mascota mascota = mascotaService.updateMascota(mascotaActualizada);
+        return ResponseEntity.ok(mascota);  // 200 OK
     }
 
     // DELETE ==========================================================================================================
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una mascota por su ID")
-    public void eliminarMascota(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> eliminarMascota(@PathVariable("id") Long id) {
         mascotaService.deleteMascota(id);
+        return ResponseEntity.noContent().build();  // 204 No Content
     }
 }

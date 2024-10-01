@@ -28,24 +28,17 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public List<Mascota> searchAll() {
-        Collection<Mascota> mascotas = repository.findAll();
     public List<Mascota> findAll() {
         List<Mascota> mascotas = repository.findAll();
         /*for (Mascota mascota : mascotas) {
             mascota.getCliente().setMascotas(null);
         }*/
-        return mascotas.stream().toList();
+        return mascotas;
     }
 
     @Override
     public Mascota findById(Long id) {
         return repository.findById((long)id).get();
-    }
-
-    @Override
-    public List<Mascota> findByClienteId(int id) {
-        return this.repository.findByClienteId((long)id).stream().toList();
     }
 
     @Override
@@ -64,8 +57,6 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public List<Mascota> searchBySimilarName(String nombre) {
-        return repository.searchBySimilarName(nombre).stream().toList();
     public List<Mascota> findAllByClienteCedula(String cedula) {
         return repository.findAllByClienteCedula(cedula);
     }

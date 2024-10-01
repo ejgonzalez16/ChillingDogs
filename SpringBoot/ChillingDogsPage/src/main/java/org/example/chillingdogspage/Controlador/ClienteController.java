@@ -1,13 +1,5 @@
 package org.example.chillingdogspage.Controlador;
 
-
-import org.example.chillingdogspage.Entidad.Mascota;
-import org.example.chillingdogspage.Servicio.MascotaService;
-import org.springframework.ui.Model;
-import org.example.chillingdogspage.Entidad.Cliente;
-import org.example.chillingdogspage.Servicio.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
@@ -25,23 +17,14 @@ import java.util.List;
 public class ClienteController {
     @Autowired
     ClienteService clienteService;
-    @Autowired
-    MascotaService mascotaService;
-
 
     // GET =============================================================================================================
     //http://localhost:8099/clientes
-    @GetMapping("all")
+    @GetMapping("")
     @Operation(summary = "Mostrar todos los clientes")
-    public ResponseEntity<List<Cliente>> getClientes(){
+    public ResponseEntity<List<Cliente>> mostrarClientes() {
         List<Cliente> clientes = clienteService.findAll();
         return ResponseEntity.ok(clientes); // 200 OK
-    }
-
-    //http://localhost:8099/mascotas/{id}
-    @GetMapping("{id}")
-    public Cliente getCliente(@PathVariable int id){
-        return this.clienteService.getCliente(id);
     }
 
     //http://localhost:8099/clientes/{cedula}
@@ -67,16 +50,15 @@ public class ClienteController {
     }
 
     // POST ============================================================================================================
-    @PostMapping("add")
+    @PostMapping("")
     @Operation(summary = "Crear un nuevo cliente")
     public ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
         Cliente clienteCreado = clienteService.createCliente(cliente);
         return ResponseEntity.status(201).body(clienteCreado); // 201 Created
     }
-    
 
     // PUT =============================================================================================================
-    @PutMapping("update/{id}")
+    @PutMapping("")
     @Operation(summary = "Actualizar los datos de un cliente")
     public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente cliente) {
         Cliente clienteActualizado = clienteService.updateCliente(cliente);
@@ -87,7 +69,7 @@ public class ClienteController {
     }
 
     // DELETE ==========================================================================================================
-    @DeleteMapping("delete/{id}")
+    @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar un cliente por su ID")
     public ResponseEntity<String> eliminarCliente(@PathVariable("id") Long id) {
         if (!clienteService.deleteCliente(id)) {
@@ -95,5 +77,5 @@ public class ClienteController {
         }
         return ResponseEntity.ok("Cliente eliminado exitosamente"); // 200 OK si se elimina correctamente
     }
-    
+
 }
