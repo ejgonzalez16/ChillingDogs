@@ -22,7 +22,8 @@ public class Mascota {
     @ManyToOne()
     private Cliente cliente;
     @JsonIgnore
-    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Si se borra una mascota NO se deben borrar los tratamientos asociados a esa mascota
+    @OneToMany(mappedBy = "mascota", orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Mascota(String nombre, String raza, int edad, float peso, String enfermedad, String foto, String estado, Cliente cliente) {

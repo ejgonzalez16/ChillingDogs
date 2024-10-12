@@ -73,8 +73,10 @@ public class MascotaController {
     // DELETE ==========================================================================================================
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una mascota por su ID")
-    public ResponseEntity<Void> eliminarMascota(@PathVariable("id") Long id) {
-        mascotaService.deleteMascota(id);
-        return ResponseEntity.noContent().build();  // 204 No Content
+    public ResponseEntity<String> eliminarMascota(@PathVariable("id") Long id) {
+        if (!mascotaService.deleteMascota(id)) {
+            return ResponseEntity.status(404).body("Mascota no encontrada"); // 404 Not Found si no existe la mascota
+        }
+        return ResponseEntity.noContent().build();  // 204 No Content si se elimina correctamente
     }
 }

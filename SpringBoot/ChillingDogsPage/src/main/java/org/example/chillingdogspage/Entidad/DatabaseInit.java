@@ -215,7 +215,7 @@ public class DatabaseInit implements ApplicationRunner {
                                 LocalDateTime.parse(datos[0]), // fecha
                                 mascotaRepository.findById(Long.parseLong(datos[1])).get(), // mascota
                                 drogaRepository.findById(Long.parseLong(datos[2])).get(), // droga
-                                veterinarioRepository.findById(Long.parseLong(datos[3])).get() // veterinario
+                                veterinarioRepository.findById(Long.parseLong(datos[3])) // veterinario
                         );
                         // Guarda el tratamiento en el repositorio
                         tratamientoRepository.save(tratamiento);

@@ -16,7 +16,8 @@ public class Droga {
     private Double precioVenta;
     private Integer unidadesDisponibles;
     @JsonIgnore
-    @OneToMany(mappedBy = "droga", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Si se borra una droga NO se deben borrar los tratamientos asociados a esa droga
+    @OneToMany(mappedBy = "droga", orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Droga() {

@@ -14,5 +14,5 @@ public interface MascotaService{
     public Mascota createMascota(Mascota mascota, String cedula);
     public Mascota registrarMascota(Mascota mascota);
     Mascota updateMascota(Mascota mascota);
-    public void deleteMascota(Long id);
+    public boolean deleteMascota(Long id);
 }

@@ -40,6 +40,10 @@ public class ClienteServiceImpl implements ClienteService {
         if (cliente == null) {
             return false;
         }
+        // Si encontramos el cliente, no es necesario desvincular las mascotas asociadas a ese cliente
+        // Pero sí es necesario desvincular los tratamientos asociados a las mascotas de ese cliente
+        cliente.getMascotas().forEach(mascota -> mascota.getTratamientos().forEach(tratamiento -> tratamiento.setMascota(null)));
+        // Luego borramos el cliente suavesito
         repository.delete(cliente);
         return true;
     }

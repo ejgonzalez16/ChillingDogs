@@ -47,8 +47,15 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
-    public void deleteMascota(Long id) {
-        repository.deleteById(id);
+    public boolean deleteMascota(Long id) {
+        Mascota mascota = repository.findById(id).orElse(null);
+        if (mascota == null) {
+            return false;
+        }
+        // Si encontramos la mascota, desvinculamos los tratamientos asociados a esa mascota y luego la borramos
+        mascota.getTratamientos().forEach(tratamiento -> tratamiento.setMascota(null));
+        repository.delete(mascota);
+        return true;
     }
 
     @Override

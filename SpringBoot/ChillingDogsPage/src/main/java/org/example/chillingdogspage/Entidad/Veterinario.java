@@ -18,7 +18,8 @@ public class Veterinario {
     private String estado;
     private String foto;
     @JsonIgnore
-    @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL, orphanRemoval = true)
+    // Si se borra un veterinario NO se deben borrar los tratamientos asociados a ese veterinario
+    @OneToMany(mappedBy = "veterinario", orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
     public Veterinario() {
