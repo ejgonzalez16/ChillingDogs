@@ -30,6 +30,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Cliente updateCliente(Cliente cliente){
+        cliente.setMascotas(repository.findById(cliente.getId()).get().getMascotas());
         return repository.save(cliente);
     }
 

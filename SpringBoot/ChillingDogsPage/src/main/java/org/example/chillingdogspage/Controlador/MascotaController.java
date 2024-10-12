@@ -55,10 +55,10 @@ public class MascotaController {
     }
 
     // POST ============================================================================================================
-    @PostMapping("/cliente/{cedula}")
+    @PostMapping("")
     @Operation(summary = "Registrar una nueva mascota para un cliente")
-    public ResponseEntity<Mascota> registrarMascota(@PathVariable("cedula") String cedula, @RequestBody Mascota mascota) {
-        Mascota nuevaMascota = mascotaService.createMascota(mascota, cedula);
+    public ResponseEntity<Mascota> registrarMascota(@RequestBody Mascota mascota) {
+        Mascota nuevaMascota = mascotaService.registrarMascota(mascota);
         return ResponseEntity.status(201).body(nuevaMascota);   // 201 Created
     }
 

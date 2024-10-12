@@ -18,6 +18,11 @@ public class MascotaServiceImpl implements MascotaService {
     ClienteRepository clienteRepository;
 
     @Override
+    public Mascota registrarMascota(Mascota mascota) {
+        return repository.save(mascota);
+    }
+
+    @Override
     public Mascota createMascota(Mascota mascota, String cedula) {
         Cliente cliente = clienteRepository.findByCedula(cedula);
         if (cliente == null) {
@@ -38,12 +43,12 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public Mascota findById(Long id) {
-        return repository.findById((long)id).get();
+        return repository.findById(id).get();
     }
 
     @Override
     public void deleteMascota(Long id) {
-        repository.deleteById((long)id);
+        repository.deleteById(id);
     }
 
     @Override

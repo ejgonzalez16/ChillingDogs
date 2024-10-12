@@ -12,6 +12,7 @@ public interface MascotaService{
     public List<Mascota> findBySimilarName(String nombre);
     List<Mascota> findAllByClienteCedula(String cedula);
     public Mascota createMascota(Mascota mascota, String cedula);
+    public Mascota registrarMascota(Mascota mascota);
     Mascota updateMascota(Mascota mascota);
     public void deleteMascota(Long id);
 }
