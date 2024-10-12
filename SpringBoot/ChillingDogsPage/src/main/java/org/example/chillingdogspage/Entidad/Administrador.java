@@ -10,6 +10,7 @@ public class Administrador {
     @Id
     private Long id;
     private String cedula;
+    private String nombre;
     private String contrasena;
     private String foto;
 }
