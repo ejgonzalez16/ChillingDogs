@@ -30,6 +30,9 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     private TratamientoRepository tratamientoRepository;
 
+    @Autowired
+    private AdministradorRepository administradorRepository;
+
     @Override
     public void run(ApplicationArguments args) {
         // Save the data to the database
@@ -38,6 +41,7 @@ public class DatabaseInit implements ApplicationRunner {
         leerVeterinarios();
         leerDrogas();
         leerTratamientos();
+        leerAdmins();
         // Descomentar para actualizar las historias de clientes Chilling
         // generarHistoriasDeUsuario();
     }
@@ -219,6 +223,41 @@ public class DatabaseInit implements ApplicationRunner {
                         );
                         // Guarda el tratamiento en el repositorio
                         tratamientoRepository.save(tratamiento);
+                    } else {
+                        System.out.println("Error en los datos de la fila: " + String.join(";", datos));
+                    }
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void leerAdmins() {
+        // Read the data from the database
+        String rutaArchivo = "static/sources/datos-quemados/admins.csv";
+
+        try {
+            ClassPathResource resource = new ClassPathResource(rutaArchivo);
+            try (BufferedReader br = new BufferedReader(new InputStreamReader(resource.getInputStream()))) {
+                String linea;
+                // Leer y descartar el encabezado
+                br.readLine();
+
+                while ((linea = br.readLine()) != null) {
+                    // Dividir la línea por el delimitador ';'
+                    String[] datos = linea.split(";");
+
+                    // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
+                    if (datos.length == 4) {
+                        Administrador admin = new Administrador(
+                                datos[0], // cedula
+                                datos[1], // nombre
+                                datos[2], // contrasena
+                                datos[3]  // foto
+                        );
+                        // Guarda el administrador en el repositorio
+                        administradorRepository.save(admin);
                     } else {
                         System.out.println("Error en los datos de la fila: " + String.join(";", datos));
                     }

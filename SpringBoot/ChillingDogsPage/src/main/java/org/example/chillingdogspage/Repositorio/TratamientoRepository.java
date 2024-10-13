@@ -39,4 +39,8 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     // Query para calcular las ganancias totales de las drogas de los tratamientos
     @Query("SELECT SUM(d.precioVenta - d.precioCompra) FROM Tratamiento t JOIN t.droga d")
     double ganancias();
+
+    // Query para traer las top 3 drogas
+    @Query("SELECT d FROM Tratamiento t JOIN t.droga d GROUP BY d.id ORDER BY COUNT(*) DESC LIMIT 3")
+    List<Tratamiento> topDrogas();
 }
