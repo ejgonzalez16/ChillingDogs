@@ -26,6 +26,6 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     int countVeterinariosActivos();
 
     // Query para contar los veterinarios que estan inactivos
-    @Query("SELECT COUNT(*) FROM Veterinario v WHERE v.estado = 'Inactivo'")
+    @Query("SELECT COUNT(*) FROM Veterinario v WHERE v.estado = 'inactivo'")
     int countVeterinariosInactivos();
 }
