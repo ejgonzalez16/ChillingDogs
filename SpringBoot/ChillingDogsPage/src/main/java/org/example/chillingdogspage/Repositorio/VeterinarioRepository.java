@@ -22,7 +22,7 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     List<Veterinario> findByNombreContaining(String nombre);
 
     // Query para contar los veterinarios que estan activos
-    @Query("SELECT COUNT(*) FROM Veterinario WHERE estado = 'Activo'")
+    @Query("SELECT COUNT(*) FROM Veterinario WHERE estado = 'activo'")
     int countVeterinariosActivos();
 
     // Query para contar los veterinarios que estan inactivos

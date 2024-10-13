@@ -23,7 +23,7 @@ public class DashboardController {
 
     // GET =============================================================================================================
     //http://localhost:8099/admin/count-tratamiento
-    @PostMapping("/count-tratamiento")
+    @GetMapping("/count-tratamiento")
     @Operation(summary = "Contar todos los tratamientos realizados")
     public ResponseEntity<Integer> countTratamientos() {
         int count = dashboardService.countTratamientos();
@@ -31,7 +31,7 @@ public class DashboardController {
     }
 
     //http://localhost:8099/admin/count-tratamiento-mes
-    @PostMapping("/count-tratamiento-mes")
+    @GetMapping("/count-tratamiento-mes")
     @Operation(summary = "Contar los tratamientos realizados del mes")
     public ResponseEntity<Integer> countTratamientoMes() {
         int count = dashboardService.countTratamientosMes();
@@ -39,7 +39,7 @@ public class DashboardController {
     }
 
     //http://localhost:8099/admin/medicamentos-mes
-    @PostMapping("medicamentos-mes")
+    @GetMapping("medicamentos-mes")
     @Operation(summary = "Contar los medicaemntos usados del mes")
     public ResponseEntity<List<MedicamentosMes>> medicamentosMes() {
         List<MedicamentosMes> medicamentosMes = dashboardService.medicamentosMes();
@@ -47,7 +47,7 @@ public class DashboardController {
     }
     
     //http://localhost:8099/admin/count-vet-activos
-    @PostMapping("count-vet-activos")
+    @GetMapping("count-vet-activos")
     @Operation(summary = "Contar los veterinarios activos")
     public ResponseEntity<Integer> countVetActivos() {
         int count = dashboardService.countVeterinariosActivos();
@@ -56,7 +56,7 @@ public class DashboardController {
 
 
     //http://localhost:8099/admin/count-vet-inactivos
-    @PostMapping("count-vet-inactivos")
+    @GetMapping("count-vet-inactivos")
     @Operation(summary = "Contar los veterinarios inactivos")
     public ResponseEntity<Integer> countVetInactivos() {
         int count = dashboardService.countVeterinariosInactivos();
@@ -64,7 +64,7 @@ public class DashboardController {
     }
 
     //http://localhost:8099/dashboard/count-mascotas
-    @PostMapping("count-mascotas")
+    @GetMapping("count-mascotas")
     @Operation(summary = "Contar todas las mascotas")
     public ResponseEntity<Integer> countMascotas() {
         int count = dashboardService.countMascotas();
@@ -72,7 +72,7 @@ public class DashboardController {
     }
 
     //http://localhost:8099/dashboard/count-mascotas-tratamiento
-    @PostMapping("count-mascotas-tratamiento")
+    @GetMapping("count-mascotas-tratamiento")
     @Operation(summary = "Contar todas las mascotas diferentes que esten en tratamiento")
     public ResponseEntity<Integer> countMascotasTratamiento() {
         int count = dashboardService.countMascotasTratamiento();
@@ -80,7 +80,7 @@ public class DashboardController {
     }
 
     //http://localhost:8099/dashboard/ventas
-    @PostMapping("ventas")
+    @GetMapping("ventas")
     @Operation(summary = "Ventas totales")
     public ResponseEntity<Double> ventas() {
         double ventas = dashboardService.ventas();
@@ -88,7 +88,7 @@ public class DashboardController {
     }
 
     //http://localhost:8099/dashboard/ganancias
-    @PostMapping("ganancias")
+    @GetMapping("ganancias")
     @Operation(summary = "Ganancias totales")
     public ResponseEntity<Double> ganancia() {
         double ganancia = dashboardService.ganancias();
@@ -96,7 +96,7 @@ public class DashboardController {
     }
 
     //http://localhost:8099/dashboard/top-drogas
-    @PostMapping("top-drogas")
+    @GetMapping("top-drogas")
     @Operation(summary = "Top 3 drogas")
     public ResponseEntity<List<String>> topDrogas() {
         List<String> topDrogas = dashboardService.topDrogas();

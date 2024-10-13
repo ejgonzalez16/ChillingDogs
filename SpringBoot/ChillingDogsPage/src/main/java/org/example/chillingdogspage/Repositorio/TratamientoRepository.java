@@ -25,7 +25,7 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
 
     // Query para traer una pareja de el nombre de la droga administrada y el numero de veces que
     // fue administrada en el ultimo mes
-    @Query("SELECT d.nombre, COUNT(*) FROM Tratamiento t JOIN t.droga d WHERE MONTH(t.fecha) = MONTH(CURDATE()) AND YEAR(t.fecha) = YEAR(CURDATE()) GROUP BY d.id")
+    @Query("SELECT new org.example.chillingdogspage.Entidad.MedicamentosMes(d.nombre, COUNT(*)) FROM Tratamiento t JOIN t.droga d WHERE MONTH(t.fecha) = MONTH(CURDATE()) AND YEAR(t.fecha) = YEAR(CURDATE()) GROUP BY d.id")
     List<MedicamentosMes> medicamentosMes();
 
     // Query para contar todas las mascotas diferentes que esten en tratamiento
