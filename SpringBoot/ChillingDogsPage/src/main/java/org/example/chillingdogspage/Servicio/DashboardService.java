@@ -11,12 +11,12 @@ import java.util.List;
 public interface DashboardService {
     public int countTratamientos();
     public int countTratamientosMes();
-    public MedicamentosMes[] medicamentosMes();
+    public List<MedicamentosMes> medicamentosMes();
     public int countVeterinariosActivos();
     public int countVeterinariosInactivos();
     public int countMascotas();
     public int countMascotasTratamiento();
-    public int ventas();
-    public int ganancias();
-    public String[] topTratamientos();
+    public double ventas();
+    public double ganancias();
+    public List<String> topDrogas();
 }

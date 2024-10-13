@@ -26,7 +26,7 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     // Query para traer una pareja de el nombre de la droga administrada y el numero de veces que
     // fue administrada en el ultimo mes
     @Query("SELECT d.nombre, COUNT(*) FROM Tratamiento t JOIN t.droga d WHERE MONTH(t.fecha) = MONTH(CURDATE()) AND YEAR(t.fecha) = YEAR(CURDATE()) GROUP BY d.id")
-    List<MedicamentosMes[]> medicamentosMes();
+    List<MedicamentosMes> medicamentosMes();
 
     // Query para contar todas las mascotas diferentes que esten en tratamiento
     @Query("SELECT COUNT(DISTINCT m.id) FROM Tratamiento t JOIN t.mascota m")
@@ -41,6 +41,6 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     double ganancias();
 
     // Query para traer las top 3 drogas
-    @Query("SELECT d FROM Tratamiento t JOIN t.droga d GROUP BY d.id ORDER BY COUNT(*) DESC LIMIT 3")
-    List<Tratamiento> topDrogas();
+    @Query("SELECT d.nombre FROM Tratamiento t JOIN t.droga d GROUP BY d.id ORDER BY COUNT(*) DESC LIMIT 3")
+    List<String> topDrogas();
 }

@@ -3,6 +3,9 @@ package org.example.chillingdogspage.Servicio;
 import org.example.chillingdogspage.Entidad.Administrador;
 import org.example.chillingdogspage.Entidad.MedicamentosMes;
 import org.example.chillingdogspage.Repositorio.AdministradorRepository;
+import org.example.chillingdogspage.Repositorio.MascotaRepository;
+import org.example.chillingdogspage.Repositorio.TratamientoRepository;
+import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
 import org.example.chillingdogspage.Repositorio.AdministradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,64 +15,61 @@ import java.util.List;
 @Service
 public class DashboardServiceImpl implements DashboardService {
 
+    @Autowired
+    TratamientoRepository repoTratamientos;
+    @Autowired
+    VeterinarioRepository repoVeterinarios;
+    @Autowired
+    MascotaRepository repoMascotas;
+
     @Override
     public int countTratamientos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countTratamientos'");
+        return repoTratamientos.countTratamientos();
     }
 
     @Override
     public int countTratamientosMes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countTratamientosMes'");
+        return repoTratamientos.countTratamientosMes();
     }
 
     @Override
-    public MedicamentosMes[] medicamentosMes() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'medicamentosMes'");
+    public List<MedicamentosMes> medicamentosMes() {
+        return repoTratamientos.medicamentosMes();
     }
 
     @Override
     public int countVeterinariosActivos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countVeterinariosActivos'");
+        return repoVeterinarios.countVeterinariosActivos();
     }
 
     @Override
     public int countVeterinariosInactivos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countVeterinariosInactivos'");
+        return repoVeterinarios.countVeterinariosInactivos();
     }
 
     @Override
     public int countMascotas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countMascotas'");
+        return repoMascotas.countMascotas();
     }
 
     @Override
     public int countMascotasTratamiento() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'countMascotasTratamiento'");
+        return repoTratamientos.countMascotasTratamiento();
     }
 
     @Override
-    public int ventas() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ventas'");
+    public double ventas() {
+        return repoTratamientos.ventas();
     }
 
     @Override
-    public int ganancias() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'ganancias'");
+    public double ganancias() {
+        return repoTratamientos.ganancias();
     }
 
     @Override
-    public String[] topTratamientos() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'topTratamientos'");
+    public List<String> topDrogas() {
+        return repoTratamientos.topDrogas();
     }
 
     
