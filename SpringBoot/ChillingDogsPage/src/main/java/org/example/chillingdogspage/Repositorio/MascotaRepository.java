@@ -21,4 +21,8 @@ public interface MascotaRepository extends JpaRepository<Mascota, Long> {
     // Hacer el query para encontrar todas las mascotas de un cliente
     @Query("SELECT m FROM Mascota m WHERE m.cliente.cedula = ?1")
     List<Mascota> findAllByClienteCedula(String cedula);
+
+    // Query para contar todas las mascotas
+    @Query("SELECT COUNT(*) FROM Mascota")
+    int countMascotas();
 }

@@ -21,4 +21,11 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     @Query("SELECT c FROM Veterinario c WHERE LOWER(c.nombre) LIKE %?1%")
     List<Veterinario> findByNombreContaining(String nombre);
 
+    // Query para contar los veterinarios que estan activos
+    @Query("SELECT COUNT(*) FROM Veterinario WHERE estado = 'Activo'")
+    int countVeterinariosActivos();
+
+    // Query para contar los veterinarios que estan inactivos
+    @Query("SELECT COUNT(*) FROM Veterinario WHERE estado = 'Inactivo'")
+    int countVeterinariosInactivos();
 }
