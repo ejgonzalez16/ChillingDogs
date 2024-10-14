@@ -1,12 +1,9 @@
 package org.example.chillingdogspage.Servicio;
 
-import org.example.chillingdogspage.Entidad.Administrador;
 import org.example.chillingdogspage.Entidad.MedicamentosMes;
-import org.example.chillingdogspage.Repositorio.AdministradorRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
 import org.example.chillingdogspage.Repositorio.TratamientoRepository;
 import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
-import org.example.chillingdogspage.Repositorio.AdministradorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

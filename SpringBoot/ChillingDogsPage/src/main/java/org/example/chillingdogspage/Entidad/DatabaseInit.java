@@ -9,6 +9,7 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -216,7 +217,7 @@ public class DatabaseInit implements ApplicationRunner {
                     // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
                     if (datos.length == 4) {
                         Tratamiento tratamiento = new Tratamiento(
-                                LocalDateTime.parse(datos[0]), // fecha
+                                LocalDate.parse(datos[0]), // fecha
                                 mascotaRepository.findById(Long.parseLong(datos[1])).get(), // mascota
                                 drogaRepository.findById(Long.parseLong(datos[2])).get(), // droga
                                 veterinarioRepository.findById(Long.parseLong(datos[3])) // veterinario

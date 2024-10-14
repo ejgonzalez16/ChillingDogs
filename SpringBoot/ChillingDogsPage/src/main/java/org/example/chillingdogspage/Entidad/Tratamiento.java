@@ -2,6 +2,7 @@ package org.example.chillingdogspage.Entidad;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -9,7 +10,7 @@ public class Tratamiento {
     @GeneratedValue
     @Id
     private Long id;
-    private LocalDateTime fecha;
+    private LocalDate fecha;
     @ManyToOne()
     private Mascota mascota;
     @ManyToOne()
@@ -20,7 +21,7 @@ public class Tratamiento {
     public Tratamiento() {
     }
 
-    public Tratamiento(LocalDateTime fecha, Mascota mascota, Droga droga, Veterinario veterinario) {
+    public Tratamiento(LocalDate fecha, Mascota mascota, Droga droga, Veterinario veterinario) {
         this.fecha = fecha;
         this.mascota = mascota;
         this.droga = droga;
@@ -35,11 +36,11 @@ public class Tratamiento {
         this.id = id;
     }
 
-    public LocalDateTime getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDateTime fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

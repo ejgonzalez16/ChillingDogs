@@ -70,6 +70,16 @@ public class Droga {
         this.unidadesDisponibles = unidadesDisponibles;
     }
 
+    // Método para usar una droga (reduce las unidades disponibles en 1)
+    public void usarDroga() {
+        this.unidadesDisponibles--;
+    }
+
+    // Método para devolver una droga (aumenta las unidades disponibles en 1)
+    public void devolverDroga() {
+        this.unidadesDisponibles++;
+    }
+
     public List<Tratamiento> getTratamientos() {
         return tratamientos;
     }
