@@ -13,13 +13,13 @@ import java.util.List;
 @RestController // Devolver datos (en JSON) en lugar de un vista (HTML)
 @RequestMapping("drogas")
 @CrossOrigin(origins = "http://localhost:4200") // Solo la aplicación en Angular puede realizar peticiones a este controlador
-@Tag(name = "Tratamiento", description = "API para el manejo de tratamientos")  // Tag para la documentación de la API
+@Tag(name = "Droga", description = "API para el manejo de drogas")  // Tag para la documentación de la API
 public class DrogaController {
     @Autowired
     DrogaService drogaService;
 
     // GET =============================================================================================================
-    //http://localhost:8099/tratamientos/{id}
+    //http://localhost:8099/drogas/{id}
     @GetMapping("/{id}")
     @Operation(summary = "Obtener los detalles de una droga por su ID")
     public ResponseEntity<Droga> obtenerDroga(@PathVariable("id") Long id) {
@@ -50,10 +50,10 @@ public class DrogaController {
     // PUT =============================================================================================================
     @PutMapping("")
     @Operation(summary = "Actualizar los datos de una droga")
-    public ResponseEntity<Droga> actualizarTratamiento(@RequestBody Droga droga) {
+    public ResponseEntity<Droga> actualizarDroga(@RequestBody Droga droga) {
         Droga droga1 = drogaService.registrarDroga(droga);
         if (droga1 == null) {
-            // 404 Not Found si no existe el tratamiento, la nueva mascota, droga o veterinario (o no hay suficiente de la droga nueva)
+            // 404 Not Found si no existe el droga, la nueva mascota, droga o veterinario (o no hay suficiente de la droga nueva)
             return ResponseEntity.status(404).body(null);
         }
         return ResponseEntity.ok(droga1);  // 200 OK
@@ -62,9 +62,9 @@ public class DrogaController {
     // DELETE ==========================================================================================================
     @DeleteMapping("/{id}")
     @Operation(summary = "Eliminar una droga por su ID")
-    public ResponseEntity<String> eliminarTratamiento(@PathVariable("id") Long id) {
-        if (!drogaService.deleteTratamiento(id)) {
-            return ResponseEntity.status(404).body("Tratamiento no encontrada"); // 404 Not Found si no existe la tratamiento
+    public ResponseEntity<String> eliminarDroga(@PathVariable("id") Long id) {
+        if (!drogaService.deleteDroga(id)) {
+            return ResponseEntity.status(404).body("Droga no encontrada"); // 404 Not Found si no existe la droga
         }
         return ResponseEntity.noContent().build();  // 204 No Content si se elimina correctamente
     }

@@ -33,7 +33,7 @@ public class DrogaServiceImpl implements DrogaService {
     }
 
     @Override
-    public boolean deleteTratamiento(Long id) {
+    public boolean deleteDroga(Long id) {
         drogaRepository.deleteById(id);
         return true;
     }
