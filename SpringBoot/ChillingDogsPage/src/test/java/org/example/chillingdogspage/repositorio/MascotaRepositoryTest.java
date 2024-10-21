@@ -34,17 +34,62 @@ public class MascotaRepositoryTest {
         Cliente cliente3 = new Cliente("10003", "Duki", "duki@duki.duki", "3001234567", "https://avatars.githubusercontent.com/u/123321441?v=4");
         clienteRepository.save(cliente3);
 
-        mascotaRepository.save(new Mascota("Max", "Pastor aleman", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente1));
-        mascotaRepository.save(new Mascota("Pepe", "Samoyedo", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente2));
-        mascotaRepository.save(new Mascota("Bengie", "Shih tzu", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente1));
-        mascotaRepository.save(new Mascota("Tony", "Pitbull", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente2));
-        mascotaRepository.save(new Mascota("Max", "Golden retriever", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente3));
+        Mascota mascota1 = new Mascota("Duki", "Shih tzu", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente1);
+        mascotaRepository.save(mascota1);
+        Mascota mascota2 = new Mascota("Patty", "Pitbull", 3, 5.3f, "sordera", "https://www.hayvanlarim.org/wp-content/uploads/b-400476-pitbull_terrier_-150x150.jpg", "Activo", cliente1);
+        mascotaRepository.save(mascota2);
+        Mascota mascota3 = new Mascota("Bengie", "Golden retriever", 6, 7.3f, "hipermetropía", "https://th.bing.com/th/id/OIP.kAMCjX7G_1inCivhWgX_7QAAAA?rs=1&pid=ImgDetMain", "Activo", cliente2);
+        mascotaRepository.save(mascota3);
+        Mascota mascota4 = new Mascota("Duki", "Poodle", 3, 5.3f, "sordera", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente3);
+        mascotaRepository.save(mascota4);
     }
 
     @Test
     public void MascotaRepository_findByNombreContaining_Mascotas() {
-        List<Mascota> mascotas = mascotaRepository.findByNombreContaining("Perro");
+        // Arrange
+
+        // Act
+        List<Mascota> mascotas = mascotaRepository.findByNombreContaining("Du");
+
+        // Assert
         Assertions.assertThat(mascotas).isNotEmpty();
+        Assertions.assertThat(mascotas).size().isEqualTo(2);
+    }
+
+    @Test
+    public void MascotaRepository_findAllByClienteId_Mascotas() {
+        // Arrange
+
+        // Act
+        Cliente cliente = clienteRepository.findByCedula("10001");
+        List<Mascota> mascotas = mascotaRepository.findAllByClienteId(cliente.getId());
+
+        // Assert
+        Assertions.assertThat(mascotas).isNotEmpty();
+        Assertions.assertThat(mascotas).size().isEqualTo(2);
+    }
+
+    @Test
+    public void MascotaRepository_findAllByClienteCedula_Mascotas() {
+        // Arrange
+
+        // Act
+        List<Mascota> mascotas = mascotaRepository.findAllByClienteCedula("10002");
+
+        // Assert
+        Assertions.assertThat(mascotas).isNotEmpty();
+        Assertions.assertThat(mascotas).size().isEqualTo(1);
+    }
+
+    @Test
+    public void MascotaRepository_countMascotas_cantidad() {
+        // Arrange
+
+        // Act
+        int count = mascotaRepository.countMascotas();
+
+        // Assert
+        Assertions.assertThat(count).isEqualTo(4);
     }
 
     

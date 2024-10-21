@@ -28,6 +28,10 @@ public class DrogaRepositoryTest {
         Droga droga2 = new Droga("Droga 2", 25.0, 20.0, 10);
         Droga droga3 = new Droga("Droga 3", 40.0, 30.0, 0);
 
+        drogaRepository.save(droga1);
+        drogaRepository.save(droga2);
+        drogaRepository.save(droga3);
+
         //Act
         List<Droga> drogas = drogaRepository.findDisponibles();
 
