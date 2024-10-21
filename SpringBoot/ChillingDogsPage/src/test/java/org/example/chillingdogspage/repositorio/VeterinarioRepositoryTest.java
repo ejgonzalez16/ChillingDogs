@@ -51,12 +51,12 @@ public class VeterinarioRepositoryTest {
     }
 
     @Test
-    public void VeterinarioRepository_findByNombreContaining_NoCaseSens_Veterinario() {
+    public void VeterinarioRepository_findByNombreContaining_Veterinario() {
 
         // Arrange
 
         // Act
-        List<Veterinario> veterinarios = veterinarioRepository.findByNombreContaining_NoCaseSens("ju");
+        List<Veterinario> veterinarios = veterinarioRepository.findByNombreContaining("ju");
 
         // Assert
         Assertions.assertThat(veterinarios).isNotEmpty();
