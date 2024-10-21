@@ -4,7 +4,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.chillingdogspage.Entidad.Veterinario;
 import org.example.chillingdogspage.Servicio.VeterinarioService;
-import org.example.chillingdogspage.Servicio.VeterinarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
