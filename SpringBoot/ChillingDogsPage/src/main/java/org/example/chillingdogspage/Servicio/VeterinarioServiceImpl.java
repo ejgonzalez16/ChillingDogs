@@ -53,6 +53,6 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public List<Veterinario> findBySimilarName(String nombre){
-        return repository.findByNombreContaining_NoCaseSens(nombre.toLowerCase());
+        return repository.findByNombreContaining(nombre.toLowerCase());
     }
 }

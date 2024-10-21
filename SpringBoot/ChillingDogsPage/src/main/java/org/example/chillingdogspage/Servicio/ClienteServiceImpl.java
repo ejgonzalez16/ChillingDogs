@@ -14,6 +14,11 @@ public class ClienteServiceImpl implements ClienteService {
     ClienteRepository repository;
 
     @Override
+    public Cliente createCliente(Cliente cliente){
+        return repository.save(cliente);
+    }
+
+    @Override
     public List<Cliente> findAll(){
         return repository.findAll();
     }
@@ -24,8 +29,8 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
-    public Cliente createCliente(Cliente cliente){
-        return repository.save(cliente);
+    public List<Cliente> findBySimilarName(String nombre){
+        return repository.findByNombreContaining(nombre.toLowerCase());
     }
 
     @Override
@@ -47,14 +52,4 @@ public class ClienteServiceImpl implements ClienteService {
         repository.delete(cliente);
         return true;
     }
-
-    @Override
-    public List<Cliente> findBySimilarName(String nombre){
-        return repository.findByNombreContaining_NoCaseSens(nombre.toLowerCase());
-    }
-
-    /*@Override
-    public Cliente buscarClientePorMascota(Long idMascota) {
-        return repository.findByMascotaId(idMascota);
-    }*/
 }
