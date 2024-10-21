@@ -1,8 +1,6 @@
 package org.example.chillingdogspage.Servicio;
 
-import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Veterinario;
-import org.example.chillingdogspage.Repositorio.ClienteRepository;
 import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -55,6 +53,6 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public List<Veterinario> findBySimilarName(String nombre){
-        return repository.findByNombreContaining(nombre.toLowerCase());
+        return repository.findByNombreContaining_NoCaseSens(nombre.toLowerCase());
     }
 }

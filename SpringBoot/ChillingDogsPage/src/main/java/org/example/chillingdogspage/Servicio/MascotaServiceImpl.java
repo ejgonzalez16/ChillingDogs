@@ -65,7 +65,7 @@ public class MascotaServiceImpl implements MascotaService {
 
     @Override
     public List<Mascota> findBySimilarName(String nombre) {
-        return repository.findByNombreContaining(nombre.toLowerCase());
+        return repository.findByNombreContaining_NoCaseSens(nombre.toLowerCase());
     }
 
     @Override

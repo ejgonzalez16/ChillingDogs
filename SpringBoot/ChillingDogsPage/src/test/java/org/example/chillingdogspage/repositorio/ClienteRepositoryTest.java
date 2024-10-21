@@ -21,9 +21,6 @@ public class ClienteRepositoryTest {
     @Autowired
     private ClienteRepository clienteRepository;
 
-    @Autowired
-    private MascotaRepository mascotaRepository;
-
     /*
     Notación para pruebas:
     ClaseProbando_metodoProbando_resultadoEsperado
@@ -36,15 +33,10 @@ public class ClienteRepositoryTest {
 
     @BeforeEach   // Se ejecuta antes de cada prueba
     void init() {
-        Cliente cliente1 = clienteRepository.save(new Cliente("10001", "Anuel", "anuel@anu.anu", "3001234567", "https://avatars.githubusercontent.com/u/123321441?v=4"));
-        Cliente cliente2 = clienteRepository.save(new Cliente("10002", "Beto", "beto@beto.beto", "3002345678", "https://avatars.githubusercontent.com/u/123321442?v=4"));
-        Cliente cliente3 = clienteRepository.save(new Cliente("10003", "Carlos", "carlos@car.car", "3003456789", "https://avatars.githubusercontent.com/u/123321443?v=4"));
-        Cliente cliente4 = clienteRepository.save(new Cliente("10004", "Dario", "dario@dar.dar", "3004567890", "https://avatars.githubusercontent.com/u/123321444?v=4"));
-
-        mascotaRepository.save(new Mascota("Aby", "Shih tzu", 4, 4.3f, "daltonismo", "https://cdn.britannica.com/03/234203-050-C3D47B4B/Shih-tzu-dog.jpg", "Activo", cliente1));
-        mascotaRepository.save(new Mascota("Boby", "Pitbull", 3, 5.3f, "sordera", "https://www.hayvanlarim.org/wp-content/uploads/b-400476-pitbull_terrier_-150x150.jpg", "Activo", cliente2));
-        mascotaRepository.save(new Mascota("Coby", "Pastor alemán", 5, 6.3f, "miopía", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente3));
-        mascotaRepository.save(new Mascota("Doby", "Golden retriever", 6, 7.3f, "hipermetropía", "https://th.bing.com/th/id/OIP.kAMCjX7G_1inCivhWgX_7QAAAA?rs=1&pid=ImgDetMain", "Activo", cliente4));
+        clienteRepository.save(new Cliente("10001", "Anuel", "anuel@anu.anu", "3001234567", "https://avatars.githubusercontent.com/u/123321441?v=4"));
+        clienteRepository.save(new Cliente("10002", "Beto", "beto@beto.beto", "3002345678", "https://avatars.githubusercontent.com/u/123321442?v=4"));
+        clienteRepository.save(new Cliente("10003", "Carlos", "carlos@car.car", "3003456789", "https://avatars.githubusercontent.com/u/123321443?v=4"));
+        clienteRepository.save(new Cliente("10004", "Dario", "dario@dar.dar", "3004567890", "https://avatars.githubusercontent.com/u/123321444?v=4"));
     }
 
     @Test
@@ -110,13 +102,15 @@ public class ClienteRepositoryTest {
     @Test
     public void ClienteRepository_findByNombreContaining_Cliente() {
         // Arrange
-        String nombre = "Anuel";
+        String nombre = "AR";
 
         // Act
-        List<Cliente> clientes = clienteRepository.findByNombreContaining(nombre);
+        List<Cliente> clientes = clienteRepository.findByNombreContaining_NoCaseSens(nombre);
 
         // Assert
         Assertions.assertThat(clientes).isNotNull();
+        // Debería haber 2 clientes que contengan "AR" en su nombre (Carlos y Dario)
+        Assertions.assertThat(clientes.size()).isEqualTo(2);
     }
 
     @Test
@@ -125,7 +119,9 @@ public class ClienteRepositoryTest {
         String nombre = "Beto";
 
         // Act
-        Cliente cliente = clienteRepository.findByNombreContaining(nombre).get(0);
+        List<Cliente> clientes = clienteRepository.findByNombreContaining_NoCaseSens(nombre);
+        Assertions.assertThat(clientes).isNotEmpty();    // Mini-Assert
+        Cliente cliente = clientes.get(0);
         cliente.setNombre("Beto actualizado");
         Cliente clienteActualizado = clienteRepository.save(cliente);
 
