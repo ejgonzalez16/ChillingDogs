@@ -5,18 +5,18 @@ import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Repositorio.ClienteRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.util.List;
 import java.util.Optional;
 
 @DataJpaTest    // Hace que se cargue una DB (H2) en memoria para las pruebas
-@RunWith(SpringRunner.class)    // Necesario para que se ejecuten las pruebas
+@ExtendWith(SpringExtension.class)    // Necesario para que se ejecuten las pruebas
 public class ClienteRepositoryTest {
     @Autowired
     private ClienteRepository clienteRepository;
@@ -35,7 +35,7 @@ public class ClienteRepositoryTest {
      */
 
     @BeforeEach   // Se ejecuta antes de cada prueba
-    public void init() {
+    void init() {
         Cliente cliente1 = clienteRepository.save(new Cliente("10001", "Anuel", "anuel@anu.anu", "3001234567", "https://avatars.githubusercontent.com/u/123321441?v=4"));
         Cliente cliente2 = clienteRepository.save(new Cliente("10002", "Beto", "beto@beto.beto", "3002345678", "https://avatars.githubusercontent.com/u/123321442?v=4"));
         Cliente cliente3 = clienteRepository.save(new Cliente("10003", "Carlos", "carlos@car.car", "3003456789", "https://avatars.githubusercontent.com/u/123321443?v=4"));
