@@ -110,13 +110,15 @@ public class ClienteRepositoryTest {
     @Test
     public void ClienteRepository_findByNombreContaining_Cliente() {
         // Arrange
-        String nombre = "Anuel";
+        String nombre = "AR";
 
         // Act
-        List<Cliente> clientes = clienteRepository.findByNombreContaining(nombre);
+        List<Cliente> clientes = clienteRepository.findByNombreContaining_NoCaseSens(nombre);
 
         // Assert
         Assertions.assertThat(clientes).isNotNull();
+        // Debería haber 2 clientes que contengan "AR" en su nombre (Carlos y Dario)
+        Assertions.assertThat(clientes.size()).isEqualTo(2);
     }
 
     @Test
@@ -125,7 +127,9 @@ public class ClienteRepositoryTest {
         String nombre = "Beto";
 
         // Act
-        Cliente cliente = clienteRepository.findByNombreContaining(nombre).get(0);
+        List<Cliente> clientes = clienteRepository.findByNombreContaining_NoCaseSens(nombre);
+        Assertions.assertThat(clientes).isNotEmpty();    // Mini-Assert
+        Cliente cliente = clientes.get(0);
         cliente.setNombre("Beto actualizado");
         Cliente clienteActualizado = clienteRepository.save(cliente);
 

@@ -1,6 +1,5 @@
 package org.example.chillingdogspage.Repositorio;
 
-import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Veterinario;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -18,8 +17,8 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
     Veterinario findByCedulaAndContrasena(String cedula, String contrasena);
 
     // Hacer el query con c.nombre en minúsculas
-    @Query("SELECT c FROM Veterinario c WHERE LOWER(c.nombre) LIKE %?1%")
-    List<Veterinario> findByNombreContaining(String nombre);
+    @Query("SELECT c FROM Veterinario c WHERE LOWER(c.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))")
+    List<Veterinario> findByNombreContaining_NoCaseSens(String nombre);
 
     // Query para contar los veterinarios que estan activos
     @Query("SELECT COUNT(*) FROM Veterinario v WHERE v.estado = 'activo'")

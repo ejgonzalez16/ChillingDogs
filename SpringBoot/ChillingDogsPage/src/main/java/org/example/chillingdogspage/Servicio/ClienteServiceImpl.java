@@ -50,7 +50,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<Cliente> findBySimilarName(String nombre){
-        return repository.findByNombreContaining(nombre.toLowerCase());
+        return repository.findByNombreContaining_NoCaseSens(nombre.toLowerCase());
     }
 
     /*@Override
