@@ -1,18 +1,22 @@
 package org.example.chillingdogspage.repositorio;
 
+import org.assertj.core.api.Assertions;
+import org.example.chillingdogspage.Entidad.Cliente;
+import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Repositorio.ClienteRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
-import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 @DataJpaTest    // Hace que se cargue una DB (H2) en memoria para las pruebas
-@RunWith(SpringRunner.class)    // Necesario para que se ejecuten las pruebas
+@ExtendWith(SpringExtension.class)     // Necesario para que se ejecuten las pruebas
 public class MascotaRepositoryTest {
     
     @Autowired
@@ -30,11 +34,11 @@ public class MascotaRepositoryTest {
         Cliente cliente3 = new Cliente("10003", "Duki", "duki@duki.duki", "3001234567", "https://avatars.githubusercontent.com/u/123321441?v=4");
         clienteRepository.save(cliente3);
 
-        mascotaRepository.save(new Mascota("Max", "Pastor aleman", 5, 15.5, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente1));
-        mascotaRepository.save(new Mascota("Pepe", "Samoyedo", 5, 15.5, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente2));
-        mascotaRepository.save(new Mascota("Bengie", "Shih tzu", 5, 15.5, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente1));
-        mascotaRepository.save(new Mascota("Tony", "Pitbull", 5, 15.5, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente2));
-        mascotaRepository.save(new Mascota("Max", "Golden retriever", 5, 15.5, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente3));
+        mascotaRepository.save(new Mascota("Max", "Pastor aleman", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente1));
+        mascotaRepository.save(new Mascota("Pepe", "Samoyedo", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente2));
+        mascotaRepository.save(new Mascota("Bengie", "Shih tzu", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente1));
+        mascotaRepository.save(new Mascota("Tony", "Pitbull", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente2));
+        mascotaRepository.save(new Mascota("Max", "Golden retriever", 5, 15.5f, "Fiebre", "https://th.bing.com/th/id/OIP.75N3OkCeQATDyQvQ9RXS9AAAAA?rs=1&pid=ImgDetMain", "Activo", cliente3));
     }
 
     @Test

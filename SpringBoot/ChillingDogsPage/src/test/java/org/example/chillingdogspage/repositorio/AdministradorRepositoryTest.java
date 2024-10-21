@@ -1,14 +1,22 @@
+package org.example.chillingdogspage.repositorio;
+
 import org.assertj.core.api.Assertions;
 import org.example.chillingdogspage.Entidad.Administrador;
+import org.example.chillingdogspage.Entidad.Cliente;
+import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Repositorio.AdministradorRepository;
+import org.example.chillingdogspage.Repositorio.ClienteRepository;
+import org.example.chillingdogspage.Repositorio.MascotaRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @DataJpaTest    // Hace que se cargue una DB (H2) en memoria para las pruebas
-@RunWith(SpringRunner.class)    // Necesario para que se ejecuten las pruebas
+@ExtendWith(SpringExtension.class)     // Necesario para que se ejecuten las pruebas
 public class AdministradorRepositoryTest {
 
     @Autowired 
@@ -19,11 +27,12 @@ public class AdministradorRepositoryTest {
         // Arrange
         Administrador administrador = new Administrador("1234567890", "Admin", "1234", "https://th.bing.com/th/id/OIP.uwAx4p0CUpIOYFlSpdsZ4QHaFj?rs=1&pid=ImgDetMain");
         // Act
-        Administrador administradorGuardado = administradorRepository.findByCedulaAndContrasena(administrador);
+        Administrador administradorGuardado = administradorRepository.save(administrador);
+        Administrador administradorEncontrado = administradorRepository.findByCedulaAndContrasena(administrador.getCedula(), administrador.getContrasena());
         // Assert
-        Assertions.assertThat(administradorGuardado).isNotNull();
-        Assertions.assertThat(administradorGuardado.getCedula()).isEqualTo(administrador.getCedula());
-        Assertions.assertThat(administradorGuardado.getContrasena()).isEqualTo(administrador.getContrasena());
+        Assertions.assertThat(administradorEncontrado).isNotNull();
+        Assertions.assertThat(administradorEncontrado.getCedula()).isEqualTo(administrador.getCedula());
+        Assertions.assertThat(administradorEncontrado.getContrasena()).isEqualTo(administrador.getContrasena());
     }
     
 }
