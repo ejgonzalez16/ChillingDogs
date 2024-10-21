@@ -18,7 +18,7 @@ public interface VeterinarioRepository extends JpaRepository<Veterinario, Long> 
 
     // Hacer el query con c.nombre en minúsculas
     @Query("SELECT c FROM Veterinario c WHERE LOWER(c.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))")
-    List<Veterinario> findByNombreContaining_NoCaseSens(String nombre);
+    List<Veterinario> findByNombreContaining(String nombre);
 
     // Query para contar los veterinarios que estan activos
     @Query("SELECT COUNT(*) FROM Veterinario v WHERE v.estado = 'activo'")

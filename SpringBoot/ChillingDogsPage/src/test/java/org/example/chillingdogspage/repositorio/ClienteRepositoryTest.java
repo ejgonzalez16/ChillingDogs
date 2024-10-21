@@ -2,9 +2,7 @@ package org.example.chillingdogspage.repositorio;
 
 import org.assertj.core.api.Assertions;
 import org.example.chillingdogspage.Entidad.Cliente;
-import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Repositorio.ClienteRepository;
-import org.example.chillingdogspage.Repositorio.MascotaRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,6 +37,7 @@ public class ClienteRepositoryTest {
         clienteRepository.save(new Cliente("10004", "Dario", "dario@dar.dar", "3004567890", "https://avatars.githubusercontent.com/u/123321444?v=4"));
     }
 
+    // Pruebas Create --------------------------------------------------------------------------------------------------
     @Test
     public void ClienteRepository_save_Cliente(){
         // Arrange
@@ -47,8 +46,10 @@ public class ClienteRepositoryTest {
         Cliente clienteGuardado = clienteRepository.save(cliente);
         // Assert
         Assertions.assertThat(clienteGuardado).isNotNull();
+        Assertions.assertThat(clienteGuardado.getId()).isNotNull();
     }
 
+    // Pruebas Read ----------------------------------------------------------------------------------------------------
     @Test
     public void ClienteRepository_findAll_NotEmptyList() {
         // Arrange
@@ -76,18 +77,6 @@ public class ClienteRepositoryTest {
     }
 
     @Test
-    public void ClienteRepository_deleteById_EmptyCliente() {
-        // Arrange
-        Long index = 2L;
-
-        // Act
-        clienteRepository.deleteById(index);
-
-        // Assert
-        Assertions.assertThat(clienteRepository.findById(index)).isEmpty();
-    }
-
-    @Test
     public void ClienteRepository_findByCedula_FindWrongCedula() {
         // Arrange
         String cedula = "12345";
@@ -105,7 +94,7 @@ public class ClienteRepositoryTest {
         String nombre = "AR";
 
         // Act
-        List<Cliente> clientes = clienteRepository.findByNombreContaining_NoCaseSens(nombre);
+        List<Cliente> clientes = clienteRepository.findByNombreContaining(nombre);
 
         // Assert
         Assertions.assertThat(clientes).isNotNull();
@@ -114,12 +103,25 @@ public class ClienteRepositoryTest {
     }
 
     @Test
+    public void ClienteRepository_findByNombreContaining_EmptyCliente() {
+        // Arrange
+        String nombre = "Z";
+
+        // Act
+        List<Cliente> clientes = clienteRepository.findByNombreContaining(nombre);
+
+        // Assert
+        Assertions.assertThat(clientes).isEmpty();
+    }
+
+    // Pruebas Update --------------------------------------------------------------------------------------------------
+    @Test
     public void ClienteRepository_updateByName_Cliente() {
         // Arrange
         String nombre = "Beto";
 
         // Act
-        List<Cliente> clientes = clienteRepository.findByNombreContaining_NoCaseSens(nombre);
+        List<Cliente> clientes = clienteRepository.findByNombreContaining(nombre);
         Assertions.assertThat(clientes).isNotEmpty();    // Mini-Assert
         Cliente cliente = clientes.get(0);
         cliente.setNombre("Beto actualizado");
@@ -129,4 +131,35 @@ public class ClienteRepositoryTest {
         Assertions.assertThat(clienteActualizado).isNotNull();
         Assertions.assertThat(clienteActualizado.getNombre()).isEqualTo("Beto actualizado");
     }
+
+    // Esta prueba se debe ejecutar por separado porque se necesita el id del cliente
+    // Si se ejecuta junto con el resto de pruebas, los ids de los clientes no serán los mismos y fallará
+    @Test
+    public void ClienteRepository_updateById_Cliente() {
+        // Arrange
+        Long index = 2L;
+
+        // Act
+        Cliente cliente = clienteRepository.findById(index).get();
+        cliente.setNombre("Beto actualizado");
+        Cliente clienteActualizado = clienteRepository.save(cliente);
+
+        // Assert
+        Assertions.assertThat(clienteActualizado).isNotNull();
+        Assertions.assertThat(clienteActualizado.getNombre()).isEqualTo("Beto actualizado");
+    }
+
+    // Pruebas Delete --------------------------------------------------------------------------------------------------
+    @Test
+    public void ClienteRepository_deleteById_EmptyCliente() {
+        // Arrange
+        Long index = 2L;
+
+        // Act
+        clienteRepository.deleteById(index);
+
+        // Assert
+        Assertions.assertThat(clienteRepository.findById(index)).isEmpty();
+    }
+
 }

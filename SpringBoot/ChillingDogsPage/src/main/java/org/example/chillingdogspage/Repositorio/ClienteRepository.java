@@ -14,5 +14,5 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     // Hacer el query con c.nombre y nombre en minúsculas
     @Query("SELECT c FROM Cliente c WHERE LOWER(c.nombre) LIKE LOWER(CONCAT('%', :nombre, '%'))")
-    List<Cliente> findByNombreContaining_NoCaseSens(String nombre);
+    List<Cliente> findByNombreContaining(String nombre);
 }
