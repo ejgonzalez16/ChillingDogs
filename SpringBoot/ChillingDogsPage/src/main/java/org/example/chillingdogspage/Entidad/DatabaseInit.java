@@ -5,6 +5,7 @@ import org.example.chillingdogspage.Repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
+import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Controller;
 
@@ -15,6 +16,7 @@ import java.util.List;
 
 @Controller
 @Transactional
+@Profile("dev")     // Solo se ejecuta cuando el perfil de desarrollo está activo
 public class DatabaseInit implements ApplicationRunner {
     @Autowired
     private ClienteRepository clienteRepository;
