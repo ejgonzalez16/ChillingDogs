@@ -35,6 +35,14 @@ public class DrogaController {
         return ResponseEntity.ok(drogas); // 200 OK
     }
 
+    //http://localhost:8099/drogas/disponibles
+    @GetMapping("/disponibles")
+    @Operation(summary = "Mostrar todas las drogas disponibles")
+    public ResponseEntity<List<Droga>> mostrarDrogasDisponibles() {
+        List<Droga> drogas = drogaService.findDisponibles();
+        return ResponseEntity.ok(drogas); // 200 OK
+    }
+
     // POST ============================================================================================================
     @PostMapping("")
     @Operation(summary = "Registrar una nueva droga")

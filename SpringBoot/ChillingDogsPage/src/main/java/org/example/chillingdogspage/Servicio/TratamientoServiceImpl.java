@@ -121,6 +121,8 @@ public class TratamientoServiceImpl implements TratamientoService {
         if (tratamiento == null) {
             return false;
         }
+        /*Devolver la droga usada en el tratamiento
+        tratamiento.getDroga().devolverDroga();*/
         repository.delete(tratamiento);
         return true;
     }

@@ -6,6 +6,7 @@ import java.util.List;
 
 public interface DrogaService {
     public List<Droga> findAll();
+    public List<Droga> findDisponibles();
     public Droga findById(Long id);
     public Droga registrarDroga(Droga droga);
     public Droga updateDroga(Droga droga);

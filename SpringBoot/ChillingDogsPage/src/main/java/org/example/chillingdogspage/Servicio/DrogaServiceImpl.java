@@ -18,6 +18,11 @@ public class DrogaServiceImpl implements DrogaService {
     }
 
     @Override
+    public List<Droga> findDisponibles() {
+        return drogaRepository.findDisponibles();
+    }
+
+    @Override
     public Droga findById(Long id) {
         return drogaRepository.findById(id).get();
     }
