@@ -72,58 +72,58 @@ public class TratamientoServiceImpl implements TratamientoService {
         return repository.save(tratamiento);
     }
 
-    @Override
-    public Tratamiento updateTratamiento(TratamientoDTO tratamientoDTO) {
-        Tratamiento tratamiento = repository.findById(tratamientoDTO.getId()).orElse(null);
-        if (tratamiento == null) {
-            return null;
-        }
+    // @Override
+    // public Tratamiento updateTratamiento(TratamientoDTO tratamientoDTO) {
+    //     Tratamiento tratamiento = repository.findById(tratamientoDTO.getId()).orElse(null);
+    //     if (tratamiento == null) {
+    //         return null;
+    //     }
 
-        // Si la droga cambió, se actualiza la cantidad de unidades disponibles de la droga actual y la nueva
-        // Además, actualizamos droga en el tratamiento
-        Droga drogaActual = tratamiento.getDroga();
-        if (!tratamientoDTO.getDrogaId().equals(drogaActual.getId())) {
-            drogaActual.devolverDroga();
-            Droga nuevaDroga = drogaRepository.findById(tratamientoDTO.getDrogaId()).orElse(null);
-            if (nuevaDroga == null || nuevaDroga.getUnidadesDisponibles() < 1) {
-                return null;
-            }
-            nuevaDroga.usarDroga();
-            tratamiento.setDroga(nuevaDroga);
-        }
+    //     // Si la droga cambió, se actualiza la cantidad de unidades disponibles de la droga actual y la nueva
+    //     // Además, actualizamos droga en el tratamiento
+    //     Droga drogaActual = tratamiento.getDroga();
+    //     if (!tratamientoDTO.getDrogaId().equals(drogaActual.getId())) {
+    //         drogaActual.devolverDroga();
+    //         Droga nuevaDroga = drogaRepository.findById(tratamientoDTO.getDrogaId()).orElse(null);
+    //         if (nuevaDroga == null || nuevaDroga.getUnidadesDisponibles() < 1) {
+    //             return null;
+    //         }
+    //         nuevaDroga.usarDroga();
+    //         tratamiento.setDroga(nuevaDroga);
+    //     }
 
-        // Actualizar el veterinario si cambió
-        Veterinario veterinarioActual = tratamiento.getVeterinario();
-        if (!tratamientoDTO.getVeterinarioId().equals(veterinarioActual.getId())) {
-            Veterinario nuevoVeterinario = veterinarioRepository.findById(tratamientoDTO.getVeterinarioId()).orElse(null);
-            if (nuevoVeterinario == null) {
-                return null;
-            }
-            tratamiento.setVeterinario(nuevoVeterinario);
-        }
+    //     // Actualizar el veterinario si cambió
+    //     Veterinario veterinarioActual = tratamiento.getVeterinario();
+    //     if (!tratamientoDTO.getVeterinarioId().equals(veterinarioActual.getId())) {
+    //         Veterinario nuevoVeterinario = veterinarioRepository.findById(tratamientoDTO.getVeterinarioId()).orElse(null);
+    //         if (nuevoVeterinario == null) {
+    //             return null;
+    //         }
+    //         tratamiento.setVeterinario(nuevoVeterinario);
+    //     }
 
-        // Actualizar la mascota si cambió
-        Mascota mascotaActual = tratamiento.getMascota();
-        if (!tratamientoDTO.getMascotaId().equals(mascotaActual.getId())) {
-            Mascota nuevaMascota = mascotaRepository.findById(tratamientoDTO.getMascotaId()).orElse(null);
-            if (nuevaMascota == null) {
-                return null;
-            }
-            tratamiento.setMascota(nuevaMascota);
-        }
+    //     // Actualizar la mascota si cambió
+    //     Mascota mascotaActual = tratamiento.getMascota();
+    //     if (!tratamientoDTO.getMascotaId().equals(mascotaActual.getId())) {
+    //         Mascota nuevaMascota = mascotaRepository.findById(tratamientoDTO.getMascotaId()).orElse(null);
+    //         if (nuevaMascota == null) {
+    //             return null;
+    //         }
+    //         tratamiento.setMascota(nuevaMascota);
+    //     }
 
-        return repository.save(tratamiento);
-    }
+    //     return repository.save(tratamiento);
+    // }
 
-    @Override
-    public boolean deleteTratamiento(Long id) {
-        Tratamiento tratamiento = repository.findById(id).orElse(null);
-        if (tratamiento == null) {
-            return false;
-        }
-        /*Devolver la droga usada en el tratamiento
-        tratamiento.getDroga().devolverDroga();*/
-        repository.delete(tratamiento);
-        return true;
-    }
+    // @Override
+    // public boolean deleteTratamiento(Long id) {
+    //     Tratamiento tratamiento = repository.findById(id).orElse(null);
+    //     if (tratamiento == null) {
+    //         return false;
+    //     }
+    //     /*Devolver la droga usada en el tratamiento
+    //     tratamiento.getDroga().devolverDroga();*/
+    //     repository.delete(tratamiento);
+    //     return true;
+    // }
 }

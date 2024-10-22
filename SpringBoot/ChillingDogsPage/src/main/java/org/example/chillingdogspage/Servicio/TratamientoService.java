@@ -13,6 +13,6 @@ public interface TratamientoService {
     public List<Tratamiento> findAllByMascotaId(Long id);
     public List<Tratamiento> findAllByVeterinarioId(Long id);
     public Tratamiento registrarTratamiento(TratamientoDTO tratamientoDTO);
-    public Tratamiento updateTratamiento(TratamientoDTO tratamientoDTO);
-    public boolean deleteTratamiento(Long id);
+    // public Tratamiento updateTratamiento(TratamientoDTO tratamientoDTO);
+    // public boolean deleteTratamiento(Long id);
 }

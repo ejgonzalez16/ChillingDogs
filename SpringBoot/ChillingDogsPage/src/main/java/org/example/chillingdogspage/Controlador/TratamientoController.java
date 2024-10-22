@@ -71,24 +71,24 @@ public class TratamientoController {
     }
 
     // PUT =============================================================================================================
-    @PutMapping("")
-    @Operation(summary = "Actualizar los datos de un tratamiento")
-    public ResponseEntity<Tratamiento> actualizarTratamiento(@RequestBody TratamientoDTO tratamientoDTO) {
-        Tratamiento tratamiento = tratamientoService.updateTratamiento(tratamientoDTO);
-        if (tratamiento == null) {
-            // 404 Not Found si no existe el tratamiento, la nueva mascota, droga o veterinario (o no hay suficiente de la droga nueva)
-            return ResponseEntity.status(404).body(null);
-        }
-        return ResponseEntity.ok(tratamiento);  // 200 OK
-    }
+    // @PutMapping("")
+    // @Operation(summary = "Actualizar los datos de un tratamiento")
+    // public ResponseEntity<Tratamiento> actualizarTratamiento(@RequestBody TratamientoDTO tratamientoDTO) {
+    //     Tratamiento tratamiento = tratamientoService.updateTratamiento(tratamientoDTO);
+    //     if (tratamiento == null) {
+    //         // 404 Not Found si no existe el tratamiento, la nueva mascota, droga o veterinario (o no hay suficiente de la droga nueva)
+    //         return ResponseEntity.status(404).body(null);
+    //     }
+    //     return ResponseEntity.ok(tratamiento);  // 200 OK
+    // }
 
     // DELETE ==========================================================================================================
-    @DeleteMapping("/{id}")
-    @Operation(summary = "Eliminar un tratamiento por su ID")
-    public ResponseEntity<String> eliminarTratamiento(@PathVariable("id") Long id) {
-        if (!tratamientoService.deleteTratamiento(id)) {
-            return ResponseEntity.status(404).body("Tratamiento no encontrada"); // 404 Not Found si no existe la tratamiento
-        }
-        return ResponseEntity.noContent().build();  // 204 No Content si se elimina correctamente
-    }
+    // @DeleteMapping("/{id}")
+    // @Operation(summary = "Eliminar un tratamiento por su ID")
+    // public ResponseEntity<String> eliminarTratamiento(@PathVariable("id") Long id) {
+    //     if (!tratamientoService.deleteTratamiento(id)) {
+    //         return ResponseEntity.status(404).body("Tratamiento no encontrada"); // 404 Not Found si no existe la tratamiento
+    //     }
+    //     return ResponseEntity.noContent().build();  // 204 No Content si se elimina correctamente
+    // }
 }
