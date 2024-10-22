@@ -1,6 +1,5 @@
 package org.example.chillingdogspage.controlador;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.chillingdogspage.Controlador.MascotaController;
 import org.example.chillingdogspage.Entidad.Mascota;

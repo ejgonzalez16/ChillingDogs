@@ -1,6 +1,5 @@
 package org.example.chillingdogspage.servicio;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;

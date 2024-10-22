@@ -1,17 +1,9 @@
 package org.example.chillingdogspage.repositorio;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import org.assertj.core.api.Assertions;
-import org.example.chillingdogspage.Entidad.Droga;
-import org.example.chillingdogspage.Entidad.Mascota;
-import org.example.chillingdogspage.Entidad.MedicamentosMes;
-import org.example.chillingdogspage.Entidad.Tratamiento;
 import org.example.chillingdogspage.Entidad.Veterinario;
-import org.example.chillingdogspage.Repositorio.DrogaRepository;
-import org.example.chillingdogspage.Repositorio.MascotaRepository;
-import org.example.chillingdogspage.Repositorio.TratamientoRepository;
 import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

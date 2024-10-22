@@ -6,7 +6,6 @@ import org.example.chillingdogspage.Repositorio.DrogaRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
 import org.example.chillingdogspage.Repositorio.TratamientoRepository;
 import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
-import org.example.chillingdogspage.Servicio.TratamientoService;
 import org.example.chillingdogspage.Servicio.TratamientoServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -14,13 +13,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 

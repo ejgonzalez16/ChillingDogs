@@ -2,10 +2,7 @@ package org.example.chillingdogspage.repositorio;
 
 import org.assertj.core.api.Assertions;
 import org.example.chillingdogspage.Entidad.Droga;
-import org.example.chillingdogspage.Repositorio.ClienteRepository;
 import org.example.chillingdogspage.Repositorio.DrogaRepository;
-import org.example.chillingdogspage.Repositorio.MascotaRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

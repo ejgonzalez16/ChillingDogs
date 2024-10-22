@@ -2,18 +2,12 @@ package org.example.chillingdogspage.repositorio;
 
 import org.assertj.core.api.Assertions;
 import org.example.chillingdogspage.Entidad.Administrador;
-import org.example.chillingdogspage.Entidad.Cliente;
-import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Repositorio.AdministradorRepository;
-import org.example.chillingdogspage.Repositorio.ClienteRepository;
-import org.example.chillingdogspage.Repositorio.MascotaRepository;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.context.junit4.SpringRunner;
 
 @DataJpaTest    // Hace que se cargue una DB (H2) en memoria para las pruebas
 @ExtendWith(SpringExtension.class)     // Necesario para que se ejecuten las pruebas
