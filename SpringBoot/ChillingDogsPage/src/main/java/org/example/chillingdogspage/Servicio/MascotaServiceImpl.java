@@ -17,21 +17,13 @@ public class MascotaServiceImpl implements MascotaService {
     @Autowired
     ClienteRepository clienteRepository;
 
+    // Create ----------------------------------------------------------------------------------------------------------
     @Override
     public Mascota registrarMascota(Mascota mascota) {
         return repository.save(mascota);
     }
 
-    @Override
-    public Mascota createMascota(Mascota mascota, String cedula) {
-        Cliente cliente = clienteRepository.findByCedula(cedula);
-        if (cliente == null) {
-            return null;
-        }
-        mascota.setCliente(cliente);
-        return repository.save(mascota);
-    }
-
+    // Read ------------------------------------------------------------------------------------------------------------
     @Override
     public List<Mascota> findAll() {
         List<Mascota> mascotas = repository.findAll();
@@ -47,6 +39,23 @@ public class MascotaServiceImpl implements MascotaService {
     }
 
     @Override
+    public List<Mascota> findBySimilarName(String nombre) {
+        return repository.findByNombreContaining(nombre.toLowerCase());
+    }
+
+    @Override
+    public List<Mascota> findAllByClienteCedula(String cedula) {
+        return repository.findAllByClienteCedula(cedula);
+    }
+
+    // Update ----------------------------------------------------------------------------------------------------------
+    @Override
+    public Mascota updateMascota(Mascota mascota) {
+        return repository.save(mascota);
+    }
+
+    // Delete ----------------------------------------------------------------------------------------------------------
+    @Override
     public boolean deleteMascota(Long id) {
         Mascota mascota = repository.findById(id).orElse(null);
         if (mascota == null) {
@@ -56,20 +65,5 @@ public class MascotaServiceImpl implements MascotaService {
         mascota.getTratamientos().forEach(tratamiento -> tratamiento.setMascota(null));
         repository.delete(mascota);
         return true;
-    }
-
-    @Override
-    public Mascota updateMascota(Mascota mascota) {
-        return repository.save(mascota);
-    }
-
-    @Override
-    public List<Mascota> findBySimilarName(String nombre) {
-        return repository.findByNombreContaining(nombre.toLowerCase());
-    }
-
-    @Override
-    public List<Mascota> findAllByClienteCedula(String cedula) {
-        return repository.findAllByClienteCedula(cedula);
     }
 }
