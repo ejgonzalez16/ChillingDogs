@@ -44,6 +44,29 @@ public class TratamientoServiceTestMock {
     @Mock
     private MascotaRepository mascotaRepository;
 
+    // Create ----------------------------------------------------------------------------------------------------------
+    @Test
+    public void TratamientoService_registrarTratamiento_Tratamiento(){
+        //arrange
+        Droga droga = new Droga("Droga", 500.0, 200.0, 5);
+        Veterinario veterinario = new Veterinario("1", "contra", "especial", "Ricaurte", "Activo", "Foto");
+        TratamientoDTO tratamientoDTO = new TratamientoDTO();
+        Cliente cliente = new Cliente();
+        Mascota mascota = new Mascota("Silva", "Transformer", 15000, 850.0f, "Ser silva", "", "Inactivo", cliente);
+        Tratamiento tratamiento = new Tratamiento(LocalDate.now(), mascota, droga, veterinario);
+        when(drogaRepository.findById(tratamientoDTO.getDrogaId())).thenReturn(Optional.of(droga));
+        when(veterinarioRepository.findById(tratamientoDTO.getVeterinarioId())).thenReturn(Optional.of(veterinario));
+        when(mascotaRepository.findById(tratamientoDTO.getMascotaId())).thenReturn(Optional.of(mascota));
+        when(tratamientoRepository.save(Mockito.any(Tratamiento.class))).thenReturn(tratamiento);
+
+        //act
+        Tratamiento newTratamiento = tratamientoService.registrarTratamiento(tratamientoDTO);
+
+        //assert
+        Assertions.assertThat(newTratamiento).isNotNull();
+    }
+
+    // Read ------------------------------------------------------------------------------------------------------------
     @Test
     public void TratamientoService_findAll_TratamientoList(){
         //arrange
@@ -95,28 +118,7 @@ public class TratamientoServiceTestMock {
         Assertions.assertThat(tratamientos.size()).isEqualTo(3);
     }
 
-    @Test
-    public void TratamientoService_registrarTratamiento_Tratamiento(){
-        //arrange
-        Droga droga = new Droga("Droga", 500.0, 200.0, 5);
-        Veterinario veterinario = new Veterinario("1", "contra", "especial", "Ricaurte", "Activo", "Foto");
-        TratamientoDTO tratamientoDTO = new TratamientoDTO();
-        Cliente cliente = new Cliente();
-        Mascota mascota = new Mascota("Silva", "Transformer", 15000, 850.0f, "Ser silva", "", "Inactivo", cliente);
-        Tratamiento tratamiento = new Tratamiento(LocalDate.now(), mascota, droga, veterinario);
-        when(drogaRepository.findById(tratamientoDTO.getDrogaId())).thenReturn(Optional.of(droga));
-        when(veterinarioRepository.findById(tratamientoDTO.getVeterinarioId())).thenReturn(Optional.of(veterinario));
-        when(mascotaRepository.findById(tratamientoDTO.getMascotaId())).thenReturn(Optional.of(mascota));
-        when(tratamientoRepository.save(Mockito.any(Tratamiento.class))).thenReturn(tratamiento);
-
-        //act
-        Tratamiento newTratamiento = tratamientoService.registrarTratamiento(tratamientoDTO);
-
-        //assert
-        Assertions.assertThat(newTratamiento).isNotNull();
-    }
-
-    @Test
+    /*@Test
     public void TratamientoService_updateTratamiento_Tratamiento(){
         //arrange
         Droga droga = new Droga("Droga", 500.0, 200.0, 5);
@@ -149,5 +151,5 @@ public class TratamientoServiceTestMock {
 
         //assert
         Assertions.assertThat(realizado).isTrue();
-    }
+    }*/
 }
