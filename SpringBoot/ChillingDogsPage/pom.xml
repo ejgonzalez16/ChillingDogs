@@ -86,6 +86,34 @@
             <version>5.10.2</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencias para Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.11.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-chrome-driver</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Dependencia para evitar problemas con los drivers de Chrome -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.4.1</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
