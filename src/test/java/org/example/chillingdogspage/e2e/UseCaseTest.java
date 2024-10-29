@@ -60,8 +60,8 @@ public class UseCaseTest {
         // Configurar el navegador
         ChromeOptions chromeOptions = getChromeOptions();
 
-        // Asegúrate de tener el chromedriver configurado correctamente
-        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
+        // Apunta a la ubicación estándar del chromedriver en Linux
+        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
         // Instanciar el driver y el wait
         this.driver = new ChromeDriver(chromeOptions);
