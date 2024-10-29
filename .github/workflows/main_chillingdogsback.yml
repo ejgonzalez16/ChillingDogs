@@ -22,17 +22,25 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
-      - name: Install Chrome and Latest Chromedriver
+      - name: Install Chrome and Matching Chromedriver
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip xvfb libxi6 libgconf-2-4
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
-          # Descargar la última versión de Chromedriver disponible
-          LATEST_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-          wget https://chromedriver.storage.googleapis.com/${LATEST_VERSION}/chromedriver_linux64.zip
+          # Obtener la versión principal de Chrome (ejemplo: 130)
+          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1 | cut -d '.' -f 1)
 
+          # Descargar el Chromedriver compatible con esa versión de Chrome
+          DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
+          
+          if [ -z "$DRIVER_VERSION" ]; then
+            echo "Error: No se encontró un Chromedriver compatible para la versión de Chrome ${CHROME_VERSION}"
+            exit 1
+          fi
+
+          wget https://chromedriver.storage.googleapis.com/${DRIVER_VERSION}/chromedriver_linux64.zip
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/chromedriver
           sudo chmod +x /usr/local/bin/chromedriver
@@ -41,6 +49,7 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
+
 
 
 
