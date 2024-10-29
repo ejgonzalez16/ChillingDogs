@@ -9,14 +9,18 @@ import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +33,9 @@ public class UseCaseTest {
     private final String BASE_URL = "http://localhost:4200";
     private WebDriver driver;   // Simula un navegador, hace los clicks, los formularios y captura la información
     private WebDriverWait wait; // Espera a que ocurra algo en la página para seguir con la prueba
+    private int cantidadTratamientos;
+    private double gananciasTotales;
+    private String nombreDroga;
 
     /*
     Notación para pruebas:
@@ -187,7 +194,8 @@ public class UseCaseTest {
         inputFotoMascota.sendKeys("https://i.pinimg.com/736x/a8/6a/18/a86a1866f25798180ee1a9b247afb3c7.jpg");
         selectDueno.selectByVisibleText(nombreCliente);
         // Nos movemos al botón de registrar para asegurar que esté visible y podamos hacer click en él
-        actions.moveToElement(btnRegistrarMascota).click().build().perform();
+        hacerScrollAElemento(btnRegistrarMascota);
+        btnRegistrarMascota.click();
 
         // Then veo la página de buscar mascotas
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tablaMascotas")));
@@ -233,11 +241,155 @@ public class UseCaseTest {
         Assertions.assertThat(tdsRow.get(5).getText()).isEqualTo(nombreCliente);
     }
 
+    @Test
+    public void CasoUso2_registrarTratamientoVet_registroCorrecto(){
+        // ADMIN INICIA SESIÓN --------------------------------------------------------------
+        // Given estoy en la página de login
+        obtenerDatosAdmin();
+        //Cerrar Sesión del admin
+        WebElement logOutBtn = driver.findElement(By.className("btnVolver"));
+        hacerScrollAElemento(logOutBtn);
+        logOutBtn.click();
+        // VETERINARIO INICIA SESIÓN --------------------------------------------------------------
+        // Given estoy en la página de login
+        registrarTratamiento();
+        revisarTratamientoCreado();
+        revisarDashboard();
+    }
+
+    public void obtenerDatosAdmin(){
+        driver.get(BASE_URL + "/login");
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("type-user-buttons")));
+
+        WebElement btnAdmin = driver.findElement(By.id("btnLoginAdmin"));
+        btnAdmin.click();
+        iniciarSesion("12345678","churumbelo");
+
+        obtenerDatosDashBoard();
+    }
+
+    public void iniciarSesion(String cedula, String contrasena){
+        WebElement cedulaInput = driver.findElement(By.id("cedulaTxt"));
+        cedulaInput.sendKeys(cedula);
+
+        WebElement contrasenaInput = driver.findElement(By.id("contrasenaTxt"));
+        contrasenaInput.sendKeys(contrasena);
+
+        WebElement botonIniciarSesion = driver.findElement(By.id("btnLogin"));
+        botonIniciarSesion.click();
+    }
+
+    public void obtenerDatosDashBoard(){
+        //Espera a que cantidad de tratamientos deje de ser vacio
+        wait.until(new ExpectedCondition<Boolean>() {
+            public Boolean apply(WebDriver driver) {
+                WebElement element = driver.findElement(By.id("cantidadTratamientosTotales"));
+                return !element.getText().trim().isEmpty(); // Retorna verdadero si no está vacío
+            }
+        });
+        //wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cantidadTratamientosTotales")));
+        WebElement textoCantidadTratamientos = driver.findElement(By.id("cantidadTratamientosTotales"));
+        cantidadTratamientos = Integer.parseInt(textoCantidadTratamientos.getText());
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("cantidadGananciasTotales")));
+        WebElement textoGananciasTotales = driver.findElement(By.id("cantidadGananciasTotales"));
+        String textoGananciasSinSimbolo = textoGananciasTotales.getText().substring(1);
+        textoGananciasSinSimbolo  = textoGananciasSinSimbolo.replaceAll(",", "");
+        gananciasTotales = Double.parseDouble(textoGananciasSinSimbolo);
+    }
+
+    public void hacerScrollAElemento(WebElement element){
+        Actions actions = new Actions(driver);
+        actions.moveToElement(element).perform();  // Mueve hacia el elemento
+    }
+
+    public void registrarTratamiento(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("type-user-buttons")));
+
+        WebElement btnVeterinario = driver.findElement(By.id("btnLoginVet"));
+        btnVeterinario.click();
+        iniciarSesion("1234567890","contrasena1");
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnBuscarTratamientos")));
+        WebElement btnTratamientos = driver.findElement(By.id("btnBuscarTratamientos"));
+        btnTratamientos.click();
+
+        WebElement barraBusqueda = driver.findElement(By.id("nombrePerroField"));
+        barraBusqueda.sendKeys("Rex");
+        WebElement botonBuscar = driver.findElement(By.id("btnForm"));
+        botonBuscar.click();
+        WebElement primerElemento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("tratarBtns")));
+        primerElemento.click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("droga")));
+        WebElement drogaSelect = driver.findElement(By.id("droga"));
+        Select select = new Select(drogaSelect);
+        select.selectByIndex(0);
+        WebElement opcionSeleccionada = select.getFirstSelectedOption();
+        nombreDroga =  opcionSeleccionada.getText();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("registrarBtn")));
+        WebElement registrarBtn = driver.findElement(By.id("registrarBtn"));
+        hacerScrollAElemento(registrarBtn);
+        registrarBtn.click();
+
+        Alert alerta = wait.until(ExpectedConditions.alertIsPresent());
+        // Acepta la alerta (equivalente a presionar "Aceptar")
+        alerta.accept();
+    }
+
+    public void revisarTratamientoCreado(){
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnBuscarMascotas")));
+        WebElement btnMascotas = driver.findElement(By.id("btnBuscarMascotas"));
+        btnMascotas.click();
+
+        WebElement barraBusqueda = driver.findElement(By.id("nombrePerroField"));
+        barraBusqueda.sendKeys("Rex");
+        WebElement botonBuscar = driver.findElement(By.id("btnForm"));
+        botonBuscar.click();
+        WebElement primerElemento = wait.until(ExpectedConditions.elementToBeClickable(By.className("detallesMascotasBtns")));
+        primerElemento.click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("btnTratamientos")));
+        WebElement btnVerTratamientos = driver.findElement(By.className("btnTratamientos"));
+        hacerScrollAElemento(btnVerTratamientos);
+        btnVerTratamientos.click();
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("drogasSuministradas")));
+        List<WebElement> drogasSuministradas = driver.findElements(By.className("drogasSuministradas"));
+        Assertions.assertThat(drogasSuministradas.get(drogasSuministradas.size() - 1).getText()).isEqualTo(nombreDroga);
+
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("fechasTratamientos")));
+        List<WebElement> fechasTratamientos = driver.findElements(By.className("fechasTratamientos"));
+        LocalDate fechaHoy = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String fechaDeHoy = fechaHoy.format(formatter);
+        Assertions.assertThat(fechasTratamientos.get(drogasSuministradas.size() - 1).getText()).isEqualTo(fechaDeHoy);
+    }
+
+    public void revisarDashboard(){
+        WebElement btnLogOut = driver.findElement(By.id("btnLogout"));
+        btnLogOut.click();
+
+        int cantidadTratamientosVieja = this.cantidadTratamientos;
+        double gananciasTotalesVieja = this.gananciasTotales;
+
+        WebElement btnAdmin = driver.findElement(By.id("btnLoginAdmin"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();", btnAdmin);
+        iniciarSesion("12345678","churumbelo");
+
+        obtenerDatosDashBoard();
+
+        Assertions.assertThat(this.cantidadTratamientos).isEqualTo(cantidadTratamientosVieja+1);
+        Assertions.assertThat(this.gananciasTotales).isGreaterThan(gananciasTotalesVieja);
+    }
+
+
     @AfterEach  // Se ejecuta después de cada prueba
     void tearDown() {
         // Cerrar el navegador
-        if (driver != null) {
+       /* if (driver != null) {
             driver.quit();
-        }
+        }*/
     }
 }
