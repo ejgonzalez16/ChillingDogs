@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 
 import java.io.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Controller
@@ -51,7 +50,7 @@ public class DatabaseInit implements ApplicationRunner {
 
     public void leerClientes() {
         // Read the data from the database
-        String rutaArchivo = "static/sources/datos-quemados/clientes.csv";
+        String rutaArchivo = "datos-quemados/clientes.csv";
 
         try {
             ClassPathResource resource = new ClassPathResource(rutaArchivo);
@@ -87,7 +86,7 @@ public class DatabaseInit implements ApplicationRunner {
 
     public void leerMascotas() {
         // Read the data from the database
-        String rutaArchivo = "static/sources/datos-quemados/mascotas.csv";
+        String rutaArchivo = "datos-quemados/mascotas.csv";
 
         try {
             ClassPathResource resource = new ClassPathResource(rutaArchivo);
@@ -129,7 +128,7 @@ public class DatabaseInit implements ApplicationRunner {
 
     private void leerVeterinarios() {
         // Read the data from the database
-        String rutaArchivo = "static/sources/datos-quemados/veterinarios.csv";
+        String rutaArchivo = "datos-quemados/veterinarios.csv";
 
         try {
             ClassPathResource resource = new ClassPathResource(rutaArchivo);
@@ -166,7 +165,7 @@ public class DatabaseInit implements ApplicationRunner {
 
     private void leerDrogas() {
         // Read the data from the database
-        String rutaArchivo = "static/sources/datos-quemados/medicamentos_veterinaria.csv";
+        String rutaArchivo = "datos-quemados/medicamentos_veterinaria.csv";
 
         try {
             ClassPathResource resource = new ClassPathResource(rutaArchivo);
@@ -202,7 +201,7 @@ public class DatabaseInit implements ApplicationRunner {
 
     private void leerTratamientos() {
         // Read the data from the database
-        String rutaArchivo = "static/sources/datos-quemados/tratamientos.csv";
+        String rutaArchivo = "datos-quemados/tratamientos.csv";
 
         try {
             ClassPathResource resource = new ClassPathResource(rutaArchivo);
@@ -238,7 +237,7 @@ public class DatabaseInit implements ApplicationRunner {
 
     private void leerAdmins() {
         // Read the data from the database
-        String rutaArchivo = "static/sources/datos-quemados/admins.csv";
+        String rutaArchivo = "datos-quemados/admins.csv";
 
         try {
             ClassPathResource resource = new ClassPathResource(rutaArchivo);
