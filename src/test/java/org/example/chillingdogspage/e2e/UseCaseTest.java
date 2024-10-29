@@ -58,16 +58,27 @@ public class UseCaseTest {
         WebDriverManager.chromedriver().setup();
 
         // Configurar el navegador
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--disable-notifications"); // Deshabilita las notificaciones
-        chromeOptions.addArguments("--disable-extensions"); // Deshabilita las extensiones
-        chromeOptions.addArguments("--start-maximized"); // Inicia el navegador maximizado
-        chromeOptions.addArguments("--headless"); // Ejecuta el navegador en modo headless (sin interfaz gráfica)
+        ChromeOptions chromeOptions = getChromeOptions();
+
+        // Asegúrate de tener el chromedriver configurado correctamente
+        System.setProperty("webdriver.chrome.driver", "/path/to/chromedriver");
 
         // Instanciar el driver y el wait
         this.driver = new ChromeDriver(chromeOptions);
         // Espera máximo 10 segundos a que algo ocurra antes de lanzar una excepción
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+    }
+
+    private static ChromeOptions getChromeOptions() {
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--disable-notifications"); // Deshabilita las notificaciones
+        chromeOptions.addArguments("--disable-extensions"); // Deshabilita las extensiones
+        chromeOptions.addArguments("--start-maximized"); // Inicia el navegador maximizado
+        chromeOptions.addArguments("--headless"); // Ejecuta el navegador en modo headless (sin interfaz gráfica)
+        chromeOptions.addArguments("--no-sandbox"); // Bypass OS security model
+        chromeOptions.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
+        chromeOptions.addArguments("--remote-allow-origins=*"); // Evita restricciones de CORS
+        return chromeOptions;
     }
 
     @Test
