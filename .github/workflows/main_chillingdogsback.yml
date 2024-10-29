@@ -22,20 +22,16 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
-      - name: Install Chrome and Chromedriver
+      - name: Install Chrome and Latest Chromedriver
         run: |
           sudo apt-get update
           sudo apt-get install -y wget unzip xvfb libxi6 libgconf-2-4
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
-          # Obtener la versión mayor de Chrome (ej. 130)
-          CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.' | head -1 | cut -d '.' -f1)
-
-          # Intentar descargar el Chromedriver correspondiente
-          wget https://chromedriver.storage.googleapis.com/${CHROME_VERSION}.0.0/chromedriver_linux64.zip || \
-            wget https://chromedriver.storage.googleapis.com/${CHROME_VERSION}.0/chromedriver_linux64.zip || \
-            wget https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}/chromedriver_linux64.zip
+          # Descargar la última versión de Chromedriver disponible
+          LATEST_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          wget https://chromedriver.storage.googleapis.com/${LATEST_VERSION}/chromedriver_linux64.zip
 
           unzip chromedriver_linux64.zip
           sudo mv chromedriver /usr/local/bin/chromedriver
@@ -45,6 +41,7 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
+
 
 
       - name: Build with Maven
