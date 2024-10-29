@@ -7,7 +7,8 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController // Devolver datos (en JSON) en lugar de una vista (HTML)
 @RequestMapping("/login")
-@CrossOrigin(origins = "http://localhost:4200") // Solo la aplicación en Angular puede realizar peticiones a este controlador
+// Permitir peticiones a este controlador de localhost:4200 (Angular) y del Frontend desplegado en Netlify
+@CrossOrigin(origins = {"http://localhost:4200", "https://chillingdogs.netlify.app/"})
 public class LoginController {
 
     //http://localhost:8099/login/

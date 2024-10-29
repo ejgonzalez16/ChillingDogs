@@ -12,7 +12,8 @@ import java.util.List;
 
 @RestController // Devolver datos (en JSON) en lugar de una vista (HTML)
 @RequestMapping("mascotas")
-@CrossOrigin(origins = "http://localhost:4200") // Solo la aplicación en Angular puede realizar peticiones a este controlador
+// Permitir peticiones a este controlador de localhost:4200 (Angular) y del Frontend desplegado en Netlify
+@CrossOrigin(origins = {"http://localhost:4200", "https://chillingdogs.netlify.app/"})
 @Tag(name = "Mascota", description = "API para el manejo de mascotas")  // Tag para la documentación de la API
 public class MascotaController {
     @Autowired
