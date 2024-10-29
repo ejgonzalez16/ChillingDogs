@@ -1,0 +1,118 @@
+main{
+    display: flex;
+    flex-direction: row;
+}
+
+.login-black{
+    background-color: #1E2128FF;
+    width: 50%;
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.type-user-buttons{
+    margin-top: 100px;
+}
+
+.type-button-selected{
+    padding-top: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 8px;
+    background-color: transparent;
+    border: none;
+    outline: none; /*Quitar efecto al hacer click*/
+    color: #E7A65CFF;
+    border-bottom: 3px solid #E7A65CFF;
+}
+
+.type-button{
+    padding-top: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-bottom: 8px;
+    background-color: transparent;
+    border: none;
+    outline: none; /*Quitar efecto al hacer click*/
+    color: #A8ADB7FF;
+}
+
+.type-button:hover{
+    color: #E7A65CFF;
+}
+
+.login-part{
+    display: flex;
+    flex-direction: column;
+    height: 65%;
+    width: 100%;
+}
+
+.login-part h1{
+    margin-top: 30px;
+    text-align: center;
+}
+
+.login-part label{
+    margin-top: 30px;
+    margin-bottom: 10px;
+}
+
+.login-part input{
+    color: #A8ADB7FF;
+    background-color: #323743FF;
+    border-radius: 15px;
+    border: #6F7787FF 1px solid;
+    padding-left: 10px;
+}
+
+.login-black h1, label{
+    color: #FFFFFFFF;
+    font-weight: bold;
+}
+
+.login-black label{
+    font-size: 25px;
+    text-align: left;
+}
+
+.login-button{
+    background-color: #E7A65CFF;
+    color: #FFFFFFFF;
+    margin-top: 30px;
+    padding: 7px;
+    border-radius: 30px;
+}
+
+.login-button:hover{
+    background-color: rgb(226, 133, 26);
+}
+
+.login-image{
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    align-items: end;
+    background-color: #E7A65CFF;
+    width: 50%;
+}
+
+.login-image img{
+    margin-bottom: -35px;
+    width: 85%;
+}
+
+/*QUITAR LAS FLECHAS DE LOS INPUT NUMBER*/
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+input[type=number] {
+    -moz-appearance: textfield;
+}
