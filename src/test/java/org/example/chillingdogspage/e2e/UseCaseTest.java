@@ -2,6 +2,8 @@ package org.example.chillingdogspage.e2e;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.assertj.core.api.Assertions;
+import org.example.chillingdogspage.Entidad.Cliente;
+import org.example.chillingdogspage.Entidad.Mascota;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -13,7 +15,6 @@ import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.springframework.boot.actuate.autoconfigure.metrics.MetricsProperties;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,7 +22,6 @@ import org.springframework.test.context.ActiveProfiles;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
 
 // Crea un contexto de Spring (instancia de la aplicación) para las pruebas
@@ -71,13 +71,34 @@ public class UseCaseTest {
     }
 
     @Test
-    public void CasoUso1_registrarClienteYMascotaNuevos_registroCorrecto() throws InterruptedException {
-        // VETERINARIO INICIA SESIÓN --------------------------------------------------------------
+    public void CasoUso1_registrarClienteYMascotaNuevos_registroCorrecto() {
+        // VETERINARIO INICIA SESIÓN
+        String cedulaVeterinario = "1234567893";
+        String contrasenaVeterinario = "contrasena4";
+        iniciarSesionComoVeterinario(cedulaVeterinario, contrasenaVeterinario);
+
+        // CREAR NUEVO CLIENTE
+        Cliente cliente = new Cliente("1", "Juan", "juan@juan.juan", "3006647463", "https://www.geetanjaliinstitute.com/wp-content/uploads/2020/01/student_PNG62561.png");
+        crearNuevoCliente(cliente);
+
+        // CREAR NUEVA MASCOTA
+        Mascota mascota = new Mascota("Firulais", "Pitbull", 5, 10.4f, "Gonorrea", "https://i.pinimg.com/736x/a8/6a/18/a86a1866f25798180ee1a9b247afb3c7.jpg", "Activo", cliente);
+        crearNuevaMascota(mascota);
+
+        // CERRAR SESIÓN Y HACER LOGIN COMO CLIENTE
+        cerrarSesion();
+        iniciarSesionComoCliente(cliente.getCedula());
+
+        // VERIFICAR DETALLES DE LA MASCOTA
+        verificarDetallesMascotaComoCliente(mascota);
+    }
+
+    private void iniciarSesionComoVeterinario(String cedula, String contrasenaValida) {
         // Given estoy en la página de login
         driver.get(BASE_URL + "/login");
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("type-user-buttons")));
 
-        // When hago login como veterinario
+        // When elijo hacer login como veterinario
         WebElement btnLoginVet = driver.findElement(By.id("btnLoginVet"));
         btnLoginVet.click();
 
@@ -86,90 +107,78 @@ public class UseCaseTest {
         WebElement inputCedula = driver.findElement(By.id("cedulaTxt"));
         WebElement inputContrasena = driver.findElement(By.id("contrasenaTxt"));
         WebElement btnLogin = driver.findElement(By.id("btnLogin"));
-        inputCedula.sendKeys("1234567893");
-        inputContrasena.sendKeys("contrasenaEquivocada");
+
+        inputCedula.sendKeys(cedula);
+        inputContrasena.sendKeys("contrasenaInvalida");
         btnLogin.click();
 
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("alertLoginError")));
-        WebElement alertLoginError = driver.findElement(By.id("alertLoginError"));
-        String alertLoginErrorEsperado = "Credenciales inválidas";
         // Then veo un mensaje de error
-        Assertions.assertThat(alertLoginError.getText()).isEqualTo(alertLoginErrorEsperado);
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("alertLoginError")));
+        Assertions.assertThat(driver.findElement(By.id("alertLoginError")).getText()).isEqualTo("Credenciales inválidas");
 
-        // When hago login con credenciales válidas
+        // When hago login con credenciales válidas...
         inputContrasena.clear();
-        inputContrasena.sendKeys("contrasena4");
+        inputContrasena.sendKeys(contrasenaValida);
         btnLogin.click();
 
-        // CREAR NUEVO CLIENTE --------------------------------------------------------------
         // Then veo la página de buscar clientes
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnBuscarClientes")));
+    }
+
+    private void crearNuevoCliente(Cliente cliente) {
         // When hago click en el botón de buscar clientes
-        WebElement btnBuscarClientes = driver.findElement(By.id("btnBuscarClientes"));
-        btnBuscarClientes.click();
-
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnBuscarClientes"))).click();
         // Then veo la página de buscar clientes
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnCrear")));
         // When hago click en el botón de crear cliente
-        WebElement btnCrear = driver.findElement(By.id("btnCrear"));
-        btnCrear.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnCrear"))).click();
 
-        // Then veo el formulario de registro de cliente
+        // Then veo el formulario para crear un cliente
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("modificarForm")));
-        // When lleno el formulario de registro de cliente con un email inválido
         WebElement inputCedulaCliente = driver.findElement(By.id("cedula"));
         WebElement inputNombreCliente = driver.findElement(By.id("nombre"));
         WebElement inputEmailCliente = driver.findElement(By.id("email"));
         WebElement inputCelularCliente = driver.findElement(By.id("celular"));
         WebElement inputFotoCliente = driver.findElement(By.id("foto"));
         WebElement btnRegistrarCliente = driver.findElement(By.id("btnRegistrar"));
-        String cedulaCliente = "1";
-        String nombreCliente = "Juan";
-        String emailCliente = "juan@juan.juan";
-        String celularCliente = "3006647463";
-        inputCedulaCliente.sendKeys(cedulaCliente);
-        inputNombreCliente.sendKeys(nombreCliente);
+
+        // When lleno el formulario con un email inválido
+        inputCedulaCliente.sendKeys(cliente.getCedula());
+        inputNombreCliente.sendKeys(cliente.getNombre());
         inputEmailCliente.sendKeys("email_invalido");
-        inputCelularCliente.sendKeys(celularCliente);
-        inputFotoCliente.sendKeys("https://www.geetanjaliinstitute.com/wp-content/uploads/2020/01/student_PNG62561.png");
-        // Nos movemos al botón de registrar para asegurar que esté visible y podamos hacer click en él
+        inputCelularCliente.sendKeys(cliente.getCelular());
+        inputFotoCliente.sendKeys(cliente.getFoto());
+
         Actions actions = new Actions(driver);
         actions.moveToElement(btnRegistrarCliente).click().build().perform();
 
-        // Then veo un mensaje de error
+        // Then veo un mensaje de error que dice "Email inválido"
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("alertFormError")));
-        WebElement alertFormError = driver.findElement(By.id("alertFormError"));
-        String alertFormErrorEsperado = "Email inválido";
-        Assertions.assertThat(alertFormError.getText()).isEqualTo(alertFormErrorEsperado);
+        Assertions.assertThat(driver.findElement(By.id("alertFormError")).getText()).isEqualTo("Email inválido");
 
-        // When lleno el formulario de registro de cliente con un email válido
+        // When lleno el formulario con un email válido
         inputEmailCliente.clear();
-        inputEmailCliente.sendKeys(emailCliente);
+        inputEmailCliente.sendKeys(cliente.getCorreo());
         btnRegistrarCliente.click();
 
-        // Then veo la página de buscar clientes, con un cliente más correspondiente al cliente que acabo de registrar
+        // Then veo la tabla de clientes con el nuevo cliente
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tablaClientes")));
         List<WebElement> rows = driver.findElements(By.tagName("tr"));
-        WebElement lastRow = rows.get(rows.size() - 1);
-        List<WebElement> tds = lastRow.findElements(By.tagName("td"));
-        Assertions.assertThat(tds.get(0).getText()).isEqualTo(cedulaCliente);
-        Assertions.assertThat(tds.get(2).getText()).isEqualTo(nombreCliente);
-        Assertions.assertThat(tds.get(3).getText()).isEqualTo(emailCliente);
+        List<WebElement> tds = rows.get(rows.size() - 1).findElements(By.tagName("td"));
 
-        // CREAR NUEVA MASCOTA --------------------------------------------------------------
-        // When hago click en el botón de crear mascota
-        WebElement btnBuscarMascotas = driver.findElement(By.id("btnBuscarMascotas"));
-        btnBuscarMascotas.click();
+        Assertions.assertThat(tds.get(0).getText()).isEqualTo(cliente.getCedula());
+        Assertions.assertThat(tds.get(2).getText()).isEqualTo(cliente.getNombre());
+        Assertions.assertThat(tds.get(3).getText()).isEqualTo(cliente.getCorreo());
+    }
 
+    private void crearNuevaMascota(Mascota mascota) {
+        // When hago click en el botón de buscar mascotas
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnBuscarMascotas"))).click();
         // Then veo la página de buscar mascotas
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnCrearMascota")));
         // When hago click en el botón de crear mascota
-        WebElement btnCrearMascota = driver.findElement(By.id("btnCrearMascota"));
-        btnCrearMascota.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.id("btnCrearMascota"))).click();
 
-        // Then veo el formulario de registro de mascota
+        // Then veo el formulario para crear una mascota
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("modificarForm")));
-        // When lleno el formulario de registro de mascota
         WebElement inputNombreMascota = driver.findElement(By.id("nombre"));
         WebElement btnEstadoActivoMascota = driver.findElement(By.id("btnActivo"));
         WebElement inputRazaMascota = driver.findElement(By.id("raza"));
@@ -180,65 +189,65 @@ public class UseCaseTest {
         WebElement elemSelectDueno = driver.findElement(By.id("cliente"));
         Select selectDueno = new Select(elemSelectDueno);
         WebElement btnRegistrarMascota = driver.findElement(By.id("btnRegistrar"));
-        String nombreMascota = "Firulais";
-        String razaMascota = "Pitbull";
-        String edadMascota = "5";
-        String pesoMascota = "10.4";
-        String enfermedadMascota = "Gonorrea";
-        inputNombreMascota.sendKeys(nombreMascota);
+
+        // When lleno el formulario con datos válidos
+        inputNombreMascota.sendKeys(mascota.getNombre());
         btnEstadoActivoMascota.click();
-        inputRazaMascota.sendKeys(razaMascota);
-        inputEdadMascota.sendKeys(edadMascota);
-        inputPesoMascota.sendKeys(pesoMascota);
-        inputEnfermedadMascota.sendKeys(enfermedadMascota);
-        inputFotoMascota.sendKeys("https://i.pinimg.com/736x/a8/6a/18/a86a1866f25798180ee1a9b247afb3c7.jpg");
-        selectDueno.selectByVisibleText(nombreCliente);
-        // Nos movemos al botón de registrar para asegurar que esté visible y podamos hacer click en él
+        inputRazaMascota.sendKeys(mascota.getRaza());
+        inputEdadMascota.sendKeys(String.valueOf(mascota.getEdad()));
+        inputPesoMascota.sendKeys(String.valueOf(mascota.getPeso()));
+        inputEnfermedadMascota.sendKeys(mascota.getEnfermedad());
+        inputFotoMascota.sendKeys(mascota.getFoto());
+        selectDueno.selectByVisibleText(mascota.getCliente().getNombre());
+
         hacerScrollAElemento(btnRegistrarMascota);
         btnRegistrarMascota.click();
 
-        // Then veo la página de buscar mascotas
+        // Then veo la tabla de mascotas con la nueva mascota (falta verificar que esté la mascota)
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("tablaMascotas")));
+    }
 
-        // When el veterinario cierra sesión
-        WebElement btnLogout = driver.findElement(By.id("btnLogout"));
-        btnLogout.click();
-
-        // Then veo la página de login
+    private void cerrarSesion() {
+        driver.findElement(By.id("btnLogout")).click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("type-user-buttons")));
-        // When hago login como cliente con mi cédula escrita correctamente
-        inputCedula = driver.findElement(By.id("cedulaTxt"));
-        btnLogin = driver.findElement(By.id("btnLogin"));
-        inputCedula.sendKeys(cedulaCliente);
+    }
+
+    private void iniciarSesionComoCliente(String cedula) {
+        // Given estoy en la página de login
+        driver.get(BASE_URL + "/login");
+        WebElement inputCedula = driver.findElement(By.id("cedulaTxt"));
+        WebElement btnLogin = driver.findElement(By.id("btnLogin"));
+
+        // When hago login como cliente con credenciales válidas
+        inputCedula.sendKeys(cedula);
         btnLogin.click();
 
         // Then veo la página de mis-mascotas
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("btnDetallesMascota")));
-        // When hago click en el botón de detalles de la mascota (hago findElement porque es la única mascota del cliente)
-        WebElement btnDetallesMascota = driver.findElement(By.className("btnDetallesMascota"));
-        btnDetallesMascota.click();
+    }
 
-        // Then veo la página de detalles de la mascota
+    private void verificarDetallesMascotaComoCliente(Mascota mascota) {
+        // Given estoy en la página de mis-mascotas
+        // When hago click en el botón de detalles de la primera mascota que tengo
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.className("btnDetallesMascota"))).click();
+
+        // Then veo los detalles de la mascota que seleccioné
         wait.until(ExpectedConditions.presenceOfElementLocated(By.className("estadoPeludo")));
-        // When veo los detalles de la mascota
         WebElement estadoDeNombreMascota = driver.findElement(By.id("nombreMascota"));
         WebElement estadoMascota = driver.findElement(By.className("estadoMascota"));
-        rows = driver.findElements(By.tagName("tr"));
-        List<WebElement> tdsRow = new ArrayList<>();
-        for (WebElement row : rows) {
-            tdsRow.add(row.findElements(By.tagName("td")).get(2));
-        }
+        List<WebElement> tdsRow = driver.findElements(By.tagName("tr")).stream()
+                .map(row -> row.findElements(By.tagName("td")).get(2))
+                .toList();
 
-        // Then veo que corresponden a los datos de la mascota que acabo de registrar
-        Assertions.assertThat(estadoDeNombreMascota.getText()).isEqualTo("Estado de " + nombreMascota);
-        Assertions.assertThat(estadoMascota.getText()).isEqualTo("Activo");
-        Assertions.assertThat(tdsRow.get(1).getText()).isEqualTo(razaMascota);
-        // Assert del texto de edad, quitandole el " añitos" (el añitos de la página tiene la ñ como 2 caracteres)
+        Assertions.assertThat(estadoDeNombreMascota.getText()).isEqualTo("Estado de " + mascota.getNombre());
+        Assertions.assertThat(estadoMascota.getText()).isEqualTo(mascota.getEstado());
+        Assertions.assertThat(tdsRow.get(1).getText()).isEqualTo(mascota.getRaza());
+
         String edadMascotaSinAnios = tdsRow.get(2).getText().substring(0, tdsRow.get(2).getText().length() - 8);
-        Assertions.assertThat(edadMascotaSinAnios).isEqualTo(edadMascota);
-        Assertions.assertThat(tdsRow.get(3).getText()).isEqualTo(pesoMascota + " kg");
-        Assertions.assertThat(tdsRow.get(4).getText()).isEqualTo(enfermedadMascota);
-        Assertions.assertThat(tdsRow.get(5).getText()).isEqualTo(nombreCliente);
+        Assertions.assertThat(edadMascotaSinAnios).isEqualTo(String.valueOf(mascota.getEdad()));
+        Assertions.assertThat(tdsRow.get(3).getText()).isEqualTo(mascota.getPeso() + " kg");
+        Assertions.assertThat(tdsRow.get(4).getText()).isEqualTo(mascota.getEnfermedad());
+        Assertions.assertThat(tdsRow.get(5).getText()).isEqualTo(mascota.getCliente().getNombre());
     }
 
     @Test
