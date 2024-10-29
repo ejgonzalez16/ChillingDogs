@@ -326,8 +326,8 @@ public class UseCaseTest {
         barraBusqueda.sendKeys("Rex");
         WebElement botonBuscar = driver.findElement(By.id("btnForm"));
         botonBuscar.click();
-        WebElement primerElemento = wait.until(ExpectedConditions.presenceOfElementLocated(By.className("tratarBtns")));
-        primerElemento.click();
+        // Se usa este método para evitar problemas con la actualización de elementos de la página
+        clickElementWithRetry(By.className("tratarBtns"), 3);
 
         wait.until(ExpectedConditions.presenceOfElementLocated(By.id("droga")));
         WebElement drogaSelect = driver.findElement(By.id("droga"));
@@ -393,6 +393,20 @@ public class UseCaseTest {
         Assertions.assertThat(this.gananciasTotales).isGreaterThan(gananciasTotalesVieja);
     }
 
+    // Método para hacer click en un elemento con reintentos
+    // Para evitar problemas de StaleElementReferenceException por cambios en el DOM
+    public void clickElementWithRetry(By locator, int maxIntentos) {
+        int intentos = 0;
+        while (intentos < maxIntentos) {
+            try {
+                WebElement element = wait.until(ExpectedConditions.elementToBeClickable(locator));
+                element.click();
+                break;
+            } catch (StaleElementReferenceException e) {
+                intentos++;
+            }
+        }
+    }
 
     @AfterEach  // Se ejecuta después de cada prueba
     void tearDown() {
