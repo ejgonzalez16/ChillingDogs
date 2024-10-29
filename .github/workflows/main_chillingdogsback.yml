@@ -29,12 +29,12 @@ jobs:
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo apt install -y ./google-chrome-stable_current_amd64.deb
 
-          # Obtener la versión principal de Chrome (ejemplo: 130)
+          # Obtener la versión principal de Chrome
           CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+' | head -1 | cut -d '.' -f 1)
 
-          # Descargar el Chromedriver compatible con esa versión de Chrome
+          # Descargar el Chromedriver compatible
           DRIVER_VERSION=$(curl -s https://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION})
-          
+
           if [ -z "$DRIVER_VERSION" ]; then
             echo "Error: No se encontró un Chromedriver compatible para la versión de Chrome ${CHROME_VERSION}"
             exit 1
@@ -49,9 +49,6 @@ jobs:
         run: |
           google-chrome --version
           chromedriver --version
-
-
-
 
       - name: Build with Maven
         run: mvn clean install
@@ -91,5 +88,6 @@ jobs:
           app-name: 'ChillingDogsBack'
           slot-name: 'Production'
           package: '*.jar'
+
 
           
