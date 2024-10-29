@@ -62,7 +62,7 @@ public class UseCaseTest {
         chromeOptions.addArguments("--disable-notifications"); // Deshabilita las notificaciones
         chromeOptions.addArguments("--disable-extensions"); // Deshabilita las extensiones
         chromeOptions.addArguments("--start-maximized"); // Inicia el navegador maximizado
-//        chromeOptions.addArguments("--headless"); // Ejecuta el navegador en modo headless (sin interfaz gráfica)
+        chromeOptions.addArguments("--headless"); // Ejecuta el navegador en modo headless (sin interfaz gráfica)
 
         // Instanciar el driver y el wait
         this.driver = new ChromeDriver(chromeOptions);
