@@ -30,7 +30,8 @@ import java.util.List;
 @ActiveProfiles("test") // Usa las configuraciones de application-test.properties
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_EACH_TEST_METHOD) // Reinicia el contexto de Spring antes de cada prueba
 public class UseCaseTest {
-    private final String BASE_URL = "http://localhost:4200";
+//    private final String BASE_URL = "http://localhost:4200";
+    private final String BASE_URL = "https://chillingdogs.netlify.app";
     private WebDriver driver;   // Simula un navegador, hace los clicks, los formularios y captura la información
     private WebDriverWait wait; // Espera a que ocurra algo en la página para seguir con la prueba
     private int cantidadTratamientos;
@@ -61,7 +62,7 @@ public class UseCaseTest {
         ChromeOptions chromeOptions = getChromeOptions();
 
         // Apunta a la ubicación estándar del chromedriver en Linux
-        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
+//        System.setProperty("webdriver.chrome.driver", "/usr/local/bin/chromedriver");
 
         // Instanciar el driver y el wait
         this.driver = new ChromeDriver(chromeOptions);
@@ -74,10 +75,10 @@ public class UseCaseTest {
         chromeOptions.addArguments("--disable-notifications"); // Deshabilita las notificaciones
         chromeOptions.addArguments("--disable-extensions"); // Deshabilita las extensiones
         chromeOptions.addArguments("--start-maximized"); // Inicia el navegador maximizado
-        chromeOptions.addArguments("--headless"); // Ejecuta el navegador en modo headless (sin interfaz gráfica)
+/*        chromeOptions.addArguments("--headless"); // Ejecuta el navegador en modo headless (sin interfaz gráfica)
         chromeOptions.addArguments("--no-sandbox"); // Bypass OS security model
         chromeOptions.addArguments("--disable-dev-shm-usage"); // Overcome limited resource problems
-        chromeOptions.addArguments("--remote-allow-origins=*"); // Evita restricciones de CORS
+        chromeOptions.addArguments("--remote-allow-origins=*"); // Evita restricciones de CORS*/
         return chromeOptions;
     }
 
