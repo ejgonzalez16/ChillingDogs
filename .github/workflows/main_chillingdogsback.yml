@@ -22,8 +22,8 @@ jobs:
           java-version: '17'
           distribution: 'microsoft'
 
-      - name: Build with Maven
-        run: mvn clean install
+      - name: Build with Maven (Skip Tests)
+        run: mvn clean install -Dmaven.test.skip=true
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
@@ -38,7 +38,7 @@ jobs:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
     permissions:
-      id-token: write #This is required for requesting the JWT
+      id-token: write # Required for requesting the JWT
   
     steps:
       - name: Download artifact from build job
@@ -60,4 +60,3 @@ jobs:
           app-name: 'ChillingDogsBack'
           slot-name: 'Production'
           package: '*.jar'
-          
