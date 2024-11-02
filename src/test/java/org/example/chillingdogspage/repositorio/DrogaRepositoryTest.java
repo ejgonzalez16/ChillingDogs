@@ -21,9 +21,9 @@ public class DrogaRepositoryTest {
     @Test
     public void DrogaRepository_findDisponibles_Drogas() {
         //Arrange
-        Droga droga1 = new Droga("Droga 1", 15.0, 10.0, 5);
-        Droga droga2 = new Droga("Droga 2", 25.0, 20.0, 10);
-        Droga droga3 = new Droga("Droga 3", 40.0, 30.0, 0);
+        Droga droga1 = Droga.builder().nombre("Droga 1").precioCompra(10.0).precioVenta(15.0).unidadesDisponibles(5).build();
+        Droga droga2 = Droga.builder().nombre("Droga 2").precioCompra(20.0).precioVenta(25.0).unidadesDisponibles(10).build();
+        Droga droga3 = Droga.builder().nombre("Droga 3").precioCompra(30.0).precioVenta(40.0).unidadesDisponibles(0).build();
 
         drogaRepository.save(droga1);
         drogaRepository.save(droga2);

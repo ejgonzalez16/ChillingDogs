@@ -50,11 +50,11 @@ public class TratamientoServiceTestNaive {
         Veterinario veterinario2 = new Veterinario("10002", "5678", "cirujano", "Beto", "Activo", "https://avatars.githubusercontent.com/u/123321442?v=4");
         veterinarioService.createVeterinario(veterinario2);
 
-        Droga droga1 = new Droga("Droga 1", 15.0, 10.0, 5);
+        Droga droga1 = Droga.builder().nombre("Droga 1").precioCompra(10.0).precioVenta(15.0).unidadesDisponibles(5).build();
         drogaService.registrarDroga(droga1);
-        Droga droga2 = new Droga("Droga 2", 25.0, 20.0, 10);
+        Droga droga2 = Droga.builder().nombre("Droga 2").precioCompra(20.0).precioVenta(25.0).unidadesDisponibles(10).build();
         drogaService.registrarDroga(droga2);
-        Droga droga3 = new Droga("Droga 3", 40.0, 30.0, 0);
+        Droga droga3 = Droga.builder().nombre("Droga 3").precioCompra(30.0).precioVenta(40.0).unidadesDisponibles(0).build();
         drogaService.registrarDroga(droga3);
 
         TratamientoDTO tratamiento1 = new TratamientoDTO(1L, 1L, 1L, 1L);
@@ -78,7 +78,7 @@ public class TratamientoServiceTestNaive {
         mascotaService.registrarMascota(mascota);
         Veterinario veterinario = new Veterinario("10010", "5678", "cirujano", "Paco", "Activo", "https://avatars.githubusercontent.com/u/123321442?v=4");
         veterinarioService.createVeterinario(veterinario);
-        Droga droga = new Droga("Droga 4", 12.0, 9.0, 3);
+        Droga droga = Droga.builder().nombre("Droga 4").precioCompra(9.0).precioVenta(12.0).unidadesDisponibles(3).build();
         drogaService.registrarDroga(droga);
         // Act
         TratamientoDTO tratamiento = new TratamientoDTO(5L,4L,4L,3L);

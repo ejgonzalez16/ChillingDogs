@@ -181,12 +181,12 @@ public class DatabaseInit implements ApplicationRunner {
                     // Asegúrate de que el archivo CSV tenga la misma cantidad de columnas
                     // Tiene 5 columnas, pero no se lee la última (unidades vendidas)
                     if (datos.length == 5) {
-                        Droga droga = new Droga(
-                                datos[0], // nombre
-                                Double.parseDouble(datos[1]), // precioVenta
-                                Double.parseDouble(datos[2]), // precioCompra
-                                Integer.parseInt(datos[3])  // unidadesDisponibles
-                        );
+                        Droga droga = Droga.builder()
+                                .nombre(datos[0])
+                                .precioVenta(Double.parseDouble(datos[1]))
+                                .precioCompra(Double.parseDouble(datos[2]))
+                                .unidadesDisponibles(Integer.parseInt(datos[3]))
+                                .build();
                         // Guarda la droga en el repositorio
                         drogaRepository.save(droga);
                     } else {

@@ -43,7 +43,7 @@ public class TratamientoServiceTestMock {
     @Test
     public void TratamientoService_registrarTratamiento_Tratamiento(){
         //arrange
-        Droga droga = new Droga("Droga", 500.0, 200.0, 5);
+        Droga droga = Droga.builder().nombre("Droga").precioCompra(200.0).precioVenta(500.0).unidadesDisponibles(5).build();
         Veterinario veterinario = new Veterinario("1", "contra", "especial", "Ricaurte", "Activo", "Foto");
         TratamientoDTO tratamientoDTO = new TratamientoDTO();
         Cliente cliente = new Cliente();

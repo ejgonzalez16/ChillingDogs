@@ -12,6 +12,8 @@ import java.util.List;
 
 @Entity
 @Data   // Genera los getters y setters para todos los atributos
+@Builder    // Builder permite crear objetos de forma más clara sin usar un constructor
+@AllArgsConstructor // Genera un constructor con todos los atributos
 @NoArgsConstructor  // Genera un constructor vacío
 public class Droga {
     @GeneratedValue

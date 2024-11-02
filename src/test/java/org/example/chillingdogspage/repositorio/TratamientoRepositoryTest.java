@@ -49,11 +49,11 @@ public class TratamientoRepositoryTest {
         Veterinario veterinario2 = new Veterinario("10002", "5678", "cirujano", "Beto", "Activo", "https://avatars.githubusercontent.com/u/123321442?v=4");
         veterinarioRepository.save(veterinario2);
 
-        Droga droga1 = new Droga("Droga 1", 15.0, 10.0, 5);
+        Droga droga1 = Droga.builder().nombre("Droga 1").precioCompra(10.0).precioVenta(15.0).unidadesDisponibles(5).build();
         drogaRepository.save(droga1);
-        Droga droga2 = new Droga("Droga 2", 25.0, 20.0, 10);
+        Droga droga2 = Droga.builder().nombre("Droga 2").precioCompra(20.0).precioVenta(25.0).unidadesDisponibles(10).build();
         drogaRepository.save(droga2);
-        Droga droga3 = new Droga("Droga 3", 40.0, 30.0, 0);
+        Droga droga3 = Droga.builder().nombre("Droga 3").precioCompra(30.0).precioVenta(40.0).unidadesDisponibles(0).build();
         drogaRepository.save(droga3);
 
         Tratamiento tratamiento1 = new Tratamiento(LocalDate.parse("2022-01-01"), mascota1, droga1, veterinario1);
