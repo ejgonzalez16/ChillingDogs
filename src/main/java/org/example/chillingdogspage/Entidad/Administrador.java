@@ -3,8 +3,12 @@ package org.example.chillingdogspage.Entidad;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
+@Data   // Genera los getters y setters para todos los atributos
+@NoArgsConstructor  // Genera un constructor vacío
 public class Administrador {
     @GeneratedValue
     @Id
@@ -14,53 +18,11 @@ public class Administrador {
     private String contrasena;
     private String foto;
 
-    public Administrador() {
-    }
-
+    // Importante tener un constructor vacío y un constructor sin id ni relaciones
     public Administrador(String cedula, String nombre, String contrasena, String foto) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.contrasena = contrasena;
-        this.foto = foto;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
         this.foto = foto;
     }
 }

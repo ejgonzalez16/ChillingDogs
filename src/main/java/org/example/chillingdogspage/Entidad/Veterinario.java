@@ -2,11 +2,15 @@ package org.example.chillingdogspage.Entidad;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data   // Genera los getters y setters para todos los atributos
+@NoArgsConstructor  // Genera un constructor vacío
 public class Veterinario {
     @GeneratedValue
     @Id
@@ -22,10 +26,7 @@ public class Veterinario {
     @OneToMany(mappedBy = "veterinario", orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
-    public Veterinario() {
-        this.estado = "activo";
-    }
-
+    // Importante tener un constructor vacío y un constructor sin id ni relaciones
     public Veterinario(String cedula, String contrasena, String especialidad, String nombre, String estado, String foto) {
         this.cedula = cedula;
         this.contrasena = contrasena;
@@ -33,69 +34,5 @@ public class Veterinario {
         this.nombre = nombre;
         this.estado = estado;
         this.foto = foto;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getCedula() {
-        return cedula;
-    }
-
-    public void setCedula(String cedula) {
-        this.cedula = cedula;
-    }
-
-    public String getContrasena() {
-        return contrasena;
-    }
-
-    public void setContrasena(String contrasena) {
-        this.contrasena = contrasena;
-    }
-
-    public String getEspecialidad() {
-        return especialidad;
-    }
-
-    public void setEspecialidad(String especialidad) {
-        this.especialidad = especialidad;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getFoto() {
-        return foto;
-    }
-
-    public void setFoto(String foto) {
-        this.foto = foto;
-    }
-
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
     }
 }

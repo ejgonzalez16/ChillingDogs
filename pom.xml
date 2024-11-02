@@ -114,6 +114,14 @@
             <version>5.4.1</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- Dependencia para usar Lombok, que permite generar automáticamente getters, setters, constructores, etc. -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.30</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>

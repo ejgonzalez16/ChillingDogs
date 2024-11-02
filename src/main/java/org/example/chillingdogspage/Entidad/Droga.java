@@ -2,11 +2,17 @@ package org.example.chillingdogspage.Entidad;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Data   // Genera los getters y setters para todos los atributos
+@NoArgsConstructor  // Genera un constructor vacío
 public class Droga {
     @GeneratedValue
     @Id
@@ -20,53 +26,11 @@ public class Droga {
     @OneToMany(mappedBy = "droga", orphanRemoval = false)
     private List<Tratamiento> tratamientos = new ArrayList<>();
 
-    public Droga() {
-    }
-
+    // Importante tener un constructor vacío y un constructor sin id ni relaciones
     public Droga(String nombre, Double precioVenta, Double precioCompra, Integer unidadesDisponibles) {
         this.nombre = nombre;
         this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
-        this.unidadesDisponibles = unidadesDisponibles;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Double getPrecioCompra() {
-        return precioCompra;
-    }
-
-    public void setPrecioCompra(Double precioCompra) {
-        this.precioCompra = precioCompra;
-    }
-
-    public Double getPrecioVenta() {
-        return precioVenta;
-    }
-
-    public void setPrecioVenta(Double precioVenta) {
-        this.precioVenta = precioVenta;
-    }
-
-    public Integer getUnidadesDisponibles() {
-        return unidadesDisponibles;
-    }
-
-    public void setUnidadesDisponibles(Integer unidadesDisponibles) {
         this.unidadesDisponibles = unidadesDisponibles;
     }
 
@@ -78,13 +42,5 @@ public class Droga {
     // Método para devolver una droga (aumenta las unidades disponibles en 1)
     public void devolverDroga() {
         this.unidadesDisponibles++;
-    }
-
-    public List<Tratamiento> getTratamientos() {
-        return tratamientos;
-    }
-
-    public void setTratamientos(List<Tratamiento> tratamientos) {
-        this.tratamientos = tratamientos;
     }
 }
