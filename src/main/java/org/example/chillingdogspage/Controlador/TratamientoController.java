@@ -3,7 +3,7 @@ package org.example.chillingdogspage.Controlador;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.chillingdogspage.Entidad.Tratamiento;
-import org.example.chillingdogspage.Entidad.TratamientoDTO;
+import org.example.chillingdogspage.DTOs.TratamientoDTO;
 import org.example.chillingdogspage.Servicio.TratamientoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

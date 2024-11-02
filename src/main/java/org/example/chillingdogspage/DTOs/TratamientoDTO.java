@@ -1,4 +1,4 @@
-package org.example.chillingdogspage.Entidad;
+package org.example.chillingdogspage.DTOs;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

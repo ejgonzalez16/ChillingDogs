@@ -6,7 +6,7 @@ import org.assertj.core.api.Assertions;
 import org.example.chillingdogspage.Entidad.Droga;
 import org.example.chillingdogspage.Entidad.Mascota;
 import org.example.chillingdogspage.Entidad.Tratamiento;
-import org.example.chillingdogspage.Entidad.TratamientoDTO;
+import org.example.chillingdogspage.DTOs.TratamientoDTO;
 import org.example.chillingdogspage.Entidad.Veterinario;
 import org.example.chillingdogspage.Servicio.DrogaService;
 import org.example.chillingdogspage.Servicio.MascotaService;

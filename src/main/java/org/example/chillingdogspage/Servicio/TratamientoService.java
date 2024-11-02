@@ -1,7 +1,7 @@
 package org.example.chillingdogspage.Servicio;
 
 import org.example.chillingdogspage.Entidad.Tratamiento;
-import org.example.chillingdogspage.Entidad.TratamientoDTO;
+import org.example.chillingdogspage.DTOs.TratamientoDTO;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

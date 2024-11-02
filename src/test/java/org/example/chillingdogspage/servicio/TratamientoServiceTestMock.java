@@ -1,6 +1,7 @@
 package org.example.chillingdogspage.servicio;
 
 import org.assertj.core.api.Assertions;
+import org.example.chillingdogspage.DTOs.TratamientoDTO;
 import org.example.chillingdogspage.Entidad.*;
 import org.example.chillingdogspage.Repositorio.DrogaRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;

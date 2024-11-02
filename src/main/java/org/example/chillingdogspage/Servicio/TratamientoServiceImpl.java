@@ -1,5 +1,6 @@
 package org.example.chillingdogspage.Servicio;
 
+import org.example.chillingdogspage.DTOs.TratamientoDTO;
 import org.example.chillingdogspage.Entidad.*;
 import org.example.chillingdogspage.Repositorio.DrogaRepository;
 import org.example.chillingdogspage.Repositorio.MascotaRepository;
