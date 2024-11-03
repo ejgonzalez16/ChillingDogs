@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.chillingdogspage.Entidad.Administrador;
 import org.example.chillingdogspage.Servicio.AdministradorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class AdministradorController {
     public ResponseEntity<Administrador> loginAdministrador(@RequestBody Administrador administrador) {
         Administrador administradorLogueado = administradorService.findByCedulaAndContrasena(administrador.getCedula(), administrador.getContrasena());
         if (administradorLogueado == null) {
-            return ResponseEntity.status(404).body(null); // 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
         }
         return ResponseEntity.ok(administradorLogueado); // 200 OK
     }

@@ -6,6 +6,7 @@ import org.example.chillingdogspage.Entidad.Tratamiento;
 import org.example.chillingdogspage.DTOs.TratamientoDTO;
 import org.example.chillingdogspage.Servicio.TratamientoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,6 +27,9 @@ public class TratamientoController {
     @Operation(summary = "Obtener los detalles de un tratamiento por su ID")
     public ResponseEntity<Tratamiento> obtenerTratamiento(@PathVariable("id") Long id) {
         Tratamiento tratamiento = tratamientoService.findById(id);
+        if (tratamiento == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
+        }
         return ResponseEntity.ok(tratamiento);  // 200 OK
     }
 
@@ -35,7 +39,7 @@ public class TratamientoController {
     public ResponseEntity<List<Tratamiento>> mostrarTratamientosMascota(@PathVariable("id") Long id){
         List<Tratamiento> tratamientos = tratamientoService.findAllByMascotaId(id);
         if (tratamientos.isEmpty()) {
-            return ResponseEntity.status(404).body(tratamientos);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tratamientos);
         }
         return ResponseEntity.ok(tratamientos); // 200 OK
     }
@@ -46,7 +50,7 @@ public class TratamientoController {
     public ResponseEntity<List<Tratamiento>> mostrarTratamientosVeterinario(@PathVariable("id") Long id){
         List<Tratamiento> tratamientos = tratamientoService.findAllByVeterinarioId(id);
         if (tratamientos.isEmpty()) {
-            return ResponseEntity.status(404).body(tratamientos);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tratamientos);
         }
         return ResponseEntity.ok(tratamientos); // 200 OK
     }
@@ -66,30 +70,30 @@ public class TratamientoController {
         Tratamiento tratamiento = tratamientoService.registrarTratamiento(tratamientoDTO);
         if (tratamiento == null) {
             // 404 Not Found si no existe la mascota, la droga o el veterinario (o no hay suficiente droga)
-            return ResponseEntity.status(404).body(null);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
         }
-        return ResponseEntity.status(201).body(tratamiento);    // 201 Created si se crea correctamente
+        return ResponseEntity.status(HttpStatus.CREATED).body(tratamiento);    // 201 Created si se crea correctamente
     }
 
-    // PUT =============================================================================================================
-    // @PutMapping("")
-    // @Operation(summary = "Actualizar los datos de un tratamiento")
-    // public ResponseEntity<Tratamiento> actualizarTratamiento(@RequestBody TratamientoDTO tratamientoDTO) {
-    //     Tratamiento tratamiento = tratamientoService.updateTratamiento(tratamientoDTO);
-    //     if (tratamiento == null) {
-    //         // 404 Not Found si no existe el tratamiento, la nueva mascota, droga o veterinario (o no hay suficiente de la droga nueva)
-    //         return ResponseEntity.status(404).body(null);
-    //     }
-    //     return ResponseEntity.ok(tratamiento);  // 200 OK
-    // }
+    /* PUT =============================================================================================================
+     @PutMapping("")
+     @Operation(summary = "Actualizar los datos de un tratamiento")
+     public ResponseEntity<Tratamiento> actualizarTratamiento(@RequestBody TratamientoDTO tratamientoDTO) {
+         Tratamiento tratamiento = tratamientoService.updateTratamiento(tratamientoDTO);
+         if (tratamiento == null) {
+             // 404 Not Found si no existe el tratamiento, la nueva mascota, droga o veterinario (o no hay suficiente de la droga nueva)
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+         }
+         return ResponseEntity.ok(tratamiento);  // 200 OK
+     }
 
-    // DELETE ==========================================================================================================
-    // @DeleteMapping("/{id}")
-    // @Operation(summary = "Eliminar un tratamiento por su ID")
-    // public ResponseEntity<String> eliminarTratamiento(@PathVariable("id") Long id) {
-    //     if (!tratamientoService.deleteTratamiento(id)) {
-    //         return ResponseEntity.status(404).body("Tratamiento no encontrada"); // 404 Not Found si no existe la tratamiento
-    //     }
-    //     return ResponseEntity.noContent().build();  // 204 No Content si se elimina correctamente
-    // }
+     DELETE ==========================================================================================================
+     @DeleteMapping("/{id}")
+     @Operation(summary = "Eliminar un tratamiento por su ID")
+     public ResponseEntity<String> eliminarTratamiento(@PathVariable("id") Long id) {
+         if (!tratamientoService.deleteTratamiento(id)) {
+             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tratamiento no encontrada"); // 404 Not Found si no existe la tratamiento
+         }
+         return ResponseEntity.noContent().build();  // 204 No Content si se elimina correctamente
+     }*/
 }

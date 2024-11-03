@@ -2,6 +2,7 @@ package org.example.chillingdogspage.Controlador;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Servicio.ClienteService;
@@ -34,7 +35,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> obtenerCliente(@PathVariable("cedula") String cedula) {
         Cliente cliente = clienteService.findByCedula(cedula);
         if (cliente == null) {
-            return ResponseEntity.status(404).body(null); // 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
         }
         return ResponseEntity.ok(cliente);  // 200 OK
     }
@@ -45,7 +46,7 @@ public class ClienteController {
     public ResponseEntity<List<Cliente>> mostrarClientesPorNombre(@PathVariable("nombre") String nombre) {
         List<Cliente> clientes = clienteService.findBySimilarName(nombre);
         if (clientes.isEmpty()) {
-            return ResponseEntity.status(404).body(null); // 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
         }
         return ResponseEntity.ok(clientes); // 200 OK
     }
@@ -55,7 +56,10 @@ public class ClienteController {
     @Operation(summary = "Crear un nuevo cliente")
     public ResponseEntity<Cliente> crearCliente(@RequestBody Cliente cliente) {
         Cliente clienteCreado = clienteService.createCliente(cliente);
-        return ResponseEntity.status(201).body(clienteCreado); // 201 Created
+        if (clienteCreado == null) {
+            return ResponseEntity.status(HttpStatus.CONFLICT).body(null); // 409 Conflict si ya existe un cliente con esa cédula
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(clienteCreado); // 201 Created
     }
 
     // PUT =============================================================================================================
@@ -64,7 +68,7 @@ public class ClienteController {
     public ResponseEntity<Cliente> actualizarCliente(@RequestBody Cliente cliente) {
         Cliente clienteActualizado = clienteService.updateCliente(cliente);
         if (clienteActualizado == null) {
-            return ResponseEntity.status(404).body(null); // 404 Not Found
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
         }
         return ResponseEntity.ok(clienteActualizado); // 200 OK
     }
@@ -74,7 +78,7 @@ public class ClienteController {
     @Operation(summary = "Eliminar un cliente por su ID")
     public ResponseEntity<String> eliminarCliente(@PathVariable("id") Long id) {
         if (!clienteService.deleteCliente(id)) {
-            return ResponseEntity.status(404).body("Cliente no encontrado"); // 404 Not Found si no existe el cliente
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente no encontrado"); // 404 Not Found si no existe el cliente
         }
         return ResponseEntity.ok("Cliente eliminado exitosamente"); // 200 OK si se elimina correctamente
     }

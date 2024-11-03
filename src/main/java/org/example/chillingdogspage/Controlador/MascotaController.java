@@ -3,6 +3,7 @@ package org.example.chillingdogspage.Controlador;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.chillingdogspage.Entidad.Mascota;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.example.chillingdogspage.Servicio.MascotaService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class MascotaController {
     public ResponseEntity<List<Mascota>> mostrarMascotasCliente(@PathVariable("cedula") String cedula){
         List<Mascota> mascotas = mascotaService.findAllByClienteCedula(cedula);
         if (mascotas.isEmpty()) {
-            return ResponseEntity.status(404).body(mascotas);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mascotas);
         }
         return ResponseEntity.ok(mascotas); // 200 OK
     }
@@ -60,7 +61,10 @@ public class MascotaController {
     @Operation(summary = "Registrar una nueva mascota para un cliente")
     public ResponseEntity<Mascota> registrarMascota(@RequestBody Mascota mascota) {
         Mascota nuevaMascota = mascotaService.registrarMascota(mascota);
-        return ResponseEntity.status(201).body(nuevaMascota);   // 201 Created
+        if (nuevaMascota == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found si no existe el cliente
+        }
+        return ResponseEntity.status(HttpStatus.CREATED).body(nuevaMascota);   // 201 Created
     }
 
     // PUT =============================================================================================================
@@ -68,6 +72,9 @@ public class MascotaController {
     @Operation(summary = "Actualizar los datos de una mascota")
     public ResponseEntity<Mascota> actualizarMascota(@RequestBody Mascota mascotaActualizada) {
         Mascota mascota = mascotaService.updateMascota(mascotaActualizada);
+        if (mascota == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
+        }
         return ResponseEntity.ok(mascota);  // 200 OK
     }
 
@@ -76,7 +83,7 @@ public class MascotaController {
     @Operation(summary = "Eliminar una mascota por su ID")
     public ResponseEntity<String> eliminarMascota(@PathVariable("id") Long id) {
         if (!mascotaService.deleteMascota(id)) {
-            return ResponseEntity.status(404).body("Mascota no encontrada"); // 404 Not Found si no existe la mascota
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Mascota no encontrada"); // 404 Not Found si no existe la mascota
         }
         return ResponseEntity.noContent().build();  // 204 No Content si se elimina correctamente
     }
