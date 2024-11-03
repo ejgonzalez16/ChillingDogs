@@ -1,8 +1,11 @@
 package org.example.chillingdogspage.Servicio;
 
 import org.example.chillingdogspage.Entidad.Cliente;
+import org.example.chillingdogspage.Entidad.Usuario;
 import org.example.chillingdogspage.Repositorio.ClienteRepository;
+import org.example.chillingdogspage.Seguridad.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,10 +14,18 @@ import java.util.List;
 public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
+    CustomUserDetailService customUserDetailService;
+
+    @Autowired
     ClienteRepository repository;
 
     @Override
     public Cliente createCliente(Cliente cliente){
+        if (repository.findByCedula(cliente.getCedula()) != null) {
+            return null;
+        }
+        Usuario usuario = customUserDetailService.guardarUsuario(cliente.getCedula(), "", "CLIENTE");
+        cliente.setUsuario(usuario);
         return repository.save(cliente);
     }
 

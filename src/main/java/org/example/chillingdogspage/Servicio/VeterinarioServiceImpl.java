@@ -1,7 +1,9 @@
 package org.example.chillingdogspage.Servicio;
 
+import org.example.chillingdogspage.Entidad.Usuario;
 import org.example.chillingdogspage.Entidad.Veterinario;
 import org.example.chillingdogspage.Repositorio.VeterinarioRepository;
+import org.example.chillingdogspage.Seguridad.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Autowired
     VeterinarioRepository repository;
+
+    @Autowired
+    CustomUserDetailService customUserDetailService;
 
     @Override
     public List<Veterinario> findAll(){
@@ -30,6 +35,11 @@ public class VeterinarioServiceImpl implements VeterinarioService {
 
     @Override
     public Veterinario createVeterinario(Veterinario veterinario){
+        if (repository.findByCedula(veterinario.getCedula()) != null) {
+            return null;
+        }
+        Usuario usuario = customUserDetailService.guardarUsuario(veterinario.getCedula(), veterinario.getContrasena(), "VETERINARIO");
+        veterinario.setUsuario(usuario);
         return repository.save(veterinario);
     }
 
