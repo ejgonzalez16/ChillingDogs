@@ -1,22 +1,24 @@
-package org.example.chillingdogspage.Entidad;
+package org.example.chillingdogspage.Database;
 
 import jakarta.transaction.Transactional;
+import org.example.chillingdogspage.Entidad.*;
 import org.example.chillingdogspage.Repositorio.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-@Controller
 @Transactional
-@Profile("dev")     // Solo se ejecuta cuando el perfil de desarrollo está activo
-public class DatabaseInit implements ApplicationRunner {
+public class AbstractDatabaseInit implements ApplicationRunner {
     @Autowired
     private ClienteRepository clienteRepository;
 
@@ -35,9 +37,21 @@ public class DatabaseInit implements ApplicationRunner {
     @Autowired
     private AdministradorRepository administradorRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private RolRepository rolRepository;
+
+    @Autowired
+    private UsuarioRepository usuarioRepository;
+
+    private Map<String, Rol> roles = new HashMap<>();
+
     @Override
     public void run(ApplicationArguments args) {
         // Save the data to the database
+        crearRoles();
         leerClientes();
         leerMascotas();
         leerVeterinarios();
@@ -46,6 +60,21 @@ public class DatabaseInit implements ApplicationRunner {
         leerAdmins();
         // Descomentar para actualizar las historias de clientes Chilling
         // generarHistoriasDeUsuario();
+    }
+
+    private void crearRoles() {
+        roles.put("ADMIN", rolRepository.save(new Rol("ADMIN")));
+        roles.put("CLIENTE", rolRepository.save(new Rol("CLIENTE")));
+        roles.put("VETERINARIO", rolRepository.save(new Rol("VETERINARIO")));
+    }
+
+    private Usuario guardarUsuario(String cedula, String contrasena, List<Rol> roles) {
+        Usuario usuario = Usuario.builder()
+                .username(cedula)
+                .password(passwordEncoder.encode(contrasena))
+                .roles(roles)
+                .build();
+        return usuarioRepository.save(usuario);
     }
 
     public void leerClientes() {
@@ -73,6 +102,8 @@ public class DatabaseInit implements ApplicationRunner {
                                 datos[3], // celular
                                 datos[4]  // foto
                         );
+                        Usuario usuario = guardarUsuario(cliente.getCedula(), "", List.of(roles.get("CLIENTE")));
+                        cliente.setUsuario(usuario);
                         clienteRepository.save(cliente); // Guarda el cliente en el repositorio
                     } else {
                         System.out.println("Error en los datos de la fila: " + String.join(";", datos));
@@ -152,6 +183,8 @@ public class DatabaseInit implements ApplicationRunner {
                                 datos[4],  // estado
                                 datos[5]  // foto
                         );
+                        Usuario usuario = guardarUsuario(veterinario.getCedula(), veterinario.getContrasena(), List.of(roles.get("VETERINARIO")));
+                        veterinario.setUsuario(usuario);
                         veterinarioRepository.save(veterinario); // Guarda el veterinario en el repositorio
                     } else {
                         System.out.println("Error en los datos de la fila: " + String.join(";", datos));
@@ -258,6 +291,8 @@ public class DatabaseInit implements ApplicationRunner {
                                 datos[2], // contrasena
                                 datos[3]  // foto
                         );
+                        Usuario usuario = guardarUsuario(admin.getCedula(), admin.getContrasena(), List.of(roles.get("ADMIN")));
+                        admin.setUsuario(usuario);
                         // Guarda el administrador en el repositorio
                         administradorRepository.save(admin);
                     } else {
