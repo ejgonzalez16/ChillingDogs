@@ -1,8 +1,7 @@
 package org.example.chillingdogspage.Entidad;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,8 +12,13 @@ public class Administrador {
     @GeneratedValue
     @Id
     private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Usuario usuario;
+
     private String cedula;
     private String nombre;
+    @Transient  // No se mapea en la base de datos (ya se está mapeando en Usuario)
     private String contrasena;
     private String foto;
 

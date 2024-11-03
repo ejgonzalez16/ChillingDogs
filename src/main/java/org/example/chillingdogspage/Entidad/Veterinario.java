@@ -15,7 +15,12 @@ public class Veterinario {
     @GeneratedValue
     @Id
     private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Usuario usuario;
+
     private String cedula;
+    @Transient  // No se mapea en la base de datos (ya se está mapeando en Usuario)
     private String contrasena;
     private String especialidad;
     private String nombre;

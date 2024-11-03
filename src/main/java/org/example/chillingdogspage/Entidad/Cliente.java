@@ -17,6 +17,10 @@ public class Cliente {
     @GeneratedValue
     @Id
     private Long id;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JsonIgnore
+    private Usuario usuario;
+
     private String cedula;
     private String nombre;
     private String correo;
