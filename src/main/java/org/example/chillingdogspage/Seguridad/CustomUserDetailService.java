@@ -30,6 +30,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    // Este método lo usa Spring Security con AuthenticationManager para autenticar a los usuarios
     /* Mapear datos de Usuario -> UserDetails
      * Retorna un UserDetails, que es la entidad básica en springboot que únicamente tiene
      * username, password y authorities

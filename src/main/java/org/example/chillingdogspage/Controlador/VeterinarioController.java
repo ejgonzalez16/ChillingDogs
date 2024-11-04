@@ -2,11 +2,19 @@ package org.example.chillingdogspage.Controlador;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.example.chillingdogspage.DTOs.PerfilDTO;
+import org.example.chillingdogspage.DTOs.UsuarioDTO;
+import org.example.chillingdogspage.Entidad.Cliente;
 import org.example.chillingdogspage.Entidad.Veterinario;
+import org.example.chillingdogspage.Seguridad.JWTGenerator;
 import org.example.chillingdogspage.Servicio.VeterinarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +27,12 @@ import java.util.List;
 public class VeterinarioController {
     @Autowired
     VeterinarioService veterinarioService;
+
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    JWTGenerator jwtGenerator;
 
     // GET =============================================================================================================
     //http://localhost:8099/veterinarios
@@ -33,12 +47,40 @@ public class VeterinarioController {
     //http://localhost:8099/veterinarios/login
     @PostMapping("/login")
     @Operation(summary = "Hacer login de un veterinario")
-    public ResponseEntity<Veterinario> loginVeterinario(@RequestBody Veterinario veterinario) {
-        Veterinario veterinarioLogueado = veterinarioService.findByCedulaAndContrasena(veterinario.getCedula(), veterinario.getContrasena());
-        if (veterinarioLogueado == null) {
+    public ResponseEntity<String> loginVeterinario(@RequestBody UsuarioDTO usuarioDTO) {
+        // Authentication guarda las credenciales del usuario
+         Authentication authentication = authenticationManager.authenticate(
+                 new UsernamePasswordAuthenticationToken(usuarioDTO.getUsername(), usuarioDTO.getPassword())
+         );
+
+        // Guardar la autenticación en el contexto de seguridad
+        // A través de SecurityContextHolder se puede obtener el usuario autenticado
+         SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String token = jwtGenerator.generateToken(authentication);
+
+        // El Login NO tiene nada que ver con devolver al Usuario
+        // Solo me interesa saber si las credenciales son correctas o no
+        return ResponseEntity.ok(token); // 200 OK
+    }
+
+    //http://localhost:8099/veterinarios/perfil
+    @GetMapping("/perfil")
+    @Operation(summary = "Mostrar la foto y nombre del veterinario logueado")
+    public ResponseEntity<PerfilDTO> mostrarPerfil() {
+        // Obtener el usuario autenticado
+        Veterinario veterinario = veterinarioService.findByCedula(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if (veterinario == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
         }
-        return ResponseEntity.ok(veterinarioLogueado); // 200 OK
+        PerfilDTO perfilDTO = PerfilDTO.builder()
+                .nombre(veterinario.getNombre())
+                .foto(veterinario.getFoto())
+                .build();
+        return ResponseEntity.ok(perfilDTO); // 200 OK
     }
 
     //http://localhost:8099/veterinarios/{cedula}
