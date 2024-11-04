@@ -10,12 +10,11 @@ import java.util.List;
 
 @Service
 public class AdministradorServiceImpl implements AdministradorService {
-
     @Autowired
-    AdministradorRepository repository;
+    private AdministradorRepository administradorRepository;
 
     @Override
-    public Administrador findByCedulaAndContrasena(String cedula, String contrasena){
-        return repository.findByCedulaAndContrasena(cedula, contrasena);
+    public Administrador findByCedula(String cedula) {
+        return administradorRepository.findByCedula(cedula);
     }
 }

@@ -16,7 +16,7 @@ public class AdministradorRepositoryTest {
     @Autowired 
     private AdministradorRepository administradorRepository;
 
-    @Test
+    /*@Test
     public void AdministradorRepository_findByCedulaAndContrasena_Administrador() {
         // Arrange
         Administrador administrador = new Administrador("1234567890", "Admin", "1234", "https://th.bing.com/th/id/OIP.uwAx4p0CUpIOYFlSpdsZ4QHaFj?rs=1&pid=ImgDetMain");
@@ -27,6 +27,6 @@ public class AdministradorRepositoryTest {
         Assertions.assertThat(administradorEncontrado).isNotNull();
         Assertions.assertThat(administradorEncontrado.getCedula()).isEqualTo(administrador.getCedula());
         Assertions.assertThat(administradorEncontrado.getContrasena()).isEqualTo(administrador.getContrasena());
-    }
+    }*/
     
 }

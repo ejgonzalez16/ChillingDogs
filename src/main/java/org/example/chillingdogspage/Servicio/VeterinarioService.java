@@ -12,8 +12,6 @@ public interface VeterinarioService {
 
     public Veterinario findByCedula(String cedula);
 
-    public Veterinario findByCedulaAndContrasena(String cedula, String contrasena);
-
     public Veterinario createVeterinario(Veterinario veterinario);
 
     public Veterinario updateVeterinario(Veterinario veterinario);

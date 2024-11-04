@@ -29,7 +29,7 @@ public class VeterinarioRepositoryTest {
         veterinarioRepository.save(veterinario3);
     }
 
-    @Test
+    /*@Test
     public void VeterinarioRepository_findByCedulaAndContrasena_Veterinario() {
 
         // Arrange
@@ -40,7 +40,7 @@ public class VeterinarioRepositoryTest {
         // Assert
         Assertions.assertThat(veterinario).isNotNull();
         
-    }
+    }*/
 
     @Test
     public void VeterinarioRepository_findByNombreContaining_Veterinario() {

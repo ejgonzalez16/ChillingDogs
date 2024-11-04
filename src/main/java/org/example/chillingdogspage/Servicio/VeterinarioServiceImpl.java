@@ -29,11 +29,6 @@ public class VeterinarioServiceImpl implements VeterinarioService {
     }
 
     @Override
-    public Veterinario findByCedulaAndContrasena(String cedula, String contrasena){
-        return repository.findByCedulaAndContrasena(cedula, contrasena);
-    }
-
-    @Override
     public Veterinario createVeterinario(Veterinario veterinario){
         if (repository.findByCedula(veterinario.getCedula()) != null) {
             return null;
