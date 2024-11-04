@@ -36,6 +36,20 @@ public class SecurityConfig {
         http
             .csrf(AbstractHttpConfigurer::disable)  // Deshabilitar la protección CSRF (un tipo de ataque a aplicaciones web que se da en MPA), solo se debería activar si el Backend y el Frontend están en el mismo nodo
             .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))  // Para acceder a la consola de H2
+            .authorizeHttpRequests(requests -> requests
+                // Peticiones que pueden hacer todos los usuarios
+                .requestMatchers("/h2/**").permitAll()    // Acceso a la consola de H2
+                .requestMatchers("/clientes/login", "/veterinarios/login", "/admin/login").permitAll()
+                // Peticiones que solo pueden hacer los usuarios autenticados
+                .requestMatchers("mascotas/cliente/**", "/mascotas/{id}", "/tratamientos/mascota/**").authenticated()
+                // Peticiones que solo pueden hacer los clientes
+                .requestMatchers("/clientes/perfil").hasAuthority("CLIENTE")
+                // Peticiones que solo pueden hacer los veterinarios
+                .requestMatchers("/veterinarios/perfil", "/tratamientos/**").hasAuthority("VETERINARIO")
+                // Peticiones que pueden hacer veterinarios y administradores
+                .requestMatchers("/clientes/**", "/mascotas/**", "/drogas/**").hasAnyAuthority("VETERINARIO", "ADMIN")
+                // Peticiones que solo pueden hacer los administradores
+                .requestMatchers("/admin/perfil", "/dashboard/**", "/veterinarios/**").hasAuthority("ADMIN")
                 // El resto de rutas permitir a todos
                 .anyRequest().permitAll()
             )

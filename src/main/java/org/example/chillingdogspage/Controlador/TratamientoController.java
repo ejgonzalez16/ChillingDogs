@@ -41,6 +41,8 @@ public class TratamientoController {
         if (tratamientos.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(tratamientos);
         }
+        // Debería ir un método para verificar si el usuario autenticado tiene permiso para acceder a los tratamientos de la mascota
+        // Pero zzz
         return ResponseEntity.ok(tratamientos); // 200 OK
     }
 
