@@ -4,10 +4,13 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.example.chillingdogspage.Entidad.Tratamiento;
 import org.example.chillingdogspage.DTOs.TratamientoDTO;
+import org.example.chillingdogspage.Entidad.Veterinario;
 import org.example.chillingdogspage.Servicio.TratamientoService;
+import org.example.chillingdogspage.Servicio.VeterinarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,6 +23,9 @@ import java.util.List;
 public class TratamientoController {
     @Autowired
     TratamientoService tratamientoService;
+
+    @Autowired
+    VeterinarioService veterinarioService;
 
     // GET =============================================================================================================
     //http://localhost:8099/tratamientos/{id}
@@ -46,6 +52,22 @@ public class TratamientoController {
         return ResponseEntity.ok(tratamientos); // 200 OK
     }
 
+    //http://localhost:8099/tratamientos/veterinario
+    @GetMapping("veterinario")
+    @Operation(summary = "Mostrar los tratamientos del veterinario logueado")
+    public ResponseEntity<List<Tratamiento>> mostrarTratamientosVeterinarioLogueado(){
+        // Obtener el usuario autenticado
+        Veterinario veterinario = veterinarioService.findByCedula(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if (veterinario == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);   // 403 Forbidden
+        }
+        List<Tratamiento> tratamientos = tratamientoService.findAllByVeterinarioId(veterinario.getId());
+        return ResponseEntity.ok(tratamientos); // 200 OK
+    }
+
     //http://localhost:8099/tratamientos/veterinario/{id}
     @GetMapping("veterinario/{id}")
     @Operation(summary = "Mostrar los tratamientos de un veterinario")
@@ -69,6 +91,15 @@ public class TratamientoController {
     @PostMapping("")
     @Operation(summary = "Registrar un nuevo tratamiento para una mascota")
     public ResponseEntity<Tratamiento> registrarTratamiento(@RequestBody TratamientoDTO tratamientoDTO) {
+        // Obtener el usuario autenticado
+        Veterinario veterinario = veterinarioService.findByCedula(
+                SecurityContextHolder.getContext().getAuthentication().getName()
+        );
+
+        if (veterinario == null) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).body(null);   // 403 Forbidden
+        }
+        tratamientoDTO.setVeterinarioId(veterinario.getId());
         Tratamiento tratamiento = tratamientoService.registrarTratamiento(tratamientoDTO);
         if (tratamiento == null) {
             // 404 Not Found si no existe la mascota, la droga o el veterinario (o no hay suficiente droga)

@@ -46,7 +46,7 @@ public class CustomUserDetailService implements UserDetailsService {
         // User es una implementación de UserDetails
         return User.builder()
                 .username(usuarioDB.getUsername())
-                .password(passwordEncoder.encode(usuarioDB.getPassword()))
+                .password(usuarioDB.getPassword())
                 .authorities(mapRolesToAuthorities(usuarioDB.getRoles()))
                 .build();
     }

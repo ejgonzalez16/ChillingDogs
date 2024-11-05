@@ -71,6 +71,7 @@ public class AdministradorController {
         PerfilDTO perfilDTO = PerfilDTO.builder()
                 .nombre(administrador.getNombre())
                 .foto(administrador.getFoto())
+                .rol("ADMIN")
                 .build();
         return ResponseEntity.ok(perfilDTO); // 200 OK
     }

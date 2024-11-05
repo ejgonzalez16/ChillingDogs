@@ -10,4 +10,5 @@ import lombok.Data;
 public class PerfilDTO {
     private String nombre;
     private String foto;
+    private String rol;
 }

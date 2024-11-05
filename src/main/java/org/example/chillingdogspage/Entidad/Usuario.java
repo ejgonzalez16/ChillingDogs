@@ -21,7 +21,7 @@ public class Usuario {
     private String username;
     private String password;
 
-    // EAGER: Carga todos los roles al cargar el usuario, cascade: Si se elimina el usuario, se eliminan los registros en la tabla intermedia
+    // EAGER: Carga todos los roles al cargar el usuario
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     // Tabla intermedia para la relación muchos a muchos (un usuario puede tener varios roles y un rol puede asignarse a varios usuarios)
     @JoinTable(

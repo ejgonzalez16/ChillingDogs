@@ -45,7 +45,7 @@ public class VeterinarioController {
 
     // Hacer el login de un veterinario con su cedula y contraseña
     //http://localhost:8099/veterinarios/login
-    @PostMapping("/login")
+    @PostMapping("login")
     @Operation(summary = "Hacer login de un veterinario")
     public ResponseEntity<String> loginVeterinario(@RequestBody UsuarioDTO usuarioDTO) {
         // Authentication guarda las credenciales del usuario
@@ -79,6 +79,7 @@ public class VeterinarioController {
         PerfilDTO perfilDTO = PerfilDTO.builder()
                 .nombre(veterinario.getNombre())
                 .foto(veterinario.getFoto())
+                .rol("VETERINARIO")
                 .build();
         return ResponseEntity.ok(perfilDTO); // 200 OK
     }
@@ -122,7 +123,7 @@ public class VeterinarioController {
     public ResponseEntity<Veterinario> actualizarVeterinario(@RequestBody Veterinario veterinario) {
         Veterinario veterinarioActualizado = veterinarioService.updateVeterinario(veterinario);
         if (veterinarioActualizado == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // 404 Not Found
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null); // 400 Bad Request si la cedula ya está registrada en otro veterinario
         }
         return ResponseEntity.ok(veterinarioActualizado); // 200 OK
     }

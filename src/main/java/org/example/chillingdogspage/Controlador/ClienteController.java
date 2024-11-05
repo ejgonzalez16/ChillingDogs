@@ -79,6 +79,7 @@ public class ClienteController {
         PerfilDTO perfilDTO = PerfilDTO.builder()
                 .nombre(cliente.getNombre())
                 .foto(cliente.getFoto())
+                .rol("CLIENTE")
                 .build();
         return ResponseEntity.ok(perfilDTO); // 200 OK
     }

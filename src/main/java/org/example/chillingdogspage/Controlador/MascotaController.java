@@ -39,6 +39,20 @@ public class MascotaController {
         return ResponseEntity.ok(mascota);  // 200 OK
     }
 
+    //http://localhost:8099/mascotas/cliente
+    @GetMapping("cliente")
+    @Operation(summary = "Mostrar las mascotas del cliente logueado")
+    public ResponseEntity<List<Mascota>> mostrarMascotasClienteLogueado(){
+        // Obtenemos la cédula del cliente autenticado
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String cedulaCliente = authentication.getName();
+        List<Mascota> mascotas = mascotaService.findAllByClienteCedula(cedulaCliente);
+        if (mascotas.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mascotas);
+        }
+        return ResponseEntity.ok(mascotas); // 200 OK
+    }
+
     //http://localhost:8099/mascotas/cliente/{cedula}
     @GetMapping("cliente/{cedula}")
     @Operation(summary = "Mostrar las mascotas de un cliente")
@@ -49,9 +63,6 @@ public class MascotaController {
         }
 
         List<Mascota> mascotas = mascotaService.findAllByClienteCedula(cedula);
-        if (mascotas.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(mascotas);
-        }
         return ResponseEntity.ok(mascotas); // 200 OK
     }
 

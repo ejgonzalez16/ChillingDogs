@@ -15,7 +15,7 @@ public class Veterinario {
     @GeneratedValue
     @Id
     private Long id;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})   // Al eliminar un cliente no intente automáticamente eliminar su usuario asociado.
     @JsonIgnore
     private Usuario usuario;
 
