@@ -49,7 +49,7 @@ public class SecurityConfig {
                 // Peticiones que pueden hacer veterinarios y administradores
                 .requestMatchers("/clientes/**", "/mascotas/**", "/drogas/**").hasAnyAuthority("VETERINARIO", "ADMIN")
                 // Peticiones que solo pueden hacer los administradores
-                .requestMatchers("/admin/perfil", "/dashboard/**", "/veterinarios/**", "/tratamientos/contarDroga/**").hasAuthority("ADMIN")
+                .requestMatchers("/admin/perfil", "/dashboard/**", "/veterinarios/**").hasAuthority("ADMIN")
                 // El resto de rutas permitir a todos
                 .anyRequest().permitAll()
             )

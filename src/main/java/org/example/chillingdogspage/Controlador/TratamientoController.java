@@ -87,13 +87,6 @@ public class TratamientoController {
         return ResponseEntity.ok(tratamientos); // 200 OK
     }
 
-    @GetMapping("contarDroga/{idDroga}")
-    @Operation(summary = "Contar las ventas de una droga")
-    public ResponseEntity<Integer> ventasDroga(@PathVariable("idDroga") Long idDroga){
-        int ventasDroga = tratamientoService.countByDrogaId(idDroga);
-        return ResponseEntity.ok(ventasDroga); // 200 OK
-    }
-
     // POST ============================================================================================================
     @PostMapping("")
     @Operation(summary = "Registrar un nuevo tratamiento para una mascota")
