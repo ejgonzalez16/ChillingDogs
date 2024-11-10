@@ -14,7 +14,14 @@ public class DrogaServiceImpl implements DrogaService {
 
     @Override
     public List<Droga> findAll() {
-        return drogaRepository.findAll();
+        List<Object[]> drogasConUnidadesVendidas = drogaRepository.findDrogasConUnidadesVendidas();
+        // Poner las unidades vendidas en cada droga con map
+        return drogasConUnidadesVendidas.stream().map(droga -> {
+            Droga d = (Droga) droga[0];
+            Long unidadesVendidas = (Long) droga[1];
+            d.setUnidadesVendidas(unidadesVendidas);
+            return d;
+        }).toList();
     }
 
     @Override

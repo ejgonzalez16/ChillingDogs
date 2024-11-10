@@ -23,6 +23,8 @@ public class Droga {
     private Double precioCompra;
     private Double precioVenta;
     private Integer unidadesDisponibles;
+    @Transient
+    private Long unidadesVendidas;
     @JsonIgnore
     // Si se borra una droga NO se deben borrar los tratamientos asociados a esa droga
     @OneToMany(mappedBy = "droga", orphanRemoval = false)
