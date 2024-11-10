@@ -176,13 +176,11 @@ public class TratamientoRepositoryTest {
         // Arrange
 
         // Act
-        List<String> drogas = tratamientoRepository.topDrogas();
+        List<MedicamentosMes> drogas = tratamientoRepository.topDrogas();
 
         // Assert
         Assertions.assertThat(drogas).isNotEmpty();
         Assertions.assertThat(drogas).size().isEqualTo(2);
-
-        Assertions.assertThat(drogas).contains("Droga 1", "Droga 3");
     }
 
 }

@@ -44,9 +44,9 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     @Query("SELECT SUM(d.precioVenta - d.precioCompra) FROM Tratamiento t JOIN t.droga d")
     double ganancias();
 
-    // Query para traer el top 3 drogas
-    @Query("SELECT d.nombre FROM Tratamiento t JOIN t.droga d GROUP BY d.id ORDER BY COUNT(*) DESC LIMIT 3")
-    List<String> topDrogas();
+    // Query para tner el top 3 medicamentos del mes y su numero de ventas
+    @Query("SELECT new org.example.chillingdogspage.Entidad.MedicamentosMes(d.nombre, COUNT(*)) FROM Tratamiento t JOIN t.droga d WHERE MONTH(t.fecha) = MONTH(CURDATE()) AND YEAR(t.fecha) = YEAR(CURDATE()) GROUP BY d.id DESC LIMIT 3")
+    List<MedicamentosMes> topDrogas();
 
     //Query para contar la cantidad e tratamientos de una droga por su Id
     @Query("SELECT COUNT(*) FROM Tratamiento t WHERE t.droga.id = ?1")

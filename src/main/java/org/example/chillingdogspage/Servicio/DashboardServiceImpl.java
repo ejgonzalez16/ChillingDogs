@@ -65,7 +65,7 @@ public class DashboardServiceImpl implements DashboardService {
     }
 
     @Override
-    public List<String> topDrogas() {
+    public List<MedicamentosMes> topDrogas() {
         return repoTratamientos.topDrogas();
     }
 

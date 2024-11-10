@@ -100,8 +100,8 @@ public class DashboardController {
 
     @GetMapping("top-drogas")
     @Operation(summary = "Top 3 drogas")
-    public ResponseEntity<List<String>> topDrogas() {
-        List<String> topDrogas = dashboardService.topDrogas();
+    public ResponseEntity<List<MedicamentosMes>> topDrogas() {
+        List<MedicamentosMes> topDrogas = dashboardService.topDrogas();
         logger.info("Top 3 drogas: {}", topDrogas); // Imprimir top drogas en consola
         return ResponseEntity.ok(topDrogas);
     }

@@ -16,5 +16,5 @@ public interface DashboardService {
     public int countMascotasTratamiento();
     public double ventas();
     public double ganancias();
-    public List<String> topDrogas();
+    public List<MedicamentosMes> topDrogas();
 }
