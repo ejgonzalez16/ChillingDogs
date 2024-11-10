@@ -73,6 +73,11 @@ public class TratamientoServiceImpl implements TratamientoService {
         return repository.save(tratamiento);
     }
 
+    @Override
+    public Integer countByDrogaId(Long idDroga){
+        return repository.countByDrogaId(idDroga);
+    }
+
     // @Override
     // public Tratamiento updateTratamiento(TratamientoDTO tratamientoDTO) {
     //     Tratamiento tratamiento = repository.findById(tratamientoDTO.getId()).orElse(null);

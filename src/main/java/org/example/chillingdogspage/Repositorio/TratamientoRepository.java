@@ -47,4 +47,9 @@ public interface TratamientoRepository extends JpaRepository<Tratamiento, Long> 
     // Query para traer el top 3 drogas
     @Query("SELECT d.nombre FROM Tratamiento t JOIN t.droga d GROUP BY d.id ORDER BY COUNT(*) DESC LIMIT 3")
     List<String> topDrogas();
+
+    //Query para contar la cantidad e tratamientos de una droga por su Id
+    @Query("SELECT COUNT(*) FROM Tratamiento t WHERE t.droga.id = ?1")
+    int countByDrogaId(Long drogaId);
+    
 }
