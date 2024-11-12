@@ -22,9 +22,6 @@ public class EmailController {
     @Operation(summary = "Enviar un email")
     public ResponseEntity<String> enviarEmail(@RequestBody Email email) {
         CreateEmailResponse respuesta = emailService.enviarEmail(email);
-        if(respuesta != null) {
-            return ResponseEntity.ok(respuesta.getId());
-        }
-        return ResponseEntity.badRequest().build();
+        return ResponseEntity.ok("EL correo se envió con éxito!!");
     }
 }
